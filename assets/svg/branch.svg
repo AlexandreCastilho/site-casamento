@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 145 C 40 120, 80 80, 145 15" stroke-width="2.2"/>
+  <!-- Leaf 1 -->
+  <path d="M45 115 C 30 110, 20 95, 28 85 C 38 88, 48 102, 45 115 Z" fill="currentColor" fill-opacity="0.14"/>
+  <!-- Leaf 2 -->
+  <path d="M60 100 C 70 85, 85 80, 92 90 C 88 100, 72 105, 60 100 Z" fill="currentColor" fill-opacity="0.14"/>
+  <!-- Leaf 3 -->
+  <path d="M85 75 C 70 70, 60 55, 68 45 C 78 48, 88 62, 85 75 Z" fill="currentColor" fill-opacity="0.14"/>
+  <!-- Leaf 4 -->
+  <path d="M100 60 C 110 45, 125 40, 132 50 C 128 60, 112 65, 100 60 Z" fill="currentColor" fill-opacity="0.14"/>
+  <!-- Leaf 5 Tip -->
+  <path d="M130 30 C 138 18, 150 14, 155 22 C 150 30, 138 34, 130 30 Z" fill="currentColor" fill-opacity="0.18"/>
+</svg>

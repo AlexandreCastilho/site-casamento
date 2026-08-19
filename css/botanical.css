@@ -1,0 +1,172 @@
+/* ==========================================================================
+   CASAMENTO ALEXANDRE & LARISSA - BOTANICAL DOODLES & AMAZONIAN ACCENTS
+   Ilustrações e detalhes botânicos amazônicos delicados (line-art)
+   ========================================================================== */
+
+/* Elementos Botânicos Decorativos Flutuantes */
+.botanical-accent {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.15;
+  transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.botanical-accent svg,
+.botanical-accent img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Variações de Cores das Folhas */
+.botanical-terracotta {
+  color: var(--color-terracotta-primary);
+}
+
+.botanical-green {
+  color: var(--color-green-primary);
+}
+
+.botanical-gold {
+  color: var(--color-gold);
+}
+
+/* Posicionamentos Estratégicos nos Cantos & Seções */
+
+/* 1. Hero Botanical Corners */
+.hero-botanical-tl {
+  top: -20px;
+  left: -20px;
+  width: 240px;
+  height: 280px;
+  transform: rotate(-15deg);
+  opacity: 0.3;
+  color: var(--color-gold-light);
+}
+
+.hero-botanical-br {
+  bottom: -40px;
+  right: -30px;
+  width: 280px;
+  height: 320px;
+  transform: rotate(165deg);
+  opacity: 0.25;
+  color: var(--color-terracotta-light);
+}
+
+/* 2. Welcome Card Corners */
+.welcome-botanical-corner {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 140px;
+  height: 140px;
+  color: var(--color-terracotta-primary);
+  opacity: 0.35;
+  z-index: 5;
+}
+
+.welcome-botanical-bottom {
+  position: absolute;
+  bottom: -30px;
+  left: -20px;
+  width: 160px;
+  height: 160px;
+  color: var(--color-green-light);
+  opacity: 0.3;
+  z-index: 5;
+  transform: rotate(-45deg);
+}
+
+/* 3. Dresscode Card Botanical Flourishes */
+.card-botanical-doodle {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 110px;
+  height: 110px;
+  opacity: 0.12;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.dresscode-card:hover .card-botanical-doodle {
+  opacity: 0.25;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* 4. Section Background Watermarks */
+.section-botanical-watermark-left {
+  position: absolute;
+  left: -80px;
+  top: 15%;
+  width: 320px;
+  height: 380px;
+  color: var(--color-green-medium);
+  opacity: 0.04;
+  transform: rotate(25deg);
+}
+
+.section-botanical-watermark-right {
+  position: absolute;
+  right: -80px;
+  bottom: 10%;
+  width: 340px;
+  height: 400px;
+  color: var(--color-terracotta-dark);
+  opacity: 0.04;
+  transform: rotate(-35deg);
+}
+
+/* 5. Monograma com Guirlanda Botânica */
+.monogram-botanical-frame {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+.monogram-botanical-frame svg.frame-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--color-gold);
+}
+
+.monogram-text {
+  font-family: var(--font-serif-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--color-green-deep);
+  position: relative;
+  z-index: 2;
+  letter-spacing: 2px;
+}
+
+.monogram-text span {
+  font-family: var(--font-serif-romantic);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-terracotta-primary);
+  font-size: 1.8rem;
+}
+
+/* Micro-animações Botânicas no Scroll */
+@keyframes botanicalSway {
+  0% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(3deg) translateY(-4px); }
+  100% { transform: rotate(-2deg) translateY(2px); }
+}
+
+.sway-slow {
+  animation: botanicalSway 8s ease-in-out infinite alternate;
+}
+
+.sway-reverse {
+  animation: botanicalSway 9s ease-in-out infinite alternate-reverse;
+}

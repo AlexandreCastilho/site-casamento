@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Inner delicate geometric circle -->
+  <circle cx="150" cy="150" r="105" stroke-dasharray="4 6" opacity="0.45"/>
+  <circle cx="150" cy="150" r="112" opacity="0.25"/>
+  <!-- Left Botanical Branch -->
+  <path d="M150 268 C 80 268, 32 215, 32 150 C 32 85, 80 32, 150 32" stroke-width="2"/>
+  <path d="M48 200 C 35 195, 20 205, 25 215 C 32 218, 42 210, 48 200 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M34 165 C 18 160, 10 170, 12 180 C 22 182, 30 174, 34 165 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M34 135 C 15 132, 10 120, 16 112 C 26 112, 32 122, 34 135 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M50 95 C 35 88, 32 75, 40 68 C 48 70, 52 82, 50 95 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M85 55 C 75 42, 80 30, 90 28 C 96 36, 94 48, 85 55 Z" fill="currentColor" fill-opacity="0.12"/>
+  <!-- Right Botanical Branch -->
+  <path d="M150 268 C 220 268, 268 215, 268 150 C 268 85, 220 32, 150 32" stroke-width="2"/>
+  <path d="M252 200 C 265 195, 280 205, 275 215 C 268 218, 258 210, 252 200 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M266 165 C 282 160, 290 170, 288 180 C 278 182, 270 174, 266 165 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M266 135 C 285 132, 290 120, 284 112 C 274 112, 268 122, 266 135 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M250 95 C 265 88, 268 75, 260 68 C 252 70, 248 82, 250 95 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M215 55 C 225 42, 220 30, 210 28 C 204 36, 206 48, 215 55 Z" fill="currentColor" fill-opacity="0.12"/>
+</svg>

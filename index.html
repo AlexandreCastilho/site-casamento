@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casamento Alexandre &amp; Larissa | 28 de Novembro • Manaus</title>
+  <meta name="description" content="Site oficial do casamento de Alexandre &amp; Larissa. 28 de Novembro às 16h na Chácara Monte Rey em Manaus. Confirme sua presença e confira nossa lista de presentes." />
+  <meta name="theme-color" content="#152b20" />
+
+  <!-- Open Graph / Meta Compartilhamento -->
+  <meta property="og:title" content="Casamento Alexandre &amp; Larissa" />
+  <meta property="og:description" content="Celebre conosco esse dia tão especial! 28 de Novembro na Chácara Monte Rey em Manaus." />
+  <meta property="og:image" content="assets/photos/IMG_6870.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon / Monograma SVG -->
+  <link rel="icon" type="image/svg+xml" href="assets/svg/wreath.svg" />
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/botanical.css" />
+</head>
+<body>
+
+  <!-- Barra de Progresso de Leitura/Scroll -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- ========================================================================
+       HEADER & NAVBAR FIXA
+       ======================================================================== -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <header class="header-nav" id="mainNavbar">
+    <div class="container nav-content">
+      <a href="#hero" class="nav-monogram" aria-label="Alexandre e Larissa Início">
+        <span class="nav-monogram-initials">A</span>
+        <span class="nav-monogram-ampersand">&amp;</span>
+        <span class="nav-monogram-initials">L</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fechar menu">✕</button>
+          <li><a href="#mensagem" class="nav-link">Mensagem</a></li>
+          <li><a href="#historia" class="nav-link">Nossa História</a></li>
+          <li><a href="#local" class="nav-link">O Local</a></li>
+          <li><a href="#traje" class="nav-link">Guia de Traje</a></li>
+          <li><a href="#presentes" class="nav-link">Lista de Presentes</a></li>
+          <li><a href="#rsvp" class="nav-link">Mural &amp; RSVP</a></li>
+          <li><a href="#rsvp" class="btn btn-primary nav-cta-btn">Confirmar Presença</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu de navegação">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       TRILHOS FLUTUANTES PARALELOS COM FOTOS DO CASAL NO SCROLL (DESKTOPS)
+       ======================================================================== -->
+  <aside class="floating-photo-rail rail-left" id="railLeft" aria-hidden="true">
+    <div class="rail-track" id="leftRailTrack">
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6812.jpg" alt="Alexandre &amp; Larissa" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6819.jpg" alt="Momentos Alexandre &amp; Larissa" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6870.jpg" alt="Amor e Cumplicidade" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6833.jpg" alt="Pôr do Sol" loading="lazy" />
+      </div>
+    </div>
+  </aside>
+
+  <aside class="floating-photo-rail rail-right" id="railRight" aria-hidden="true">
+    <div class="rail-track" id="rightRailTrack">
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6818.jpg" alt="Alexandre &amp; Larissa" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6821.jpg" alt="Sorrisos e Alegria" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6875.jpg" alt="Rumo ao Altar" loading="lazy" />
+      </div>
+      <div class="floating-photo-card">
+        <img src="assets/photos/IMG_6812.jpg" alt="Companheirismo" loading="lazy" />
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       HERO SECTION COM BACKGROUND VÍDEO DA CHÁCARA MONTE REY (SEM CONTROLES)
+       ======================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="hero-video-bg-container">
+      <video class="hero-video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="assets/videos/chacara_video_1.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+
+    <!-- Detalhes Botânicos Amazônicos nos Cantos do Hero -->
+    <div class="botanical-accent hero-botanical-tl sway-slow">
+      <img src="assets/svg/monstera.svg" alt="Costela de Adão" />
+    </div>
+    <div class="botanical-accent hero-botanical-br sway-reverse">
+      <img src="assets/svg/palm.svg" alt="Palmeira Amazônica" />
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-wreath-monogram">
+        <img src="assets/svg/wreath.svg" alt="Monograma Botânico Alexandre e Larissa" />
+      </div>
+
+      <div class="hero-eyebrow">Vamos nos Casar</div>
+      
+      <h1 class="hero-names">
+        Alexandre <span class="ampersand">&amp;</span> Larissa
+      </h1>
+
+      <div class="hero-event-info">
+        <span>28 de Novembro</span>
+        <span class="dot-separator">•</span>
+        <span>16:00 horas</span>
+        <span class="dot-separator">•</span>
+        <span>Chácara Monte Rey • Manaus, AM</span>
+      </div>
+
+      <!-- Contagem Regressiva -->
+      <div class="hero-countdown-wrapper">
+        <div class="countdown-label">Contagem Regressiva para o Grande Dia</div>
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">00</span>
+            <span class="countdown-unit">Dias</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">00</span>
+            <span class="countdown-unit">Horas</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">00</span>
+            <span class="countdown-unit">Minutos</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="seconds">00</span>
+            <span class="countdown-unit">Segundos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#mensagem" class="hero-scroll-indicator" aria-label="Rolar para a mensagem dos noivos">
+      <span>Conheça os Detalhes</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ========================================================================
+       SEÇÃO 1: MENSAGEM PESSOAL DOS NOIVOS AOS CONVIDADOS (NO TOPO)
+       ======================================================================== -->
+  <section class="welcome-section" id="mensagem">
+    <!-- Marca d'água botânica sutil no fundo -->
+    <div class="botanical-accent section-botanical-watermark-left">
+      <img src="assets/svg/monstera.svg" alt="" />
+    </div>
+
+    <div class="container">
+      <div class="welcome-card reveal-on-scroll">
+        <!-- Detalhes de folhagens nos cantos do card -->
+        <div class="botanical-accent welcome-botanical-corner">
+          <img src="assets/svg/branch.svg" alt="" />
+        </div>
+        <div class="botanical-accent welcome-botanical-bottom">
+          <img src="assets/svg/fern.svg" alt="" />
+        </div>
+
+        <div class="welcome-text-content">
+          <div class="section-tag">Sejam Bem-Vindos</div>
+          <h2>Aos Nossos Queridos Familiares &amp; Amigos</h2>
+          
+          <div class="welcome-quote">
+            "O amor não consiste em olhar um para o outro, mas sim em olhar juntos na mesma direção."
+          </div>
+
+          <p class="welcome-lorem">
+            Queridos amigos e familiares, é com o coração transbordando de alegria e gratidão que convidamos cada um de vocês para testemunhar o capítulo mais lindo da nossa história. Vocês estiveram ao nosso lado nos momentos mais especiais, e nada faria mais sentido do que celebrar este dia cercados por tanto amor e carinho.
+          </p>
+
+          <!-- Espaço de texto com Lorem Ipsum conforme solicitado pelo usuário -->
+          <p class="welcome-lorem">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+
+          <div class="welcome-signature">
+            <div>
+              <div class="signature-names">Com todo nosso amor, Alexandre &amp; Larissa</div>
+              <small style="color: var(--color-terracotta-primary); font-family: var(--font-sans-accent); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">28 • Novembro • 16h</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-photo-wrapper">
+          <div class="welcome-photo-frame">
+            <img src="assets/photos/IMG_6870.jpg" alt="Alexandre &amp; Larissa" />
+          </div>
+          <div class="welcome-badge-floating">
+            <span>🌿 Alexandre &amp; Larissa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SEÇÃO 2: NOSSA HISTÓRIA (TIMELINE ROMÂNTICA)
+       ======================================================================== -->
+  <section class="story-section" id="historia">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">Nossa Jornada</div>
+        <h2 class="section-title">Como Tudo Começou</h2>
+        <p class="section-subtitle">Pequenos instantes que transformaram duas histórias em uma só caminhada.</p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória Botânica" />
+        </div>
+      </div>
+
+      <div class="story-timeline">
+        <!-- Item 1 -->
+        <div class="story-item reveal-on-scroll">
+          <div class="story-node"></div>
+          <div class="story-card-photo">
+            <img src="assets/photos/IMG_6812.jpg" alt="O Primeiro Olhar" loading="lazy" />
+          </div>
+          <div class="story-text">
+            <span class="story-date">O Encontro</span>
+            <h3>Onde Nossos Caminhos se Cruzaram</h3>
+            <p>
+              Entre conversas despretensiosas, risadas sinceras e olhares que diziam mais do que palavras, descobrimos uma sintonia única. Bastou um instante para percebermos que ali começava algo para a vida inteira.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="story-item reveal-on-scroll">
+          <div class="story-node"></div>
+          <div class="story-card-photo">
+            <img src="assets/photos/IMG_6818.jpg" alt="Construindo Sonhos" loading="lazy" />
+          </div>
+          <div class="story-text">
+            <span class="story-date">A Conexão</span>
+            <h3>Construindo Nossos Sonhos</h3>
+            <p>
+              Crescemos juntos em cada viagem, em cada desafio superado e em cada café compartilhado. O respeito mútuo, a cumplicidade e a amizade se tornaram a base inabalável do nosso amor.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="story-item reveal-on-scroll">
+          <div class="story-node"></div>
+          <div class="story-card-photo">
+            <img src="assets/photos/IMG_6819.jpg" alt="O Pedido" loading="lazy" />
+          </div>
+          <div class="story-text">
+            <span class="story-date">O 'Sim'</span>
+            <h3>O Início do Nosso 'Para Sempre'</h3>
+            <p>
+              Com o coração acelerado e a certeza absoluta de que fomos feitos um para o outro, veio o pedido mais emocionante e o 'sim' mais doce de nossas vidas. Agora, estamos a poucos passos do altar!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SEÇÃO 3: O LOCAL - CHÁCARA MONTE REY (COM VÍDEO DE FUNDO SEM CONTROLES)
+       ======================================================================== -->
+  <section class="venue-section" id="local">
+    <div class="venue-video-bg-container">
+      <video class="venue-video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="assets/videos/chacara_video_2.mp4" type="video/mp4" />
+      </video>
+      <div class="venue-overlay"></div>
+    </div>
+
+    <div class="container venue-content">
+      <div style="text-align: center;">
+        <div class="section-tag" style="color: var(--color-gold-light);">O Cenário dos Nossos Sonhos</div>
+        <h2 class="section-title" style="color: #ffffff;">Chácara Monte Rey</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.85);">
+          Um refúgio verdejante e acolhedor em Manaus para celebrar nosso amor ao ar livre.
+        </p>
+        <div class="botanical-divider" style="color: var(--color-gold-light);">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <div class="venue-card-wrapper">
+        <div class="venue-info-card reveal-left">
+          <div class="venue-badge-pill">Informações do Local</div>
+          <h3>Chácara Monte Rey</h3>
+          
+          <div class="venue-address">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <div>
+              <strong>Manaus - Amazonas</strong><br />
+              Ambiente amplo, integrado à natureza exuberante e projetado para momentos inesquecíveis.
+            </div>
+          </div>
+
+          <ul class="venue-features-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>Horário:</strong> Início pontualmente às 16h00.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>Estacionamento:</strong> Estacionamento amplo e seguro no próprio local.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>Ambiente:</strong> Chácara com áreas verdes, gramado e espaço coberto climatizado.</span>
+            </li>
+          </ul>
+
+          <div class="venue-gps-buttons">
+            <a href="https://maps.google.com/?q=Chácara+Monte+Rey+Manaus" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Google Maps
+            </a>
+            <a href="https://waze.com/ul?q=Chácara+Monte+Rey+Manaus" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              Waze
+            </a>
+            <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+              Chamar Uber
+            </a>
+          </div>
+        </div>
+
+        <div class="venue-map-container reveal-right">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.032646698944!2d-60.0217!3d-3.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x926c19a9f4c3a7a9%3A0x8f2d5a3f1245678!2sCh%C3%A1cara%20Monte%20Rey%20Manaus!5e0!3m2!1spt-BR!2sbr!4v1680000000000!5m2!1spt-BR!2sbr"
+            title="Localização da Chácara Monte Rey no Mapa"
+            loading="lazy" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SEÇÃO 4: GUIA DE TRAJE (ESPORTE FINO COM LOOKBOOK ILUSTRATIVO)
+       ======================================================================== -->
+  <section class="dresscode-section" id="traje">
+    <!-- Marca d'água botânica -->
+    <div class="botanical-accent section-botanical-watermark-right">
+      <img src="assets/svg/palm.svg" alt="" />
+    </div>
+
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">Dress Code</div>
+        <h2 class="section-title">Guia de Traje: Esporte Fino</h2>
+        <p class="section-subtitle">
+          Queremos que todos se sintam confortáveis, elegantes e prontos para celebrar nosso amor.
+        </p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <div class="dresscode-cards-grid">
+        <!-- Card Masculino -->
+        <div class="dresscode-card reveal-left">
+          <div class="card-botanical-doodle">
+            <img src="assets/svg/monstera.svg" alt="" />
+          </div>
+
+          <span class="dresscode-gender-tag tag-men">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="10" cy="14" r="5"/><path d="M19 5l-5.4 5.4"/><path d="M19 5h-5"/><path d="M19 5v5"/></svg>
+            Para os Homens
+          </span>
+
+          <h3>Esporte Fino Masculino</h3>
+          <p class="dresscode-desc">
+            Sugerimos calça de alfaiataria ou sarja nobre combinada com camisa social de manga longa (linho ou algodão). O uso de blazer é opcional para um toque a mais de sofisticação. Sapatos sociais confortáveis ou mocassins.
+          </p>
+
+          <div class="swatch-group">
+            <div class="swatch-title recommended">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Paleta Recomendada
+            </div>
+            <div class="swatch-circles">
+              <div class="swatch-circle" style="background-color: #1b2e4b;" data-tooltip="Azul Marinho"></div>
+              <div class="swatch-circle" style="background-color: #1e3a2b;" data-tooltip="Verde Floresta"></div>
+              <div class="swatch-circle" style="background-color: #e3dac9;" data-tooltip="Areia / Bege"></div>
+              <div class="swatch-circle" style="background-color: #5c4033;" data-tooltip="Tons Terrosos"></div>
+              <div class="swatch-circle" style="background-color: #2b2b2b;" data-tooltip="Preto Clássico"></div>
+            </div>
+          </div>
+
+          <div class="swatch-group">
+            <div class="swatch-title avoid">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Cor a Evitar
+            </div>
+            <div class="swatch-circles">
+              <div class="swatch-circle" style="background-color: #d1d5db; position: relative;" data-tooltip="Cinza Claro (Evitar)">
+                <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#b33927; font-weight:bold;">✕</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dresscode-alert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <strong>Atenção cavalheiros:</strong> Pedimos a gentileza de <strong>evitar o tom cinza claro</strong>, pois é uma cor reservada para os noivos e padrinhos.
+            </div>
+          </div>
+
+          <!-- Lookbook 3 Imagens Masculinas -->
+          <div class="dresscode-lookbook">
+            <div class="dresscode-lookbook-title">
+              <span>👔 Inspirações de Looks Masculinos:</span>
+            </div>
+            <div class="dresscode-lookbook-grid">
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/man_look_1.jpg" alt="Look Masculino 1 - Linho e Alfaiataria" loading="lazy" />
+                <span class="dresscode-look-caption">Linho &amp; Elegância</span>
+              </div>
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/man_look_2.jpg" alt="Look Masculino 2 - Tons Terrosos e Sarja" loading="lazy" />
+                <span class="dresscode-look-caption">Tons Terrosos</span>
+              </div>
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/man_look_3.jpg" alt="Look Masculino 3 - Esporte Fino Tropical" loading="lazy" />
+                <span class="dresscode-look-caption">Esporte Fino</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Feminino -->
+        <div class="dresscode-card reveal-right">
+          <div class="card-botanical-doodle">
+            <img src="assets/svg/fern.svg" alt="" />
+          </div>
+
+          <span class="dresscode-gender-tag tag-women">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="9" r="5"/><path d="M12 14v7"/><path d="M9 18h6"/></svg>
+            Para as Mulheres
+          </span>
+
+          <h3>Esporte Fino Feminino</h3>
+          <p class="dresscode-desc">
+            Vestidos fluidos (midi ou longos leves), macacões sofisticados e tecidos frescos que combinem com a brisa da tarde. Como a cerimônia ocorre em chácara com gramado, indicamos sapatos de salto bloco, anabela ou sapatilhas finas para total comodidade.
+          </p>
+
+          <div class="swatch-group">
+            <div class="swatch-title recommended">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Paleta Recomendada
+            </div>
+            <div class="swatch-circles">
+              <div class="swatch-circle" style="background-color: #1f3f30;" data-tooltip="Verde Amazônico"></div>
+              <div class="swatch-circle" style="background-color: #6b8e23;" data-tooltip="Verde Oliva"></div>
+              <div class="swatch-circle" style="background-color: #e8c4c4;" data-tooltip="Rosé Suave"></div>
+              <div class="swatch-circle" style="background-color: #b399d4;" data-tooltip="Lavanda"></div>
+              <div class="swatch-circle" style="background-color: #c5a059;" data-tooltip="Dourado / Champanhe"></div>
+            </div>
+          </div>
+
+          <div class="swatch-group">
+            <div class="swatch-title avoid">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Paleta a Evitar
+            </div>
+            <div class="swatch-circles">
+              <div class="swatch-circle" style="background-color: #b85d3b; position: relative;" data-tooltip="Terracota (Evitar)">
+                <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#ffffff; font-weight:bold;">✕</span>
+              </div>
+              <div class="swatch-circle" style="background-color: #8c3b24; position: relative;" data-tooltip="Tijolo / Telha (Evitar)">
+                <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#ffffff; font-weight:bold;">✕</span>
+              </div>
+              <div class="swatch-circle" style="background-color: #ffffff; position: relative;" data-tooltip="Branco / Off-White (Exclusivo da Noiva)">
+                <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#b33927; font-weight:bold;">✕</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dresscode-alert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <strong>Atenção damas:</strong> Pedimos carinhosamente para <strong>evitar a paleta terracota</strong> e tons de branco/marfim, reservados para as madrinhas e para a noiva.
+            </div>
+          </div>
+
+          <!-- Lookbook 3 Imagens Femininas -->
+          <div class="dresscode-lookbook">
+            <div class="dresscode-lookbook-title">
+              <span>👗 Inspirações de Looks Femininos:</span>
+            </div>
+            <div class="dresscode-lookbook-grid">
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/woman_look_1.jpg" alt="Look Feminino 1 - Vestido Fluido Verde" loading="lazy" />
+                <span class="dresscode-look-caption">Fluido &amp; Fresco</span>
+              </div>
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/woman_look_2.jpg" alt="Look Feminino 2 - Floral Romântico" loading="lazy" />
+                <span class="dresscode-look-caption">Floral Suave</span>
+              </div>
+              <div class="dresscode-look-item">
+                <img src="assets/photos/dresscode/woman_look_3.jpg" alt="Look Feminino 3 - Midi Elegante" loading="lazy" />
+                <span class="dresscode-look-caption">Midi Sofisticado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SEÇÃO 5: LISTA DE PRESENTES FICTÍCIOS / COTAS LÚDICAS DOS NOIVOS
+       ======================================================================== -->
+  <section class="gifts-section" id="presentes">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">Presentes &amp; Cotas</div>
+        <h2 class="section-title">Lista de Presentes dos Noivos</h2>
+        <p class="section-subtitle">
+          Sua presença é o nosso maior presente! Se quiser nos presentear com uma cota divertida e simbólica para nossa nova jornada, escolha um dos mimos abaixo.
+        </p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <!-- Grid de Presentes Dinâmico (Sem Categorias) -->
+      <div class="gifts-grid" id="giftsGridContainer">
+        <!-- Renderizado dinamicamente via gifts.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Interativo de Presente / PIX -->
+  <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true">
+    <div class="gift-modal-card">
+      <button class="modal-close-btn" id="giftModalClose" aria-label="Fechar modal">✕</button>
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="section-tag">Presentear os Noivos</span>
+        <h3 id="modalGiftTitle" style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.5rem; margin-top: 6px;">
+          Presente Selecionado
+        </h3>
+        <div id="modalGiftPrice" style="font-family: var(--font-serif-display); font-size: 1.8rem; color: var(--color-terracotta-primary); font-weight: 700; margin-top: 4px;">
+          R$ 0,00
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 16px;">
+        <img id="modalGiftImg" src="" alt="" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);" />
+      </div>
+
+      <!-- Box PIX Simulado -->
+      <div class="pix-box">
+        <div style="font-size: 0.82rem; font-weight: 600; color: var(--color-green-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+          Pagamento Instantâneo via PIX
+        </div>
+        
+        <!-- QR Code SVG ilustrativo -->
+        <div class="pix-qr-code">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" style="width:100%; height:100%; color:var(--color-green-dark);">
+            <rect x="5" y="5" width="30" height="30" rx="3" stroke-width="4"/>
+            <rect x="13" y="13" width="14" height="14" fill="currentColor"/>
+            <rect x="65" y="5" width="30" height="30" rx="3" stroke-width="4"/>
+            <rect x="73" y="13" width="14" height="14" fill="currentColor"/>
+            <rect x="5" y="65" width="30" height="30" rx="3" stroke-width="4"/>
+            <rect x="13" y="73" width="14" height="14" fill="currentColor"/>
+            <path d="M45 10v35M55 20v20M5 45h35M65 45h30M45 65v30M65 65h15v15M85 75v15M65 90h25M55 60h10v10" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 8px;">
+          Copie a chave PIX abaixo ou aponte o app do seu banco:
+        </p>
+
+        <div class="pix-key-wrapper">
+          <input type="text" class="pix-key-input" id="pixKeyDisplay" value="casamento.alexandre.larissa@gmail.com" readonly />
+          <button type="button" class="btn btn-primary btn-sm" id="copyPixBtn">Copiar Chave</button>
+        </div>
+      </div>
+
+      <!-- Formulário com Recado e Nome do Convidado -->
+      <form id="giftConfirmForm">
+        <div class="form-group">
+          <label class="form-label" for="giftGuestName">Seu Nome:</label>
+          <input type="text" id="giftGuestName" class="form-control" placeholder="Seu nome" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="giftGuestMessage">Deixe uma Mensagem com o Presente (opcional):</label>
+          <textarea id="giftGuestMessage" class="form-control" rows="2" placeholder="Escreva uma dedicatória divertida para Alexandre &amp; Larissa..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          Confirmar Envio do Presente ✨
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SEÇÃO 6: CONFIRMAÇÃO DE PRESENÇA (RSVP) & MURAL PÚBLICO DE RECADOS
+       ======================================================================== -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">Presença &amp; Recados</div>
+        <h2 class="section-title">Confirmação de Presença &amp; Mural</h2>
+        <p class="section-subtitle">
+          Sua presença tornará esse dia inesquecível! Selecione seu nome na lista oficial de convidados e deixe seu recado de carinho.
+        </p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <div class="rsvp-mural-layout">
+        <!-- Formulário Simplificado com Busca de Convidados Obrigatória -->
+        <div class="rsvp-form-card reveal-left">
+          <h3 style="font-size: 1.8rem; color: var(--color-green-dark); margin-bottom: 8px;">
+            Confirme sua Presença
+          </h3>
+          <p style="color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 24px;">
+            Digite seu nome para pesquisar na lista de convidados oficial.
+          </p>
+
+          <form id="rsvpForm" novalidate>
+            <!-- Campo de Busca Autocomplete Obrigatório -->
+            <div class="form-group">
+              <label class="form-label" for="guestSearchInput">Nome do Convidado *</label>
+              <div class="guest-search-wrapper">
+                <input 
+                  type="text" 
+                  id="guestSearchInput" 
+                  class="form-control" 
+                  placeholder="Digite seu nome para pesquisar..." 
+                  autocomplete="off" 
+                  required 
+                />
+                <input type="hidden" id="selectedGuestName" name="guestName" />
+                <div class="guest-dropdown" id="guestDropdownList"></div>
+              </div>
+              <div class="field-error-text" id="guestSearchError">
+                ⚠️ Por favor, selecione seu nome na lista oficial de convidados.
+              </div>
+            </div>
+
+            <!-- Recado para os noivos -->
+            <div class="form-group">
+              <label class="form-label" for="rsvpMessage">Deixe um Recado para os Noivos (Ficará público no mural) *</label>
+              <textarea id="rsvpMessage" class="form-control" rows="3" placeholder="Escreva uma mensagem especial para Alexandre e Larissa..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+              Confirmar Minha Presença ✨
+            </button>
+          </form>
+        </div>
+
+        <!-- Mural Público de Recados -->
+        <div class="mural-container reveal-right">
+          <div class="mural-header">
+            <div>
+              <h3>Mural de Recados</h3>
+              <p style="color: var(--color-text-muted); font-size: 0.88rem;">Mensagens de carinho deixadas pelos convidados</p>
+            </div>
+            <span class="mural-count-badge" id="muralCountBadge">Carregando...</span>
+          </div>
+
+          <div class="mural-messages-feed" id="muralFeed">
+            <!-- Renderizado dinamicamente via rsvp-mural.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MODAL DA VAN DE SEGURANÇA (PÓS-CONFIRMAÇÃO)
+       ======================================================================== -->
+  <div class="gift-modal" id="vanModal" role="dialog" aria-modal="true">
+    <div class="van-modal-card">
+      <div style="font-size: 3.2rem; margin-bottom: 8px;">🚐🥂✨</div>
+      
+      <span class="van-badge-free">100% Gratuito • Cortesia dos Noivos</span>
+
+      <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.8rem; margin-bottom: 12px;">
+        Van da Alegria &amp; Segurança!
+      </h3>
+      
+      <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+        Olá <strong id="vanGuestNameDisplay" style="color: var(--color-green-dark);">Convidado</strong>! Para que todos possam brindar, dançar e curtir a festa à vontade, estamos nos organizando para disponibilizar uma <strong>van executiva para deixar os convidados em segurança em suas casas</strong> ao final da festa.
+      </p>
+
+      <p style="color: var(--color-terracotta-primary); font-weight: 600; font-size: 0.88rem; margin-bottom: 20px;">
+        🌿 Você não será cobrado por nada! O transporte é por nossa conta.
+      </p>
+
+      <form id="vanRequestForm">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label" for="vanAddressInput">Seu Bairro / Endereço em Manaus:</label>
+          <input 
+            type="text" 
+            id="vanAddressInput" 
+            class="form-control" 
+            placeholder="Ex: Adrianópolis, Ponta Negra, Parque 10..." 
+            required 
+          />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 18px;">
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Quero Vaga na Van! 🚐
+          </button>
+          <button type="button" class="btn btn-secondary" id="vanDismissBtn" style="color: var(--color-text-muted); border-color: var(--color-border-light); background: var(--color-bg-sand);">
+            Dispensar (Vou de Carona / Uber / Meu Transporte)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Lightbox para Ampliar Fotos do Casal -->
+  <div class="lightbox-modal" id="photoLightbox" role="dialog" aria-label="Visualizador de Fotos">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fechar foto">✕</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Próxima foto">›</button>
+    <div class="lightbox-content">
+      <img id="lightboxImage" src="" alt="Foto Alexandre e Larissa" />
+      <div id="lightboxCaption" style="color: #ffffff; font-family: var(--font-serif-romantic); font-size: 1.2rem; font-style: italic; margin-top: 14px;"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-monogram">
+        <img src="assets/svg/wreath.svg" alt="Monograma Botânico Alexandre e Larissa" />
+      </div>
+
+      <div class="footer-names">Alexandre &amp; Larissa</div>
+      <div class="footer-date">28 de Novembro às 16h00 • Chácara Monte Rey • Manaus, AM</div>
+
+      <nav class="footer-nav">
+        <a href="#hero">Início</a>
+        <a href="#mensagem">Mensagem</a>
+        <a href="#historia">História</a>
+        <a href="#local">O Local</a>
+        <a href="#traje">Guia de Traje</a>
+        <a href="#presentes">Presentes</a>
+        <a href="#rsvp">RSVP &amp; Mural</a>
+      </nav>
+
+      <div class="footer-bottom">
+        <p>Feito com todo amor e carinho para celebrar nosso casamento na Amazônia. © 2026 Alexandre &amp; Larissa.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts JS -->
+  <script src="js/app.js"></script>
+  <script src="js/gifts.js"></script>
+  <script src="js/rsvp-mural.js"></script>
+</body>
+</html>

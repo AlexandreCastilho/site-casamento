@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 20 L 140 20" opacity="0.35"/>
+  <path d="M260 20 L 385 20" opacity="0.35"/>
+  <!-- Central botanical motif -->
+  <circle cx="200" cy="20" r="3.5" fill="currentColor"/>
+  <path d="M200 20 C 185 10, 165 14, 155 20 C 165 26, 185 30, 200 20 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M200 20 C 215 10, 235 14, 245 20 C 235 26, 215 30, 200 20 Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M178 17 Q 170 8, 160 10" />
+  <path d="M222 17 Q 230 8, 240 10" />
+  <circle cx="150" cy="20" r="2" fill="currentColor" opacity="0.6"/>
+  <circle cx="250" cy="20" r="2" fill="currentColor" opacity="0.6"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 240 Q 90 200, 190 40" stroke-width="2.4"/>
+  <!-- Leaves radiating along the stem -->
+  <path d="M50 215 Q 25 190, 15 160"/>
+  <path d="M70 190 Q 35 165, 20 125"/>
+  <path d="M90 165 Q 50 135, 30 90"/>
+  <path d="M110 140 Q 65 105, 45 60"/>
+  <path d="M130 115 Q 85 75, 65 30"/>
+  <path d="M150 90 Q 110 50, 95 15"/>
+  <path d="M170 65 Q 140 35, 130 5"/>
+  <!-- Right side fronds -->
+  <path d="M65 210 Q 110 205, 145 195"/>
+  <path d="M85 185 Q 135 175, 175 160"/>
+  <path d="M105 160 Q 155 145, 195 125"/>
+  <path d="M125 135 Q 170 115, 205 90"/>
+  <path d="M145 110 Q 185 85, 210 55"/>
+  <path d="M165 85 Q 195 60, 215 25"/>
+</svg>
