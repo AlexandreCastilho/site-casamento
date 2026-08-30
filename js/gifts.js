@@ -1,19 +1,18 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
  * Lista Oficial dos 30 Presentes com Valores Atualizados e Links Oficiais InfinitePay
- * + Cota Livre com QR Code Oficial PIX e Ordenação Dinâmica
+ * + Cota Livre com QR Code Oficial PIX e Ordenação Dinâmica (Sem Emojis)
  */
 
 const OFFICIAL_PIX_CODE = '00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0';
 
-// Lista Organizada: Menor para maior valor, mantendo juntos os pares temáticos + Novos Links InfinitePay
+// Lista Organizada: Menor para maior valor, mantendo juntos os pares temáticos + Links InfinitePay
 const SUGGESTED_GIFTS_ORDER = [
   {
     id: 'presente-pix-personalizado',
     title: 'Cota Livre: Presenteie com Qualquer Valor via PIX',
     price: 0,
     isCustomPix: true,
-    icon: '💖',
     image: 'assets/gifts/gift-pix-custom.jpg',
     paymentLink: ''
   },
@@ -21,7 +20,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-30',
     title: 'Só pra não dizer que não dei nada',
     price: 107.00,
-    icon: '🪙',
     image: 'assets/gifts/gift-30.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-BIZudFmrMh-102,50'
   },
@@ -29,7 +27,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-7',
     title: 'Lenço pro Alex chorar na cerimônia (não reembolsável)',
     price: 113.26,
-    icon: '🤧',
     image: 'assets/gifts/gift-7.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-4MK9NUYO82-108,50'
   },
@@ -37,7 +34,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-5',
     title: 'Misto quente para levar na lancheira e comer no aeroporto',
     price: 120.46,
-    icon: '🥪',
     image: 'assets/gifts/gift-5.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ynldsrV4nA-115,40'
   },
@@ -45,7 +41,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-18',
     title: 'Rolo de macarrão caso o Alex faça raiva',
     price: 134.66,
-    icon: '🧑‍🍳',
     image: 'assets/gifts/gift-18.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-DvwW2cY1fm-129,00'
   },
@@ -53,7 +48,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-19',
     title: 'Capacete para o Alex poder fazer raiva para a Larissa',
     price: 219.21,
-    icon: '⛑️',
     image: 'assets/gifts/gift-19.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-DuBZhUVo3X-210,00'
   },
@@ -61,15 +55,13 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-6',
     title: 'Cueca sexy para o Alexandre',
     price: 146.04,
-    icon: '🩲',
     image: 'assets/gifts/gift-6.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-AHPJCDOErA-139,90'
   },
   {
     id: 'presente-22',
-    title: 'Vaga para jantar na casa dos noivos 🍜',
+    title: 'Vaga para jantar na casa dos noivos',
     price: 149.07,
-    icon: '🍜',
     image: 'assets/gifts/gift-22.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-HEOpRZIuLi-142,80'
   },
@@ -77,7 +69,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-21',
     title: 'Um trocadinho para liberar o noivo pro RPG no fim de semana',
     price: 156.58,
-    icon: '🎲',
     image: 'assets/gifts/gift-21.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-qB9T6tAHGV-150,00'
   },
@@ -85,7 +76,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-23',
     title: 'Livro de jardinagem para a noiva não matar mais plantas',
     price: 172.13,
-    icon: '🌱',
     image: 'assets/gifts/gift-23.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-kp5TLU2M15-164,90'
   },
@@ -93,7 +83,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-12',
     title: 'Obrigar o noivo a tirar foto',
     price: 182.68,
-    icon: '🤳',
     image: 'assets/gifts/gift-12.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-eRAsvt1jRE-175,00'
   },
@@ -101,7 +90,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-20',
     title: '1º mês de chocolate para o casal',
     price: 193.64,
-    icon: '🍫',
     image: 'assets/gifts/gift-20.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-5J2ZuWkV2f-185,50'
   },
@@ -109,7 +97,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-8',
     title: 'Kit calmante para noiva',
     price: 255.75,
-    icon: '🍵',
     image: 'assets/gifts/gift-8.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-E39QxVnF6l-245,00'
   },
@@ -117,7 +104,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-9',
     title: 'Sofá confortável para o noivo caso o kit calmante não funcione',
     price: 1972.87,
-    icon: '🛋️',
     image: 'assets/gifts/gift-9.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-jOmzRTqhLK-1890,00'
   },
@@ -125,7 +111,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-17',
     title: 'Kit ração pro cachorro que o Alex vai dar para a Larissa',
     price: 308.88,
-    icon: '🦴',
     image: 'assets/gifts/gift-17.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-JaTwTHcICL-295,90'
   },
@@ -133,7 +118,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-16',
     title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
     price: 814.20,
-    icon: '🐶',
     image: 'assets/gifts/gift-16.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-smyFL9RpCH-780,00'
   },
@@ -141,7 +125,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-28',
     title: 'Curso para aprender a segurar os pensamentos intrusivos',
     price: 328.82,
-    icon: '🧠',
     image: 'assets/gifts/gift-28.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-axAc7LoK3Z-315,00'
   },
@@ -149,7 +132,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-10',
     title: 'Prioridade na fila do buffet',
     price: 375.79,
-    icon: '🍽️',
     image: 'assets/gifts/gift-10.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-xuwmISaUSl-360,00'
   },
@@ -157,7 +139,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-27',
     title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
     price: 448.86,
-    icon: '💪',
     image: 'assets/gifts/gift-27.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ULfG7qxDm6-430,00'
   },
@@ -165,7 +146,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-26',
     title: 'Monjauro para os noivos meterem o shape',
     price: 1753.66,
-    icon: '💉',
     image: 'assets/gifts/gift-26.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-OKNyKxU5Ml-1680,00'
   },
@@ -173,7 +153,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-1',
     title: 'Tênis para a Larissa caminhar em Roma',
     price: 509.30,
-    icon: '👟',
     image: 'assets/gifts/gift-1.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-iFPD03Zoff-487,90'
   },
@@ -181,7 +160,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-2',
     title: 'Dinheiro pro Alex levar a Larissa para Roma',
     price: 2974.95,
-    icon: '✈️',
     image: 'assets/gifts/gift-2.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-v95047Cvzz-2850,00'
   },
@@ -189,7 +167,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-13',
     title: 'Jogar o buquê na sua direção',
     price: 542.80,
-    icon: '💐',
     image: 'assets/gifts/gift-13.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-aIeNsf6Qwr-520,00'
   },
@@ -197,7 +174,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-24',
     title: 'Buquê de flores mensal',
     price: 668.06,
-    icon: '🌸',
     image: 'assets/gifts/gift-24.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-Z8mjwOGgrZ-640,00'
   },
@@ -205,7 +181,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-4',
     title: 'Looks novos para a lua de mel',
     price: 929.02,
-    icon: '👗',
     image: 'assets/gifts/gift-4.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-naI4QZpscF-890,00'
   },
@@ -213,7 +188,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-3',
     title: 'Fotógrafo para o Alex descansar na lua de mel',
     price: 1294.89,
-    icon: '📸',
     image: 'assets/gifts/gift-3.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ixxjW59FtY-1240,50'
   },
@@ -221,7 +195,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-15',
     title: '1º mês da escola do Xandy Junior',
     price: 1200.42,
-    icon: '👶',
     image: 'assets/gifts/gift-15.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-NDVER9uH5M-1150,00'
   },
@@ -229,7 +202,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-29',
     title: 'Patrocínio para tirar nosso nome do SERASA',
     price: 1555.33,
-    icon: '💸',
     image: 'assets/gifts/gift-29.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-JqGTo6jsdz-1490,00'
   },
@@ -237,7 +209,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-11',
     title: 'EU NÃO VOU EMBORA: Vaquinha para a hora extra da festa',
     price: 2557.42,
-    icon: '🎉',
     image: 'assets/gifts/gift-11.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-dt8kx0d0Lo-2450,00'
   },
@@ -245,7 +216,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-14',
     title: 'Cota Parintins 2027 para os noivos',
     price: 3100.21,
-    icon: '🐂',
     image: 'assets/gifts/gift-14.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-aBm6pGLkBl-2970,00'
   },
@@ -253,7 +223,6 @@ const SUGGESTED_GIFTS_ORDER = [
     id: 'presente-25',
     title: 'Implante capilar para o noivo',
     price: 3121.09,
-    icon: '💇‍♂️',
     image: 'assets/gifts/gift-25.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-E9cTcpeSEJ-2990,00'
   }
@@ -337,7 +306,6 @@ function renderGiftsGrid() {
       <div class="gift-card ${isCustom ? 'gift-card-custom' : ''}" data-id="${gift.id}">
         <div class="gift-img-frame">
           <img src="${gift.image}" alt="${escapeHtml(gift.title)}" loading="lazy" />
-          <span class="gift-emoji-badge">${gift.icon}</span>
         </div>
         <div class="gift-card-body">
           <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
@@ -346,7 +314,7 @@ function renderGiftsGrid() {
               ${priceDisplay}
             </div>
             <button type="button" class="btn ${isCustom ? 'btn-secondary' : 'btn-primary'} btn-sm presentear-btn" data-id="${gift.id}">
-              ${isCustom ? 'Contribuir 📱' : 'Presentear ✨'}
+              ${isCustom ? 'Contribuir via PIX' : 'Presentear'}
             </button>
           </div>
         </div>
@@ -431,7 +399,6 @@ function initGiftModal() {
 
       modal.innerHTML = `
         <div class="gift-modal-card" style="text-align: center; padding: 45px 30px;">
-          <div style="font-size: 3.5rem; margin-bottom: 12px;">🥂💖🌿</div>
           <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.9rem; margin-bottom: 12px;">
             Muito Obrigado, ${escapeHtml(guestName)}!
           </h3>
@@ -454,7 +421,7 @@ function openGiftModal(gift) {
   const priceEl = document.getElementById('modalGiftPrice');
   const pixInput = document.getElementById('pixKeyDisplay');
 
-  if (titleEl) titleEl.innerText = `${gift.icon} ${gift.title}`;
+  if (titleEl) titleEl.innerText = gift.title;
   if (priceEl) {
     priceEl.innerText = gift.isCustomPix 
       ? 'Valor Livre (Defina no App do seu Banco)' 
