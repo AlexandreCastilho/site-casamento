@@ -1104,20 +1104,26 @@ h1, h2, h3, h4 {
 }
 
 .story-card-photo.story-card-photo-contain {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
   background: #ffffff;
-  padding: 8px;
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  overflow: hidden;
 }
 
 .story-card-photo.story-card-photo-contain img,
 .story-card-photo img.story-img-full {
   width: 100%;
-  height: auto;
-  max-height: 480px;
-  object-fit: contain;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
   border-radius: calc(var(--radius-lg) - 6px);
+  display: block;
 }
 
 .story-text {
