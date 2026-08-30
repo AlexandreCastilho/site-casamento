@@ -1772,21 +1772,27 @@ h1, h2, h3, h4 {
 }
 
 .gift-img-frame {
-  height: 175px;
+  height: 200px;
   position: relative;
   overflow: hidden;
-  background: var(--color-bg-sand);
+  background: #faf7f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .gift-img-frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
+  object-fit: contain;
+  border-radius: calc(var(--radius-sm) - 2px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .gift-card:hover .gift-img-frame img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .gift-emoji-badge {
