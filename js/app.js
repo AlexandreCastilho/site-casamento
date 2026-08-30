@@ -1,7 +1,10 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - APP.JS
- * Lógica geral, contagem regressiva, parallax de fotos no scroll, navegação responsiva e lightbox
+ * Lógica geral, tela de carregamento, contagem regressiva, parallax e navegação
  */
+
+// Iniciar preloader imediatamente
+initPreloader();
 
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
@@ -11,6 +14,34 @@ document.addEventListener('DOMContentLoaded', () => {
   initLightbox();
   initResizeHandler();
 });
+
+/* ==========================================================================
+   0. TELA DE CARREGAMENTO NOBRE (PRELOADER)
+   ========================================================================== */
+function initPreloader() {
+  function dismiss() {
+    const preloader = document.getElementById('sitePreloader');
+    if (!preloader || preloader.classList.contains('is-hidden')) return;
+
+    preloader.classList.add('is-hidden');
+    setTimeout(() => {
+      preloader.style.display = 'none';
+      preloader.setAttribute('aria-hidden', 'true');
+    }, 850);
+  }
+
+  // Quando a página e todos os recursos forem 100% carregados
+  if (document.readyState === 'complete') {
+    setTimeout(dismiss, 500);
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(dismiss, 600);
+    });
+  }
+
+  // Fail-safe de segurança (máximo 2.8s para nunca travar o usuário)
+  setTimeout(dismiss, 2800);
+}
 
 /* ==========================================================================
    1. CONTAGEM REGRESSIVA (28 DE NOVEMBRO ÀS 16:00)
