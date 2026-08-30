@@ -47,8 +47,8 @@
           <li><a href="#historia" class="nav-link">Nossa História</a></li>
           <li><a href="#local" class="nav-link">O Local</a></li>
           <li><a href="#traje" class="nav-link">Guia de Traje</a></li>
-          <li><a href="#presentes" class="nav-link">Lista de Presentes</a></li>
           <li><a href="#rsvp" class="nav-link">Mural &amp; RSVP</a></li>
+          <li><a href="#presentes" class="nav-link">Lista de Presentes</a></li>
           <li><a href="#rsvp" class="btn btn-primary nav-cta-btn">Confirmar Presença</a></li>
         </ul>
       </nav>
@@ -542,7 +542,127 @@
   </section>
 
   <!-- ========================================================================
-       SEÇÃO 5: LISTA DE PRESENTES FICTÍCIOS / COTAS LÚDICAS DOS NOIVOS
+       SEÇÃO 5: CONFIRMAÇÃO DE PRESENÇA (RSVP) & MURAL PÚBLICO DE RECADOS
+       ======================================================================== -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">Presença &amp; Recados</div>
+        <h2 class="section-title">Confirmação de Presença &amp; Mural</h2>
+        <p class="section-subtitle">
+          Sua presença tornará esse dia inesquecível! Selecione seu nome na lista oficial de convidados e deixe seu recado de carinho.
+        </p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <div class="rsvp-mural-layout">
+        <!-- Formulário Simplificado com Busca de Convidados Obrigatória -->
+        <div class="rsvp-form-card reveal-left">
+          <h3 style="font-size: 1.8rem; color: var(--color-green-dark); margin-bottom: 8px;">
+            Confirme sua Presença
+          </h3>
+          <p style="color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 24px;">
+            Digite seu nome para pesquisar na lista de convidados oficial.
+          </p>
+
+          <form id="rsvpForm" novalidate>
+            <!-- Campo de Busca Autocomplete Obrigatório -->
+            <div class="form-group">
+              <label class="form-label" for="guestSearchInput">Nome do Convidado *</label>
+              <div class="guest-search-wrapper">
+                <input 
+                  type="text" 
+                  id="guestSearchInput" 
+                  class="form-control" 
+                  placeholder="Digite seu nome para pesquisar..." 
+                  autocomplete="off" 
+                  required 
+                />
+                <input type="hidden" id="selectedGuestName" name="guestName" />
+                <div class="guest-dropdown" id="guestDropdownList"></div>
+              </div>
+              <div class="field-error-text" id="guestSearchError">
+                ⚠️ Por favor, selecione seu nome na lista oficial de convidados.
+              </div>
+            </div>
+
+            <!-- Recado para os noivos -->
+            <div class="form-group">
+              <label class="form-label" for="rsvpMessage">Deixe um Recado para os Noivos (Ficará público no mural) *</label>
+              <textarea id="rsvpMessage" class="form-control" rows="3" placeholder="Escreva uma mensagem especial para Alexandre e Larissa..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+              Confirmar Minha Presença ✨
+            </button>
+          </form>
+        </div>
+
+        <!-- Mural Público de Recados -->
+        <div class="mural-container reveal-right">
+          <div class="mural-header">
+            <div>
+              <h3>Mural de Recados</h3>
+              <p style="color: var(--color-text-muted); font-size: 0.88rem;">Mensagens de carinho deixadas pelos convidados</p>
+            </div>
+            <span class="mural-count-badge" id="muralCountBadge">Carregando...</span>
+          </div>
+
+          <div class="mural-messages-feed" id="muralFeed">
+            <!-- Renderizado dinamicamente via rsvp-mural.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal da Van de Segurança (Pós-Confirmação) -->
+  <div class="gift-modal" id="vanModal" role="dialog" aria-modal="true">
+    <div class="van-modal-card">
+      <div style="font-size: 3.2rem; margin-bottom: 8px;">🚐🥂✨</div>
+      
+      <span class="van-badge-free">100% Gratuito • Cortesia dos Noivos</span>
+
+      <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.8rem; margin-bottom: 12px;">
+        Van da Alegria &amp; Segurança!
+      </h3>
+      
+      <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+        Olá <strong id="vanGuestNameDisplay" style="color: var(--color-green-dark);">Convidado</strong>! Para que todos possam brindar, dançar e curtir a festa à vontade, estamos nos organizando para disponibilizar uma <strong>van executiva para deixar os convidados em segurança em suas casas</strong> ao final da festa.
+      </p>
+
+      <p style="color: var(--color-terracotta-primary); font-weight: 600; font-size: 0.88rem; margin-bottom: 20px;">
+        🌿 Você não será cobrado por nada! O transporte é por nossa conta.
+      </p>
+
+      <form id="vanRequestForm">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label" for="vanAddressInput">Seu Bairro / Endereço em Manaus:</label>
+          <input 
+            type="text" 
+            id="vanAddressInput" 
+            class="form-control" 
+            placeholder="Ex: Adrianópolis, Ponta Negra, Parque 10..." 
+            required 
+          />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 18px;">
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Quero Vaga na Van! 🚐
+          </button>
+          <button type="button" class="btn btn-secondary" id="vanDismissBtn" style="color: var(--color-text-muted); border-color: var(--color-border-light); background: var(--color-bg-sand);">
+            Dispensar (Vou de Carona / Uber / Meu Transporte)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SEÇÃO 6: LISTA DE PRESENTES FICTÍCIOS / COTAS LÚDICAS DOS NOIVOS
        ======================================================================== -->
   <section class="gifts-section" id="presentes">
     <div class="container">
@@ -631,128 +751,6 @@
     </div>
   </div>
 
-  <!-- ========================================================================
-       SEÇÃO 6: CONFIRMAÇÃO DE PRESENÇA (RSVP) & MURAL PÚBLICO DE RECADOS
-       ======================================================================== -->
-  <section class="rsvp-section" id="rsvp">
-    <div class="container">
-      <div style="text-align: center;">
-        <div class="section-tag">Presença &amp; Recados</div>
-        <h2 class="section-title">Confirmação de Presença &amp; Mural</h2>
-        <p class="section-subtitle">
-          Sua presença tornará esse dia inesquecível! Selecione seu nome na lista oficial de convidados e deixe seu recado de carinho.
-        </p>
-        <div class="botanical-divider">
-          <img src="assets/svg/divider.svg" alt="Divisória" />
-        </div>
-      </div>
-
-      <div class="rsvp-mural-layout">
-        <!-- Formulário Simplificado com Busca de Convidados Obrigatória -->
-        <div class="rsvp-form-card reveal-left">
-          <h3 style="font-size: 1.8rem; color: var(--color-green-dark); margin-bottom: 8px;">
-            Confirme sua Presença
-          </h3>
-          <p style="color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 24px;">
-            Digite seu nome para pesquisar na lista de convidados oficial.
-          </p>
-
-          <form id="rsvpForm" novalidate>
-            <!-- Campo de Busca Autocomplete Obrigatório -->
-            <div class="form-group">
-              <label class="form-label" for="guestSearchInput">Nome do Convidado *</label>
-              <div class="guest-search-wrapper">
-                <input 
-                  type="text" 
-                  id="guestSearchInput" 
-                  class="form-control" 
-                  placeholder="Digite seu nome para pesquisar..." 
-                  autocomplete="off" 
-                  required 
-                />
-                <input type="hidden" id="selectedGuestName" name="guestName" />
-                <div class="guest-dropdown" id="guestDropdownList"></div>
-              </div>
-              <div class="field-error-text" id="guestSearchError">
-                ⚠️ Por favor, selecione seu nome na lista oficial de convidados.
-              </div>
-            </div>
-
-            <!-- Recado para os noivos -->
-            <div class="form-group">
-              <label class="form-label" for="rsvpMessage">Deixe um Recado para os Noivos (Ficará público no mural) *</label>
-              <textarea id="rsvpMessage" class="form-control" rows="3" placeholder="Escreva uma mensagem especial para Alexandre e Larissa..." required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
-              Confirmar Minha Presença ✨
-            </button>
-          </form>
-        </div>
-
-        <!-- Mural Público de Recados -->
-        <div class="mural-container reveal-right">
-          <div class="mural-header">
-            <div>
-              <h3>Mural de Recados</h3>
-              <p style="color: var(--color-text-muted); font-size: 0.88rem;">Mensagens de carinho deixadas pelos convidados</p>
-            </div>
-            <span class="mural-count-badge" id="muralCountBadge">Carregando...</span>
-          </div>
-
-          <div class="mural-messages-feed" id="muralFeed">
-            <!-- Renderizado dinamicamente via rsvp-mural.js -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       MODAL DA VAN DE SEGURANÇA (PÓS-CONFIRMAÇÃO)
-       ======================================================================== -->
-  <div class="gift-modal" id="vanModal" role="dialog" aria-modal="true">
-    <div class="van-modal-card">
-      <div style="font-size: 3.2rem; margin-bottom: 8px;">🚐🥂✨</div>
-      
-      <span class="van-badge-free">100% Gratuito • Cortesia dos Noivos</span>
-
-      <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.8rem; margin-bottom: 12px;">
-        Van da Alegria &amp; Segurança!
-      </h3>
-      
-      <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-        Olá <strong id="vanGuestNameDisplay" style="color: var(--color-green-dark);">Convidado</strong>! Para que todos possam brindar, dançar e curtir a festa à vontade, estamos nos organizando para disponibilizar uma <strong>van executiva para deixar os convidados em segurança em suas casas</strong> ao final da festa.
-      </p>
-
-      <p style="color: var(--color-terracotta-primary); font-weight: 600; font-size: 0.88rem; margin-bottom: 20px;">
-        🌿 Você não será cobrado por nada! O transporte é por nossa conta.
-      </p>
-
-      <form id="vanRequestForm">
-        <div class="form-group" style="text-align: left;">
-          <label class="form-label" for="vanAddressInput">Seu Bairro / Endereço em Manaus:</label>
-          <input 
-            type="text" 
-            id="vanAddressInput" 
-            class="form-control" 
-            placeholder="Ex: Adrianópolis, Ponta Negra, Parque 10..." 
-            required 
-          />
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 18px;">
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
-            Quero Vaga na Van! 🚐
-          </button>
-          <button type="button" class="btn btn-secondary" id="vanDismissBtn" style="color: var(--color-text-muted); border-color: var(--color-border-light); background: var(--color-bg-sand);">
-            Dispensar (Vou de Carona / Uber / Meu Transporte)
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <!-- Modal Lightbox para Ampliar Fotos do Casal -->
   <div class="lightbox-modal" id="photoLightbox" role="dialog" aria-label="Visualizador de Fotos">
     <button class="lightbox-close" id="lightboxClose" aria-label="Fechar foto">✕</button>
@@ -782,8 +780,8 @@
         <a href="#historia">História</a>
         <a href="#local">O Local</a>
         <a href="#traje">Guia de Traje</a>
-        <a href="#presentes">Presentes</a>
         <a href="#rsvp">RSVP &amp; Mural</a>
+        <a href="#presentes">Presentes</a>
       </nav>
 
       <div class="footer-bottom">
