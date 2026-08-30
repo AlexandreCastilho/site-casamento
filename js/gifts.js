@@ -1,12 +1,12 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
- * Lista Oficial dos 30 Presentes Organizada por Valores e Pares Temáticos
- * Com Ordenação Dinâmica (Menor/Maior, Maior/Menor, A-Z) e QR Code Oficial PIX
+ * Lista Oficial dos 30 Presentes com Links Oficiais de Pagamento InfinitePay
+ * + Cota Livre com QR Code Oficial PIX e Ordenação Dinâmica
  */
 
 const OFFICIAL_PIX_CODE = '00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0';
 
-// Lista Organizada: Menor para maior valor, mantendo juntos os pares temáticos
+// Lista Organizada: Menor para maior valor, mantendo juntos os pares temáticos + Links InfinitePay
 const SUGGESTED_GIFTS_ORDER = [
   {
     id: 'presente-pix-personalizado',
@@ -23,7 +23,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 102.50,
     icon: '🪙',
     image: 'assets/gifts/gift-30.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-uzWukt99i6-102,50'
   },
   {
     id: 'presente-7',
@@ -31,7 +31,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 108.50,
     icon: '🤧',
     image: 'assets/gifts/gift-7.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-hXdB7dOzyx-108,50'
   },
   {
     id: 'presente-5',
@@ -39,7 +39,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 115.40,
     icon: '🥪',
     image: 'assets/gifts/gift-5.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-ZwGGf2kRw4-115,40'
   },
   {
     id: 'presente-18',
@@ -47,7 +47,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 129.00,
     icon: '🧑‍🍳',
     image: 'assets/gifts/gift-18.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-v42rUDgmoZ-129,00'
   },
   {
     id: 'presente-19',
@@ -55,7 +55,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 210.00,
     icon: '⛑️',
     image: 'assets/gifts/gift-19.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-Nckkp8ELkv-210,00'
   },
   {
     id: 'presente-6',
@@ -63,7 +63,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 139.90,
     icon: '🩲',
     image: 'assets/gifts/gift-6.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-8lnkvFBX3X-139,90'
   },
   {
     id: 'presente-22',
@@ -71,7 +71,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 142.80,
     icon: '🍜',
     image: 'assets/gifts/gift-22.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-oZEXZmhW6p-142,80'
   },
   {
     id: 'presente-21',
@@ -79,7 +79,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 150.00,
     icon: '🎲',
     image: 'assets/gifts/gift-21.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-kuJ6m5E2dp-150,00'
   },
   {
     id: 'presente-23',
@@ -87,7 +87,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 164.90,
     icon: '🌱',
     image: 'assets/gifts/gift-23.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-q66WS4sjIX-164,90'
   },
   {
     id: 'presente-12',
@@ -95,7 +95,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 175.00,
     icon: '🤳',
     image: 'assets/gifts/gift-12.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-S8YlW9OPfO-175,00'
   },
   {
     id: 'presente-20',
@@ -103,7 +103,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 185.50,
     icon: '🍫',
     image: 'assets/gifts/gift-20.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-CDTlc4woI6-185,50'
   },
   {
     id: 'presente-8',
@@ -111,7 +111,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 245.00,
     icon: '🍵',
     image: 'assets/gifts/gift-8.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-myYjQhFaYa-245,00'
   },
   {
     id: 'presente-9',
@@ -119,7 +119,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 1890.00,
     icon: '🛋️',
     image: 'assets/gifts/gift-9.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-H8iBnWaNG7-1890,00'
   },
   {
     id: 'presente-17',
@@ -127,7 +127,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 295.90,
     icon: '🦴',
     image: 'assets/gifts/gift-17.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-vDEqVdxpl5-295,90'
   },
   {
     id: 'presente-16',
@@ -135,7 +135,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 780.00,
     icon: '🐶',
     image: 'assets/gifts/gift-16.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-gkPMgWwfKq-780,00'
   },
   {
     id: 'presente-28',
@@ -143,7 +143,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 315.00,
     icon: '🧠',
     image: 'assets/gifts/gift-28.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-Wj1VA3iTFS-315,00'
   },
   {
     id: 'presente-10',
@@ -151,7 +151,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 360.00,
     icon: '🍽️',
     image: 'assets/gifts/gift-10.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-fsorCmh0hg-360,00'
   },
   {
     id: 'presente-27',
@@ -159,7 +159,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 430.00,
     icon: '💪',
     image: 'assets/gifts/gift-27.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-yGamOiiQyR-430,00'
   },
   {
     id: 'presente-26',
@@ -167,7 +167,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 1680.00,
     icon: '💉',
     image: 'assets/gifts/gift-26.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-WgSS75EQzV-1680,00'
   },
   {
     id: 'presente-1',
@@ -175,7 +175,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 487.90,
     icon: '👟',
     image: 'assets/gifts/gift-1.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-I23KuUqVok-487,90'
   },
   {
     id: 'presente-2',
@@ -183,7 +183,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 2850.00,
     icon: '✈️',
     image: 'assets/gifts/gift-2.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-HcpMoMsV8c-2850,00'
   },
   {
     id: 'presente-13',
@@ -191,7 +191,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 520.00,
     icon: '💐',
     image: 'assets/gifts/gift-13.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-CGJX19aiAE-520,00'
   },
   {
     id: 'presente-24',
@@ -199,7 +199,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 640.00,
     icon: '🌸',
     image: 'assets/gifts/gift-24.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-NET7hDphNM-640,00'
   },
   {
     id: 'presente-4',
@@ -207,7 +207,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 890.00,
     icon: '👗',
     image: 'assets/gifts/gift-4.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-NnnZGPDnhR-890,00'
   },
   {
     id: 'presente-3',
@@ -215,7 +215,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 1240.50,
     icon: '📸',
     image: 'assets/gifts/gift-3.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-2jHY5LtGLD-1240,50'
   },
   {
     id: 'presente-15',
@@ -223,7 +223,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 1150.00,
     icon: '👶',
     image: 'assets/gifts/gift-15.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-1xktVaxztF-1150,00'
   },
   {
     id: 'presente-29',
@@ -231,7 +231,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 1490.00,
     icon: '💸',
     image: 'assets/gifts/gift-29.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-qGCZulbS7T-1490,00'
   },
   {
     id: 'presente-11',
@@ -239,7 +239,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 2450.00,
     icon: '🎉',
     image: 'assets/gifts/gift-11.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-GeBCYnLOEt-2450,00'
   },
   {
     id: 'presente-14',
@@ -247,7 +247,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 2970.00,
     icon: '🐂',
     image: 'assets/gifts/gift-14.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-gmLoGNRnD0-2970,00'
   },
   {
     id: 'presente-25',
@@ -255,7 +255,7 @@ const SUGGESTED_GIFTS_ORDER = [
     price: 2990.00,
     icon: '💇‍♂️',
     image: 'assets/gifts/gift-25.jpg',
-    paymentLink: ''
+    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/Ri0x-ggG7dJIgcB-2990,00'
   }
 ];
 
@@ -378,7 +378,7 @@ function handleGiftClick(gift) {
   if (gift.isCustomPix || !gift.paymentLink || gift.paymentLink.trim().length === 0 || gift.paymentLink === '#') {
     openGiftModal(gift);
   } else {
-    // Redireciona diretamente para o link de pagamento
+    // Redireciona diretamente e de forma segura para o link de checkout InfinitePay
     window.open(gift.paymentLink, '_blank', 'noopener,noreferrer');
   }
 }
