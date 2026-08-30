@@ -884,8 +884,8 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Ocultar trilhos apenas em telas pequenas / mobile onde não há espaço lateral */
-@media (max-width: 1100px) {
+/* Ocultar trilhos de polaroids em telas <= 1440px para garantir total legibilidade e evitar sobreposição */
+@media (max-width: 1440px) {
   .floating-photo-rail {
     display: none !important;
   }
@@ -2444,10 +2444,20 @@ textarea.form-control {
    BREAKPOINTS RESPONSIVOS E FLUIDEZ EM QUALQUER RESOLUÇÃO
    ========================================================================== */
 
-/* Telas Grandes e Laptops (1024px a 1200px) */
+/* Telas Grandes e Laptops (1024px a 1440px) */
+@media (max-width: 1440px) {
+  .floating-photo-rail {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1200px) {
   .container {
-    padding: 0 20px;
+    padding: 0 clamp(18px, 3vw, 24px);
+  }
+  .gifts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
   }
 }
 
@@ -2455,12 +2465,14 @@ textarea.form-control {
 @media (max-width: 992px) {
   .welcome-card {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 36px 24px;
+    gap: 32px;
+    padding: clamp(24px, 4vw, 36px) clamp(18px, 3vw, 24px);
   }
 
   .welcome-photo-frame {
-    max-width: 380px;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .story-timeline::before {
@@ -2471,7 +2483,7 @@ textarea.form-control {
     grid-template-columns: 1fr;
     gap: 20px;
     padding-left: 45px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
   }
 
   .story-item:nth-child(even) {
@@ -2485,39 +2497,34 @@ textarea.form-control {
     transform: translate(-50%, 0);
   }
 
+  .story-card-photo.story-card-photo-contain {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
   .venue-card-wrapper {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .venue-map-container {
     min-height: 320px;
+    max-height: 420px;
   }
 
   .dresscode-cards-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .rsvp-mural-layout {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
-  .gallery-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .gallery-item-1,
-  .gallery-item-2,
-  .gallery-item-3,
-  .gallery-item-4,
-  .gallery-item-5,
-  .gallery-item-6,
-  .gallery-item-7 {
-    grid-column: span 3;
-    height: 280px;
-  }
-
-  .gallery-item-1 {
-    grid-column: span 6;
+  .gifts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
   }
 }
 
@@ -2537,7 +2544,7 @@ textarea.form-control {
     position: fixed;
     top: 0;
     right: -100%;
-    width: min(82vw, 320px);
+    width: min(85vw, 320px);
     height: 100vh;
     height: 100dvh;
     background: var(--color-bg-card);
@@ -2559,7 +2566,7 @@ textarea.form-control {
     color: var(--color-green-dark) !important;
     font-size: 0.95rem;
     width: 100%;
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--color-border-light);
   }
 
@@ -2569,16 +2576,17 @@ textarea.form-control {
   }
 
   .hero-section {
-    padding: 100px 16px 60px 16px;
+    padding: clamp(90px, 15vh, 120px) 16px 50px 16px;
   }
 
   .countdown-grid {
     gap: 6px;
+    max-width: 360px;
   }
 
   .countdown-item:not(:last-child)::after {
-    right: -5px;
-    font-size: 1.4rem;
+    right: -4px;
+    font-size: 1.2rem;
   }
 
   .hero-actions {
@@ -2592,49 +2600,31 @@ textarea.form-control {
     width: 100%;
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  .form-control, 
+  .guest-search-wrapper input {
+    font-size: 16px; /* Evita zoom automático no iOS Safari */
   }
 
-  .gallery-item-1,
-  .gallery-item-2,
-  .gallery-item-3,
-  .gallery-item-4,
-  .gallery-item-5,
-  .gallery-item-6,
-  .gallery-item-7 {
-    grid-column: span 1;
-    height: 200px;
-  }
-
-  .gallery-item-1 {
-    grid-column: span 2;
-    height: 240px;
-  }
-
-  .form-row-2 {
-    grid-template-columns: 1fr;
+  .gift-modal-card,
+  .van-modal-card {
+    max-width: min(94vw, 480px);
+    padding: clamp(20px, 5vw, 30px);
   }
 }
 
 /* Celulares Muito Pequenos (<= 480px) */
 @media (max-width: 480px) {
   .container {
-    padding: 0 16px;
+    padding: 0 14px;
   }
 
   .countdown-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
   .countdown-item:not(:last-child)::after {
     display: none;
-  }
-
-  .radio-group-presence {
-    grid-template-columns: 1fr;
   }
 
   .pix-key-wrapper {
@@ -2645,26 +2635,33 @@ textarea.form-control {
     width: 100%;
   }
 
+  .venue-gps-buttons {
+    flex-direction: column;
+  }
+
   .venue-gps-buttons .btn {
     width: 100%;
   }
 
-  .gallery-grid {
+  .gifts-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .gallery-item-1,
-  .gallery-item-2,
-  .gallery-item-3,
-  .gallery-item-4,
-  .gallery-item-5,
-  .gallery-item-6,
-  .gallery-item-7 {
-    grid-column: span 1;
-    height: 220px;
+  .gift-img-frame {
+    height: 190px;
   }
 
   .welcome-card::before {
-    display: none; /* Simplificar visual em telas super estreitas */
+    display: none;
+  }
+
+  .story-item {
+    padding-left: 36px;
+  }
+
+  .story-timeline::before,
+  .story-node {
+    left: 14px;
   }
 }
