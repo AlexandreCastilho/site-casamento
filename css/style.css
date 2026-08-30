@@ -785,11 +785,12 @@ h1, h2, h3, h4 {
   padding-left: 16px;
 }
 
+.welcome-text,
 .welcome-lorem {
   color: var(--color-text-muted);
-  font-size: clamp(0.92rem, 1.4vw, 1rem);
-  line-height: 1.75;
-  margin-bottom: 20px;
+  font-size: clamp(0.94rem, 1.35vw, 1.03rem);
+  line-height: 1.8;
+  margin-bottom: 16px;
 }
 
 .welcome-signature {
