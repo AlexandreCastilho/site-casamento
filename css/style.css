@@ -1577,65 +1577,49 @@ h1, h2, h3, h4 {
   opacity: 1;
 }
 
-/* Lookbook de Inspirações de Trajes (3 Masculinos / 3 Femininos) */
-.dresscode-lookbook {
+/* Moldura de Croquis / Sketch de Estilista dos Trajes */
+.dresscode-sketch-wrapper {
   margin-top: 24px;
 }
 
-.dresscode-lookbook-title {
-  font-size: 0.8rem;
+.dresscode-sketch-header {
+  font-size: 0.82rem;
   font-family: var(--font-sans-accent);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: var(--color-green-dark);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.dresscode-lookbook-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.dresscode-look-item {
-  border-radius: var(--radius-sm);
+.dresscode-sketch-frame {
+  border-radius: var(--radius-md);
   overflow: hidden;
-  aspect-ratio: 3 / 4;
-  background-color: var(--color-bg-sand);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  background-color: #faf7f2;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   position: relative;
-  box-shadow: var(--shadow-subtle);
-  border: 1px solid var(--color-border-light);
-  cursor: pointer;
 }
 
-.dresscode-look-item img {
+.dresscode-sketch-frame:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.dresscode-sketch-frame img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
-.dresscode-look-item:hover img {
-  transform: scale(1.08);
-}
-
-.dresscode-look-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(14, 30, 22, 0.85) 100%);
-  color: #ffffff;
-  font-size: 0.68rem;
-  font-family: var(--font-sans-accent);
-  padding: 12px 6px 6px 6px;
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+.dresscode-sketch-frame:hover img {
+  transform: scale(1.02);
 }
 
 /* Alert Box */
