@@ -39,7 +39,7 @@ const SUGGESTED_GIFTS_ORDER = [
   },
   {
     id: 'presente-18',
-    title: 'Rolo de macarrão caso o Alex faça raiva',
+    title: 'Rolo de macarrão caso o Alex faça raiva para a Larissa',
     price: 134.66,
     image: 'assets/gifts/gift-18.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-DvwW2cY1fm-129,00'
