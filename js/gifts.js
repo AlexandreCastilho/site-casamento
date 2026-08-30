@@ -213,13 +213,6 @@ const SUGGESTED_GIFTS_ORDER = [
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-dt8kx0d0Lo-2450,00'
   },
   {
-    id: 'presente-14',
-    title: 'Cota Parintins 2027 para os noivos',
-    price: 3100.21,
-    image: 'assets/gifts/gift-14.jpg',
-    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-aBm6pGLkBl-2970,00'
-  },
-  {
     id: 'presente-25',
     title: 'Implante capilar para o noivo',
     price: 3121.09,
