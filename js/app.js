@@ -171,13 +171,14 @@ function initParallelPhotoParallax() {
   const railRight = document.getElementById('railRight');
   const leftTrack = document.getElementById('leftRailTrack');
   const rightTrack = document.getElementById('rightRailTrack');
+  const allCards = document.querySelectorAll('.floating-photo-card');
 
   if (!railLeft || !railRight || !leftTrack || !rightTrack) return;
 
   let ticking = false;
 
   function updateParallax() {
-    // Em telas menores que 1100px (tablets e celulares), esmaecer
+    // Em telas menores que 1100px (tablets e celulares), ocultar
     if (window.innerWidth < 1100) {
       railLeft.style.opacity = '0';
       railRight.style.opacity = '0';
@@ -188,14 +189,10 @@ function initParallelPhotoParallax() {
       window.requestAnimationFrame(() => {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const totalDocHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const vh = window.innerHeight;
 
-        // Cálculo contínuo de fade-in e fade-out
-        const fadeIn = Math.min(1, Math.max(0, (scrollY - 80) / 220));
-        const fadeOut = Math.min(1, Math.max(0, (totalDocHeight - scrollY) / 300));
-        const currentOpacity = Math.max(0, Math.min(0.95, fadeIn * fadeOut * 0.95));
-
-        railLeft.style.opacity = currentOpacity.toFixed(3);
-        railRight.style.opacity = currentOpacity.toFixed(3);
+        railLeft.style.opacity = '1';
+        railRight.style.opacity = '1';
 
         // Movimento rápido ascendente (as polaroides sobem rapidamente pela tela)
         const progress = totalDocHeight > 0 ? (scrollY / totalDocHeight) : 0;
@@ -204,6 +201,32 @@ function initParallelPhotoParallax() {
 
         leftTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetLeft).toFixed(1)}px, 0)`;
         rightTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetRight).toFixed(1)}px, 0)`;
+
+        // Cálculo de Fade In / Fade Out individual para cada foto conforme cruza a tela
+        const topFadeEnd = vh * 0.10;
+        const topFadeStart = vh * 0.32;
+        const bottomFadeStart = vh * 0.68;
+        const bottomFadeEnd = vh * 0.90;
+
+        allCards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.top + rect.height / 2;
+
+          let opacity = 1;
+          if (cardCenter < topFadeEnd) {
+            opacity = 0;
+          } else if (cardCenter < topFadeStart) {
+            opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
+          } else if (cardCenter > bottomFadeEnd) {
+            opacity = 0;
+          } else if (cardCenter > bottomFadeStart) {
+            opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
+          } else {
+            opacity = 1;
+          }
+
+          card.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(2);
+        });
 
         ticking = false;
       });

@@ -699,9 +699,11 @@ h1, h2, h3, h4 {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.08);
   transform: rotate(-4deg);
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, opacity 0.15s ease-out;
   pointer-events: auto;
   cursor: pointer;
+  will-change: transform, opacity;
+  opacity: 0;
 }
 
 .rail-track .floating-photo-card:nth-child(even) {
