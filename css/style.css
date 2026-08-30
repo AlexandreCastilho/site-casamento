@@ -1480,62 +1480,98 @@ h1, h2, h3, h4 {
 .gifts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: clamp(16px, 2.5vw, 24px);
+  gap: clamp(18px, 2.5vw, 28px);
 }
 
 .gift-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  padding: 22px 20px;
+  overflow: hidden;
   box-shadow: var(--shadow-subtle);
   border: 1px solid var(--color-border-light);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: var(--transition-smooth);
   position: relative;
   cursor: pointer;
 }
 
 .gift-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-medium);
   border-color: rgba(184, 93, 59, 0.4);
 }
 
-.gift-card-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.gift-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.gift-icon-bubble {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+.gift-img-frame {
+  height: 175px;
+  position: relative;
+  overflow: hidden;
   background: var(--color-bg-sand);
+}
+
+.gift-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gift-card:hover .gift-img-frame img {
+  transform: scale(1.06);
+}
+
+.gift-emoji-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(197, 160, 89, 0.35);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.gift-card-body {
+  padding: 18px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 14px;
+}
+
+.gift-title {
+  font-size: 1.05rem;
+  color: var(--color-green-dark);
+  font-family: var(--font-serif-display);
+  line-height: 1.35;
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.gift-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-light);
+  gap: 10px;
 }
 
 .gift-price {
   font-family: var(--font-serif-display);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-terracotta-primary);
-  text-align: right;
+  white-space: nowrap;
 }
 
 .gift-currency {
@@ -1544,25 +1580,10 @@ h1, h2, h3, h4 {
   margin-right: 2px;
 }
 
-.gift-title {
-  font-size: 1.05rem;
-  color: var(--color-green-dark);
-  font-family: var(--font-serif-display);
-  line-height: 1.4;
-  margin: 0;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-.gift-card-action {
-  margin-top: 4px;
-}
-
-.gift-card-action .btn {
-  width: 100%;
-  padding: 10px 16px;
-  font-size: 0.9rem;
+.gift-card-footer .presentear-btn {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 /* Modal de Presente / PIX */

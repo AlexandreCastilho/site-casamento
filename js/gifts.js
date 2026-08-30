@@ -1,7 +1,6 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
- * Lista Oficial de Presentes e Cotas Lúdicas
- * Sem imagens, sem descrições e com direcionamento direto para Links de Pagamento / PIX
+ * Lista Oficial dos 30 Presentes com Fotos Curadas, Valores e Suporte a Links de Pagamento
  */
 
 const LUDIC_GIFTS = [
@@ -10,6 +9,7 @@ const LUDIC_GIFTS = [
     title: 'Tênis para a Larissa caminhar em Roma',
     price: 487.90,
     icon: '👟',
+    image: 'assets/gifts/gift-1.jpg',
     paymentLink: ''
   },
   {
@@ -17,6 +17,7 @@ const LUDIC_GIFTS = [
     title: 'Dinheiro pro Alex levar a Larissa para Roma',
     price: 2850.00,
     icon: '✈️',
+    image: 'assets/gifts/gift-2.jpg',
     paymentLink: ''
   },
   {
@@ -24,6 +25,7 @@ const LUDIC_GIFTS = [
     title: 'Fotógrafo para o Alex descansar na lua de mel',
     price: 1240.50,
     icon: '📸',
+    image: 'assets/gifts/gift-3.jpg',
     paymentLink: ''
   },
   {
@@ -31,6 +33,7 @@ const LUDIC_GIFTS = [
     title: 'Looks novos para a lua de mel',
     price: 890.00,
     icon: '👗',
+    image: 'assets/gifts/gift-4.jpg',
     paymentLink: ''
   },
   {
@@ -38,6 +41,7 @@ const LUDIC_GIFTS = [
     title: 'Misto quente para levar na lancheira e comer no aeroporto',
     price: 115.40,
     icon: '🥪',
+    image: 'assets/gifts/gift-5.jpg',
     paymentLink: ''
   },
   {
@@ -45,6 +49,7 @@ const LUDIC_GIFTS = [
     title: 'Cueca sexy para o Alexandre',
     price: 139.90,
     icon: '🩲',
+    image: 'assets/gifts/gift-6.jpg',
     paymentLink: ''
   },
   {
@@ -52,6 +57,7 @@ const LUDIC_GIFTS = [
     title: 'Lenço pro Alex chorar na cerimônia (não reembolsável)',
     price: 108.50,
     icon: '🤧',
+    image: 'assets/gifts/gift-7.jpg',
     paymentLink: ''
   },
   {
@@ -59,6 +65,7 @@ const LUDIC_GIFTS = [
     title: 'Kit calmante para noiva',
     price: 245.00,
     icon: '🍵',
+    image: 'assets/gifts/gift-8.jpg',
     paymentLink: ''
   },
   {
@@ -66,6 +73,7 @@ const LUDIC_GIFTS = [
     title: 'Sofá confortável para o noivo caso o kit calmante não funcione',
     price: 1890.00,
     icon: '🛋️',
+    image: 'assets/gifts/gift-9.jpg',
     paymentLink: ''
   },
   {
@@ -73,6 +81,7 @@ const LUDIC_GIFTS = [
     title: 'Prioridade na fila do buffet',
     price: 360.00,
     icon: '🍽️',
+    image: 'assets/gifts/gift-10.jpg',
     paymentLink: ''
   },
   {
@@ -80,6 +89,7 @@ const LUDIC_GIFTS = [
     title: 'EU NÃO VOU EMBORA: Vaquinha para a hora extra da festa',
     price: 2450.00,
     icon: '🎉',
+    image: 'assets/gifts/gift-11.jpg',
     paymentLink: ''
   },
   {
@@ -87,6 +97,7 @@ const LUDIC_GIFTS = [
     title: 'Obrigar o noivo a tirar foto',
     price: 175.00,
     icon: '🤳',
+    image: 'assets/gifts/gift-12.jpg',
     paymentLink: ''
   },
   {
@@ -94,6 +105,7 @@ const LUDIC_GIFTS = [
     title: 'Jogar o buquê na sua direção',
     price: 520.00,
     icon: '💐',
+    image: 'assets/gifts/gift-13.jpg',
     paymentLink: ''
   },
   {
@@ -101,6 +113,7 @@ const LUDIC_GIFTS = [
     title: 'Cota Parintins 2027 para os noivos',
     price: 2970.00,
     icon: '🐂',
+    image: 'assets/gifts/gift-14.jpg',
     paymentLink: ''
   },
   {
@@ -108,6 +121,7 @@ const LUDIC_GIFTS = [
     title: '1º mês da escola do Xandy Junior',
     price: 1150.00,
     icon: '👶',
+    image: 'assets/gifts/gift-15.jpg',
     paymentLink: ''
   },
   {
@@ -115,6 +129,7 @@ const LUDIC_GIFTS = [
     title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
     price: 780.00,
     icon: '🐶',
+    image: 'assets/gifts/gift-16.jpg',
     paymentLink: ''
   },
   {
@@ -122,6 +137,7 @@ const LUDIC_GIFTS = [
     title: 'Kit ração pro cachorro que o Alex vai dar para a Larissa',
     price: 295.90,
     icon: '🦴',
+    image: 'assets/gifts/gift-17.jpg',
     paymentLink: ''
   },
   {
@@ -129,6 +145,7 @@ const LUDIC_GIFTS = [
     title: 'Rolo de macarrão caso o Alex faça raiva',
     price: 129.00,
     icon: '🧑‍🍳',
+    image: 'assets/gifts/gift-18.jpg',
     paymentLink: ''
   },
   {
@@ -136,6 +153,7 @@ const LUDIC_GIFTS = [
     title: 'Capacete para o Alex poder fazer raiva para a Larissa',
     price: 210.00,
     icon: '⛑️',
+    image: 'assets/gifts/gift-19.jpg',
     paymentLink: ''
   },
   {
@@ -143,6 +161,7 @@ const LUDIC_GIFTS = [
     title: '1º mês de chocolate para o casal',
     price: 185.50,
     icon: '🍫',
+    image: 'assets/gifts/gift-20.jpg',
     paymentLink: ''
   },
   {
@@ -150,6 +169,7 @@ const LUDIC_GIFTS = [
     title: 'Um trocadinho para liberar o noivo pro RPG no fim de semana',
     price: 150.00,
     icon: '🎲',
+    image: 'assets/gifts/gift-21.jpg',
     paymentLink: ''
   },
   {
@@ -157,6 +177,7 @@ const LUDIC_GIFTS = [
     title: 'Vaga para jantar na casa dos noivos 🍜',
     price: 142.80,
     icon: '🍜',
+    image: 'assets/gifts/gift-22.jpg',
     paymentLink: ''
   },
   {
@@ -164,6 +185,7 @@ const LUDIC_GIFTS = [
     title: 'Livro de jardinagem para a noiva não matar mais plantas',
     price: 164.90,
     icon: '🌱',
+    image: 'assets/gifts/gift-23.jpg',
     paymentLink: ''
   },
   {
@@ -171,6 +193,7 @@ const LUDIC_GIFTS = [
     title: 'Buquê de flores mensal',
     price: 640.00,
     icon: '🌸',
+    image: 'assets/gifts/gift-24.jpg',
     paymentLink: ''
   },
   {
@@ -178,6 +201,7 @@ const LUDIC_GIFTS = [
     title: 'Implante capilar para o noivo',
     price: 2990.00,
     icon: '💇‍♂️',
+    image: 'assets/gifts/gift-25.jpg',
     paymentLink: ''
   },
   {
@@ -185,6 +209,7 @@ const LUDIC_GIFTS = [
     title: 'Monjauro para os noivos meterem o shape',
     price: 1680.00,
     icon: '💉',
+    image: 'assets/gifts/gift-26.jpg',
     paymentLink: ''
   },
   {
@@ -192,6 +217,7 @@ const LUDIC_GIFTS = [
     title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
     price: 430.00,
     icon: '💪',
+    image: 'assets/gifts/gift-27.jpg',
     paymentLink: ''
   },
   {
@@ -199,6 +225,7 @@ const LUDIC_GIFTS = [
     title: 'Curso para aprender a segurar os pensamentos intrusivos',
     price: 315.00,
     icon: '🧠',
+    image: 'assets/gifts/gift-28.jpg',
     paymentLink: ''
   },
   {
@@ -206,6 +233,7 @@ const LUDIC_GIFTS = [
     title: 'Patrocínio para tirar nosso nome do SERASA',
     price: 1490.00,
     icon: '💸',
+    image: 'assets/gifts/gift-29.jpg',
     paymentLink: ''
   },
   {
@@ -213,11 +241,12 @@ const LUDIC_GIFTS = [
     title: 'Só pra não dizer que não dei nada',
     price: 102.50,
     icon: '🪙',
+    image: 'assets/gifts/gift-30.jpg',
     paymentLink: ''
   }
 ];
 
-// Chave PIX do Casal (Fallback para quando não houver link direto configurado)
+// Chave PIX do Casal (Fallback para quando o link direto não estiver preenchido)
 const CASAL_PIX_KEY = 'casamento.alexandre.larissa@gmail.com';
 let currentSelectedGift = null;
 
@@ -233,22 +262,23 @@ function initGiftsSection() {
   initGiftModal();
 }
 
-/* Renderizar Grid de Presentes (Layout Compacto e Elegante sem Fotos e sem Descrições) */
+/* Renderizar Grid de Presentes com Imagem Curada, Preço e Botão de Pagamento */
 function renderGiftsGrid() {
   const container = document.getElementById('giftsGridContainer');
   if (!container) return;
 
   container.innerHTML = LUDIC_GIFTS.map(gift => `
     <div class="gift-card" data-id="${gift.id}">
-      <div class="gift-card-content">
-        <div class="gift-card-top">
-          <span class="gift-icon-bubble">${gift.icon}</span>
+      <div class="gift-img-frame">
+        <img src="${gift.image}" alt="${escapeHtml(gift.title)}" loading="lazy" />
+        <span class="gift-emoji-badge">${gift.icon}</span>
+      </div>
+      <div class="gift-card-body">
+        <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
+        <div class="gift-card-footer">
           <div class="gift-price">
             <span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}
           </div>
-        </div>
-        <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
-        <div class="gift-card-action">
           <button type="button" class="btn btn-primary btn-sm presentear-btn" data-id="${gift.id}">
             Presentear ✨
           </button>
@@ -259,7 +289,7 @@ function renderGiftsGrid() {
 
   // Ouvintes para os botões de presentear e clique no card
   container.querySelectorAll('.gift-card').forEach(card => {
-    card.addEventListener('click', (e) => {
+    card.addEventListener('click', () => {
       const giftId = card.getAttribute('data-id');
       const gift = LUDIC_GIFTS.find(g => g.id === giftId);
       if (gift) handleGiftClick(gift);
@@ -277,7 +307,7 @@ function renderGiftsGrid() {
 }
 
 function handleGiftClick(gift) {
-  // Se o presente tiver um link de pagamento definido, redireciona em nova aba
+  // Se o presente tiver um link de pagamento configurado, redireciona diretamente
   if (gift.paymentLink && gift.paymentLink.trim().length > 0 && gift.paymentLink !== '#') {
     window.open(gift.paymentLink, '_blank', 'noopener,noreferrer');
   } else {
