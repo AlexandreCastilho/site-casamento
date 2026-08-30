@@ -1471,7 +1471,7 @@ h1, h2, h3, h4 {
    ========================================================================== */
 .gifts-section {
   padding: clamp(60px, 8vw, 100px) 0;
-  background-color: var(--color-bg-ivory);
+  background: linear-gradient(180deg, var(--color-bg-sand) 0%, #ede6d8 100%);
   position: relative;
 }
 
@@ -1675,7 +1675,9 @@ h1, h2, h3, h4 {
    ========================================================================== */
 .rsvp-section {
   padding: clamp(60px, 8vw, 100px) 0;
-  background: linear-gradient(180deg, var(--color-bg-sand) 0%, var(--color-bg-ivory) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-bg-ivory) 50%, #ffffff 100%);
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
   position: relative;
 }
 
