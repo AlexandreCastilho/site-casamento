@@ -197,10 +197,10 @@ function initParallelPhotoParallax() {
         railLeft.style.opacity = currentOpacity.toFixed(3);
         railRight.style.opacity = currentOpacity.toFixed(3);
 
-        // Movimento proporcional contínuo ao longo de todo o scroll da página
+        // Movimento rápido ascendente (as polaroides sobem rapidamente pela tela)
         const progress = totalDocHeight > 0 ? (scrollY / totalDocHeight) : 0;
-        const maxOffsetLeft = 320;
-        const maxOffsetRight = 440;
+        const maxOffsetLeft = 2400;
+        const maxOffsetRight = 2700;
 
         leftTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetLeft).toFixed(1)}px, 0)`;
         rightTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetRight).toFixed(1)}px, 0)`;
