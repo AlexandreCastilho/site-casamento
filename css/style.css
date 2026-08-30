@@ -685,9 +685,8 @@ h1, h2, h3, h4 {
 .rail-track {
   display: flex;
   flex-direction: column;
-  gap: 340px; /* Grande espaçamento para passar apenas 1 ou 2 por vez na tela */
+  gap: 380px; /* Grande espaçamento para passar apenas 1 ou 2 por vez na tela */
   will-change: transform;
-  padding-top: 25vh;
 }
 
 /* Moldura Polaroid Autêntica */

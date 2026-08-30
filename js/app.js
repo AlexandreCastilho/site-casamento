@@ -188,24 +188,40 @@ function initParallelPhotoParallax() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        const totalDocHeight = document.documentElement.scrollHeight - window.innerHeight;
         const vh = window.innerHeight;
+        const heroSection = document.getElementById('hero');
+        const heroHeight = heroSection ? heroSection.offsetHeight : vh;
+        const heroThreshold = heroHeight * 0.70;
+
+        // 1. REGRA: Nenhuma foto polaroid aparece na primeira seção (Hero)
+        if (scrollY < heroThreshold) {
+          railLeft.style.opacity = '0';
+          railRight.style.opacity = '0';
+          allCards.forEach(c => c.style.opacity = '0');
+          ticking = false;
+          return;
+        }
 
         railLeft.style.opacity = '1';
         railRight.style.opacity = '1';
 
-        // Movimento rápido ascendente (as polaroides sobem rapidamente pela tela)
-        const progress = totalDocHeight > 0 ? (scrollY / totalDocHeight) : 0;
-        const maxOffsetLeft = 2400;
-        const maxOffsetRight = 2700;
+        // 2. VELOCIDADE RÁPIDA: As polaroides sobem mais rápido do que a rolagem das seções
+        const relativeScroll = scrollY - heroThreshold;
+        const speedMultiplierLeft = 1.35;
+        const speedMultiplierRight = 1.55;
 
-        leftTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetLeft).toFixed(1)}px, 0)`;
-        rightTrack.style.transform = `translate3d(0, ${-(progress * maxOffsetRight).toFixed(1)}px, 0)`;
+        // Posição inicial no fundo da tela subindo velozmente
+        const startY = vh * 0.75;
+        const offsetLeft = startY - (relativeScroll * speedMultiplierLeft);
+        const offsetRight = startY - (relativeScroll * speedMultiplierRight);
 
-        // Cálculo de Fade In / Fade Out individual para cada foto conforme cruza a tela
-        const topFadeEnd = vh * 0.10;
-        const topFadeStart = vh * 0.32;
-        const bottomFadeStart = vh * 0.68;
+        leftTrack.style.transform = `translate3d(0, ${offsetLeft.toFixed(1)}px, 0)`;
+        rightTrack.style.transform = `translate3d(0, ${offsetRight.toFixed(1)}px, 0)`;
+
+        // 3. FADE IN & FADE OUT INDIVIDUAL (1 a 2 fotos por vez na tela)
+        const topFadeEnd = vh * 0.08;
+        const topFadeStart = vh * 0.28;
+        const bottomFadeStart = vh * 0.70;
         const bottomFadeEnd = vh * 0.90;
 
         allCards.forEach(card => {
