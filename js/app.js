@@ -138,7 +138,7 @@ function initNavbar() {
 }
 
 /* ==========================================================================
-   3. ANIMAÇÕES DE SCROLL FLUIDAS (INTERSECTION OBSERVER)
+   3. ANIMAÇÕES DE SCROLL FLUIDAS E CONTÍNUAS (INTERSECTION OBSERVER)
    ========================================================================== */
 function initScrollAnimations() {
   const reveals = document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right');
@@ -149,11 +149,13 @@ function initScrollAnimations() {
     threshold: 0.1
   };
 
-  const observer = new IntersectionObserver((entries, obs) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
+      } else {
+        // Remove ao sair da tela para reativar a animação sempre que o usuário scrollar novamente
+        entry.target.classList.remove('is-visible');
       }
     });
   }, observerOptions);
