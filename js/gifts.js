@@ -1,9 +1,20 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
- * Lista Oficial dos 30 Presentes com Fotos Curadas, Valores e Suporte a Links de Pagamento
+ * Lista Oficial dos 30 Presentes + Cota Livre com QR Code Oficial PIX
  */
 
+const OFFICIAL_PIX_CODE = '00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0';
+
 const LUDIC_GIFTS = [
+  {
+    id: 'presente-pix-personalizado',
+    title: 'Cota Livre: Presenteie com Qualquer Valor via PIX',
+    price: 0,
+    isCustomPix: true,
+    icon: '💖',
+    image: 'assets/gifts/gift-pix-custom.jpg',
+    paymentLink: ''
+  },
   {
     id: 'presente-1',
     title: 'Tênis para a Larissa caminhar em Roma',
@@ -246,8 +257,6 @@ const LUDIC_GIFTS = [
   }
 ];
 
-// Chave PIX do Casal (Fallback para quando o link direto não estiver preenchido)
-const CASAL_PIX_KEY = 'casamento.alexandre.larissa@gmail.com';
 let currentSelectedGift = null;
 
 // Executar no carregamento da página
@@ -267,25 +276,32 @@ function renderGiftsGrid() {
   const container = document.getElementById('giftsGridContainer');
   if (!container) return;
 
-  container.innerHTML = LUDIC_GIFTS.map(gift => `
-    <div class="gift-card" data-id="${gift.id}">
-      <div class="gift-img-frame">
-        <img src="${gift.image}" alt="${escapeHtml(gift.title)}" loading="lazy" />
-        <span class="gift-emoji-badge">${gift.icon}</span>
-      </div>
-      <div class="gift-card-body">
-        <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
-        <div class="gift-card-footer">
-          <div class="gift-price">
-            <span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}
+  container.innerHTML = LUDIC_GIFTS.map(gift => {
+    const isCustom = !!gift.isCustomPix;
+    const priceDisplay = isCustom 
+      ? '<span style="font-size: 1.05rem; font-weight: 700; color: var(--color-green-primary);">Valor Livre via PIX</span>' 
+      : `<span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}`;
+
+    return `
+      <div class="gift-card ${isCustom ? 'gift-card-custom' : ''}" data-id="${gift.id}">
+        <div class="gift-img-frame">
+          <img src="${gift.image}" alt="${escapeHtml(gift.title)}" loading="lazy" />
+          <span class="gift-emoji-badge">${gift.icon}</span>
+        </div>
+        <div class="gift-card-body">
+          <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
+          <div class="gift-card-footer">
+            <div class="gift-price">
+              ${priceDisplay}
+            </div>
+            <button type="button" class="btn ${isCustom ? 'btn-secondary' : 'btn-primary'} btn-sm presentear-btn" data-id="${gift.id}">
+              ${isCustom ? 'Contribuir 📱' : 'Presentear ✨'}
+            </button>
           </div>
-          <button type="button" class="btn btn-primary btn-sm presentear-btn" data-id="${gift.id}">
-            Presentear ✨
-          </button>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   // Ouvintes para os botões de presentear e clique no card
   container.querySelectorAll('.gift-card').forEach(card => {
@@ -307,12 +323,12 @@ function renderGiftsGrid() {
 }
 
 function handleGiftClick(gift) {
-  // Se o presente tiver um link de pagamento configurado, redireciona diretamente
-  if (gift.paymentLink && gift.paymentLink.trim().length > 0 && gift.paymentLink !== '#') {
-    window.open(gift.paymentLink, '_blank', 'noopener,noreferrer');
-  } else {
-    // Caso contrário, abre o modal PIX
+  // Se for o presente de valor personalizado ou se não tiver link direto, abre o modal PIX com o QR Code
+  if (gift.isCustomPix || !gift.paymentLink || gift.paymentLink.trim().length === 0 || gift.paymentLink === '#') {
     openGiftModal(gift);
+  } else {
+    // Redireciona diretamente para o link de pagamento
+    window.open(gift.paymentLink, '_blank', 'noopener,noreferrer');
   }
 }
 
@@ -331,22 +347,22 @@ function initGiftModal() {
     });
   }
 
-  // Copiar chave PIX
+  // Copiar código PIX oficial (Copia e Cola)
   if (copyBtn && pixInput) {
     copyBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      navigator.clipboard.writeText(CASAL_PIX_KEY).then(() => {
+      navigator.clipboard.writeText(OFFICIAL_PIX_CODE).then(() => {
         const orig = copyBtn.innerText;
-        copyBtn.innerText = 'Copiado! ✓';
+        copyBtn.innerText = 'Código PIX Copiado! ✓';
         copyBtn.style.backgroundColor = 'var(--color-green-primary)';
         setTimeout(() => {
           copyBtn.innerText = orig;
           copyBtn.style.backgroundColor = '';
-        }, 2200);
+        }, 2500);
       }).catch(() => {
         pixInput.select();
         document.execCommand('copy');
-        copyBtn.innerText = 'Copiado! ✓';
+        copyBtn.innerText = 'Código PIX Copiado! ✓';
       });
     });
   }
@@ -359,17 +375,17 @@ function initGiftModal() {
       const guestMsg = document.getElementById('giftGuestMessage').value.trim();
 
       if (guestMsg && window.addRecadoFromGift) {
-        window.addRecadoFromGift(guestName, guestMsg, currentSelectedGift ? currentSelectedGift.title : 'Presente especial');
+        window.addRecadoFromGift(guestName, guestMsg, currentSelectedGift ? currentSelectedGift.title : 'Presente via PIX');
       }
 
       modal.innerHTML = `
         <div class="gift-modal-card" style="text-align: center; padding: 45px 30px;">
-          <div style="font-size: 3.5rem; margin-bottom: 12px;">🥂🎁✨</div>
+          <div style="font-size: 3.5rem; margin-bottom: 12px;">🥂💖🌿</div>
           <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.9rem; margin-bottom: 12px;">
             Muito Obrigado, ${escapeHtml(guestName)}!
           </h3>
           <p style="color: var(--color-text-muted); font-size: 1.05rem; margin-bottom: 24px; line-height: 1.6;">
-            Seu presente e seu carinho significam muito para nós! Mal podemos esperar para comemorar com você no dia 28 de Novembro na Chácara Monte Rey!
+            Seu presente e seu carinho significam o mundo para nós! Mal podemos esperar para comemorar com você no dia 28 de Novembro na Chácara Monte Rey!
           </p>
           <button class="btn btn-primary" onclick="document.getElementById('giftModal').classList.remove('active'); location.reload();">
             Voltar ao Site
@@ -388,8 +404,12 @@ function openGiftModal(gift) {
   const pixInput = document.getElementById('pixKeyDisplay');
 
   if (titleEl) titleEl.innerText = `${gift.icon} ${gift.title}`;
-  if (priceEl) priceEl.innerText = `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
-  if (pixInput) pixInput.value = CASAL_PIX_KEY;
+  if (priceEl) {
+    priceEl.innerText = gift.isCustomPix 
+      ? 'Valor Livre (Defina no App do seu Banco)' 
+      : `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
+  }
+  if (pixInput) pixInput.value = OFFICIAL_PIX_CODE;
 
   if (modal) modal.classList.add('active');
 }

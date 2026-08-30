@@ -699,32 +699,28 @@
         </div>
       </div>
 
-      <!-- Box PIX Simulado -->
+      <!-- Box PIX com QR Code Real -->
       <div class="pix-box">
-        <div style="font-size: 0.82rem; font-weight: 600; color: var(--color-green-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+        <div style="font-size: 0.82rem; font-weight: 600; color: var(--color-green-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">
           Pagamento Instantâneo via PIX
         </div>
         
-        <!-- QR Code SVG ilustrativo -->
-        <div class="pix-qr-code">
-          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" style="width:100%; height:100%; color:var(--color-green-dark);">
-            <rect x="5" y="5" width="30" height="30" rx="3" stroke-width="4"/>
-            <rect x="13" y="13" width="14" height="14" fill="currentColor"/>
-            <rect x="65" y="5" width="30" height="30" rx="3" stroke-width="4"/>
-            <rect x="73" y="13" width="14" height="14" fill="currentColor"/>
-            <rect x="5" y="65" width="30" height="30" rx="3" stroke-width="4"/>
-            <rect x="13" y="73" width="14" height="14" fill="currentColor"/>
-            <path d="M45 10v35M55 20v20M5 45h35M65 45h30M45 65v30M65 65h15v15M85 75v15M65 90h25M55 60h10v10" stroke-width="3"/>
-          </svg>
+        <!-- QR Code Oficial Real -->
+        <div class="pix-qr-code" style="margin-bottom: 12px;">
+          <img id="pixQrCodeImg" src="assets/gifts/pix-qrcode.png" alt="QR Code PIX Larissa Leite Colares" style="width: 170px; height: 170px; margin: 0 auto; display: block; border-radius: var(--radius-sm); border: 2px solid var(--color-border-light); background: #ffffff; padding: 6px;" />
         </div>
 
-        <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 8px;">
-          Copie a chave PIX abaixo ou aponte o app do seu banco:
+        <div style="font-size: 0.88rem; color: var(--color-green-dark); font-weight: 600; margin-bottom: 6px;">
+          Favorecida: <strong>Larissa Leite Colares</strong>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 10px;">
+          Aponte a câmera do app do seu banco ou copie o código abaixo:
         </p>
 
         <div class="pix-key-wrapper">
-          <input type="text" class="pix-key-input" id="pixKeyDisplay" value="casamento.alexandre.larissa@gmail.com" readonly />
-          <button type="button" class="btn btn-primary btn-sm" id="copyPixBtn">Copiar Chave</button>
+          <input type="text" class="pix-key-input" id="pixKeyDisplay" value="00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0" readonly />
+          <button type="button" class="btn btn-primary btn-sm" id="copyPixBtn">Copiar Código PIX</button>
         </div>
       </div>
 
@@ -787,8 +783,8 @@
   </footer>
 
   <!-- Scripts JS com Versionamento para Limpeza Imediata de Cache -->
-  <script src="js/app.js?v=2.4"></script>
-  <script src="js/gifts.js?v=2.4"></script>
-  <script src="js/rsvp-mural.js?v=2.4"></script>
+  <script src="js/app.js?v=2.5"></script>
+  <script src="js/gifts.js?v=2.5"></script>
+  <script src="js/rsvp-mural.js?v=2.5"></script>
 </body>
 </html>

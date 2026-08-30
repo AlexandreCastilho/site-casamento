@@ -1502,6 +1502,16 @@ h1, h2, h3, h4 {
   border-color: rgba(184, 93, 59, 0.4);
 }
 
+.gift-card.gift-card-custom {
+  border: 2px solid var(--color-gold);
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-bg-sand) 100%);
+}
+
+.gift-card.gift-card-custom:hover {
+  border-color: var(--color-terracotta-primary);
+  box-shadow: var(--shadow-elevated);
+}
+
 .gift-img-frame {
   height: 175px;
   position: relative;
