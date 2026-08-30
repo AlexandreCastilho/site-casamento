@@ -484,7 +484,7 @@ async function postToGoogleSheets(payload) {
   }
 }
 
-// Buscar dados mais recentes da Planilha Google (com cache-buster)
+// Buscar dados mais recentes da Planilha Google (com cache-buster e diff inteligente)
 async function syncFromGoogleSheets() {
   if (!GOOGLE_SHEETS_WEBAPP_URL) return;
   try {
@@ -497,9 +497,13 @@ async function syncFromGoogleSheets() {
     if (res.ok) {
       const cloudMessages = await res.json();
       if (Array.isArray(cloudMessages)) {
-        currentMuralData = cloudMessages;
-        localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
-        renderMuralMessages(currentMuralData);
+        // Apenas re-renderiza o DOM se houver alteração real nos dados
+        const isDifferent = JSON.stringify(cloudMessages) !== JSON.stringify(currentMuralData);
+        if (isDifferent) {
+          currentMuralData = cloudMessages;
+          localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
+          renderMuralMessages(currentMuralData);
+        }
       }
     }
   } catch (err) {
@@ -524,9 +528,9 @@ function initMural() {
   // Busca imediatamente da Planilha Google na nuvem
   syncFromGoogleSheets();
 
-  // Atualiza automaticamente quando o usuário voltar para a aba ou a cada 15 segundos
+  // Atualiza suavemente ao voltar para a aba ou a cada 30 segundos sem recarregar desnecessariamente
   window.addEventListener('focus', syncFromGoogleSheets);
-  setInterval(syncFromGoogleSheets, 15000);
+  setInterval(syncFromGoogleSheets, 30000);
 }
 
 // Presentes

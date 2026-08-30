@@ -1826,7 +1826,6 @@ textarea.form-control {
   border: 1px solid var(--color-border-light);
   position: relative;
   transition: var(--transition-fast);
-  animation: fadeIn 0.5s ease-out;
 }
 
 .message-card:hover {
@@ -1836,6 +1835,7 @@ textarea.form-control {
 
 .message-card.new-msg {
   border-left: 4px solid var(--color-terracotta-primary);
+  animation: fadeIn 0.4s ease-out;
 }
 
 .message-card-header {
