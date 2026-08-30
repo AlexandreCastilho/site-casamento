@@ -1479,89 +1479,55 @@ h1, h2, h3, h4 {
 
 .gifts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: clamp(16px, 2.5vw, 28px);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
 }
 
 .gift-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  padding: 22px 20px;
   box-shadow: var(--shadow-subtle);
   border: 1px solid var(--color-border-light);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition: var(--transition-smooth);
   position: relative;
+  cursor: pointer;
 }
 
 .gift-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-medium);
-  border-color: rgba(184, 93, 59, 0.3);
+  border-color: rgba(184, 93, 59, 0.4);
 }
 
-.gift-img-wrapper {
-  height: 180px;
-  position: relative;
-  overflow: hidden;
-  background: var(--color-bg-sand);
-}
-
-.gift-img-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.gift-card:hover .gift-img-wrapper img {
-  transform: scale(1.06);
-}
-
-.gift-category-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(21, 43, 32, 0.88);
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-}
-
-.gift-body {
-  padding: 20px;
+.gift-card-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.gift-title {
-  font-size: 1.15rem;
-  color: var(--color-green-dark);
-  margin-bottom: 8px;
-  font-family: var(--font-serif-display);
-}
-
-.gift-description {
-  font-size: 0.86rem;
-  color: var(--color-text-muted);
-  line-height: 1.55;
-  margin-bottom: 16px;
-  flex-grow: 1;
-}
-
-.gift-footer {
+.gift-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
-  border-top: 1px solid var(--color-border-light);
+}
+
+.gift-icon-bubble {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-bg-sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .gift-price {
@@ -1569,12 +1535,34 @@ h1, h2, h3, h4 {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-terracotta-primary);
+  text-align: right;
 }
 
 .gift-currency {
   font-size: 0.82rem;
   font-weight: 500;
   margin-right: 2px;
+}
+
+.gift-title {
+  font-size: 1.05rem;
+  color: var(--color-green-dark);
+  font-family: var(--font-serif-display);
+  line-height: 1.4;
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.gift-card-action {
+  margin-top: 4px;
+}
+
+.gift-card-action .btn {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 0.9rem;
 }
 
 /* Modal de Presente / PIX */

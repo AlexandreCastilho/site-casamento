@@ -1,124 +1,227 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
- * Lista de presentes fictícios cômicos e lúdicos com modal PIX interativo
+ * Lista Oficial de Presentes e Cotas Lúdicas
+ * Sem imagens, sem descrições e com direcionamento direto para Links de Pagamento / PIX
  */
 
 const LUDIC_GIFTS = [
   {
     id: 'presente-1',
-    title: 'Cota do D20 Crítico pro Noivo no Altar',
-    description: 'Garante uma rolagem com vantagem e 20 natural na iniciativa para o Alexandre não gaguejar na hora do "Sim".',
-    price: 80.00,
-    icon: '🎲',
-    image: 'assets/photos/IMG_6812.jpg',
-    tag: 'D&D e Estratégia'
+    title: 'Tênis para a Larissa caminhar em Roma',
+    price: 487.90,
+    icon: '👟',
+    paymentLink: ''
   },
   {
     id: 'presente-2',
-    title: 'Kit Paciência Histórica da Professora Larissa',
-    description: 'Para aguentar uma turma de 30 pré-adolescentes perguntando se na Idade Média já existia TikTok e Wi-Fi.',
-    price: 95.00,
-    icon: '📜',
-    image: 'assets/photos/IMG_6818.jpg',
-    tag: 'Educação & História'
+    title: 'Dinheiro pro Alex levar a Larissa para Roma',
+    price: 2850.00,
+    icon: '✈️',
+    paymentLink: ''
   },
   {
     id: 'presente-3',
-    title: 'Ftool & Calculadora de Vigas da Casa Nova',
-    description: 'Para o Alexandre calcular o momento fletor e garantir que a laje aguenta a Larissa treinando crossfit.',
-    price: 150.00,
-    icon: '🏗️',
-    image: 'assets/photos/IMG_6833.jpg',
-    tag: 'Engenharia Civil'
+    title: 'Fotógrafo para o Alex descansar na lua de mel',
+    price: 1240.50,
+    icon: '📸',
+    paymentLink: ''
   },
   {
     id: 'presente-4',
-    title: 'Toada do Boi Bumbá com Coreografia na Pista',
-    description: 'Para a noiva puxar o dois-pra-lá-dois-pra-cá de Garantido e Caprichoso e botar todo mundo pra dançar!',
-    price: 110.00,
-    icon: '🐂',
-    image: 'assets/photos/IMG_6870.jpg',
-    tag: 'Boi Bumbá & Dança'
+    title: 'Looks novos para a lua de mel',
+    price: 890.00,
+    icon: '👗',
+    paymentLink: ''
   },
   {
     id: 'presente-5',
-    title: 'WOD dos Noivos: 100 Burpees com Bolo',
-    description: 'Cota de creatina, whey e reposição de glicose pós-festa para a Larissa bater o PR na lua de mel.',
-    price: 70.00,
-    icon: '🏋️‍♀️',
-    image: 'assets/photos/IMG_6819.jpg',
-    tag: 'Crossfit & Energia'
+    title: 'Misto quente para levar na lancheira e comer no aeroporto',
+    price: 115.40,
+    icon: '🥪',
+    paymentLink: ''
   },
   {
     id: 'presente-6',
-    title: 'Setup Gamer Anti-Divórcio com Cervejeira',
-    description: 'Um gabinete com RGB e cerveja trincando para o noivo jogar aquele FPS com os amigos em paz.',
-    price: 260.00,
-    icon: '🎮',
-    image: 'assets/photos/IMG_6821.jpg',
-    tag: 'Games & Cerveja'
+    title: 'Cueca sexy para o Alexandre',
+    price: 139.90,
+    icon: '🩲',
+    paymentLink: ''
   },
   {
     id: 'presente-7',
-    title: 'Manual: Casado com uma Historiadora',
-    description: 'Ensina ao noivo que quando ela diz "vamos falar sobre o passado", não é sobre a Revolução Francesa.',
-    price: 65.00,
-    icon: '🏛️',
-    image: 'assets/photos/IMG_6875.jpg',
-    tag: 'Guia do Casal'
+    title: 'Lenço pro Alex chorar na cerimônia (não reembolsável)',
+    price: 108.50,
+    icon: '🤧',
+    paymentLink: ''
   },
   {
     id: 'presente-8',
-    title: 'Primeira Rodada de Cerveja da Resenha',
-    description: 'Para o engenheiro brindar com os amigos e debater se a estrutura do casamento tá bem amarrada.',
-    price: 85.00,
-    icon: '🍻',
-    image: 'assets/photos/IMG_6819.jpg',
-    tag: 'Boteco dos Noivos'
+    title: 'Kit calmante para noiva',
+    price: 245.00,
+    icon: '🍵',
+    paymentLink: ''
   },
   {
     id: 'presente-9',
-    title: 'Passeio Romântico no Encontro das Águas',
-    description: 'Porque até mestre de masmorra e atleta de crossfit merecem um pôr do sol romântico no Rio Negro.',
-    price: 220.00,
-    icon: '🚤',
-    image: 'assets/photos/IMG_6870.jpg',
-    tag: 'Romance Amazônico'
+    title: 'Sofá confortável para o noivo caso o kit calmante não funcione',
+    price: 1890.00,
+    icon: '🛋️',
+    paymentLink: ''
   },
   {
     id: 'presente-10',
-    title: 'Cota "Tombamento Histórico do Amor"',
-    description: 'Certificado simbólico de tombamento do amor de Alexandre e Larissa como patrimônio cultural imaterial.',
-    price: 130.00,
-    icon: '✨',
-    image: 'assets/photos/IMG_6818.jpg',
-    tag: 'Patrimônio Afetivo'
+    title: 'Prioridade na fila do buffet',
+    price: 360.00,
+    icon: '🍽️',
+    paymentLink: ''
   },
   {
     id: 'presente-11',
-    title: 'Armadura +5 contra DRs Matinais',
-    description: 'Classe de Armadura épica e resistência total a cara feia antes do primeiro gole de café da manhã.',
-    price: 120.00,
-    icon: '🛡️',
-    image: 'assets/photos/IMG_6812.jpg',
-    tag: 'Item Lendário D&D'
+    title: 'EU NÃO VOU EMBORA: Vaquinha para a hora extra da festa',
+    price: 2450.00,
+    icon: '🎉',
+    paymentLink: ''
   },
   {
     id: 'presente-12',
-    title: 'Cota Livre: Cerveja pro Noivo ou Whey pra Noiva',
-    description: 'Contribuição livre para abastecer a geladeira com malte gelado ou a coqueteleira com proteína pura!',
-    price: 50.00,
-    icon: '🎁',
-    image: 'assets/photos/IMG_6875.jpg',
-    tag: 'Cota Flexível'
+    title: 'Obrigar o noivo a tirar foto',
+    price: 175.00,
+    icon: '🤳',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-13',
+    title: 'Jogar o buquê na sua direção',
+    price: 520.00,
+    icon: '💐',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-14',
+    title: 'Cota Parintins 2027 para os noivos',
+    price: 2970.00,
+    icon: '🐂',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-15',
+    title: '1º mês da escola do Xandy Junior',
+    price: 1150.00,
+    icon: '👶',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-16',
+    title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
+    price: 780.00,
+    icon: '🐶',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-17',
+    title: 'Kit ração pro cachorro que o Alex vai dar para a Larissa',
+    price: 295.90,
+    icon: '🦴',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-18',
+    title: 'Rolo de macarrão caso o Alex faça raiva',
+    price: 129.00,
+    icon: '🧑‍🍳',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-19',
+    title: 'Capacete para o Alex poder fazer raiva para a Larissa',
+    price: 210.00,
+    icon: '⛑️',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-20',
+    title: '1º mês de chocolate para o casal',
+    price: 185.50,
+    icon: '🍫',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-21',
+    title: 'Um trocadinho para liberar o noivo pro RPG no fim de semana',
+    price: 150.00,
+    icon: '🎲',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-22',
+    title: 'Vaga para jantar na casa dos noivos 🍜',
+    price: 142.80,
+    icon: '🍜',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-23',
+    title: 'Livro de jardinagem para a noiva não matar mais plantas',
+    price: 164.90,
+    icon: '🌱',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-24',
+    title: 'Buquê de flores mensal',
+    price: 640.00,
+    icon: '🌸',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-25',
+    title: 'Implante capilar para o noivo',
+    price: 2990.00,
+    icon: '💇‍♂️',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-26',
+    title: 'Monjauro para os noivos meterem o shape',
+    price: 1680.00,
+    icon: '💉',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-27',
+    title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
+    price: 430.00,
+    icon: '💪',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-28',
+    title: 'Curso para aprender a segurar os pensamentos intrusivos',
+    price: 315.00,
+    icon: '🧠',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-29',
+    title: 'Patrocínio para tirar nosso nome do SERASA',
+    price: 1490.00,
+    icon: '💸',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-30',
+    title: 'Só pra não dizer que não dei nada',
+    price: 102.50,
+    icon: '🪙',
+    paymentLink: ''
   }
 ];
 
-// Chave PIX do Casal
+// Chave PIX do Casal (Fallback para quando não houver link direto configurado)
 const CASAL_PIX_KEY = 'casamento.alexandre.larissa@gmail.com';
 let currentSelectedGift = null;
 
-// Executar assim que o script carregar ou no DOMContentLoaded
+// Executar no carregamento da página
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initGiftsSection);
 } else {
@@ -130,24 +233,22 @@ function initGiftsSection() {
   initGiftModal();
 }
 
-/* Renderizar Grid de Presentes Lúdicos (Sempre Visíveis e Sem Bloqueio) */
+/* Renderizar Grid de Presentes (Layout Compacto e Elegante sem Fotos e sem Descrições) */
 function renderGiftsGrid() {
   const container = document.getElementById('giftsGridContainer');
   if (!container) return;
 
   container.innerHTML = LUDIC_GIFTS.map(gift => `
     <div class="gift-card" data-id="${gift.id}">
-      <div class="gift-img-wrapper">
-        <img src="${gift.image}" alt="${gift.title}" loading="lazy" />
-        <span class="gift-category-badge">${gift.icon} ${gift.tag}</span>
-      </div>
-      <div class="gift-body">
-        <h4 class="gift-title">${gift.title}</h4>
-        <p class="gift-description">${gift.description}</p>
-        <div class="gift-footer">
+      <div class="gift-card-content">
+        <div class="gift-card-top">
+          <span class="gift-icon-bubble">${gift.icon}</span>
           <div class="gift-price">
             <span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}
           </div>
+        </div>
+        <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
+        <div class="gift-card-action">
           <button type="button" class="btn btn-primary btn-sm presentear-btn" data-id="${gift.id}">
             Presentear ✨
           </button>
@@ -156,27 +257,36 @@ function renderGiftsGrid() {
     </div>
   `).join('');
 
-  // Ouvintes para o modal
+  // Ouvintes para os botões de presentear e clique no card
+  container.querySelectorAll('.gift-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const giftId = card.getAttribute('data-id');
+      const gift = LUDIC_GIFTS.find(g => g.id === giftId);
+      if (gift) handleGiftClick(gift);
+    });
+  });
+
   container.querySelectorAll('.presentear-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const giftId = btn.getAttribute('data-id');
       const gift = LUDIC_GIFTS.find(g => g.id === giftId);
-      if (gift) openGiftModal(gift);
-    });
-  });
-
-  // Também permitir clicar no card inteiro para presentear
-  container.querySelectorAll('.gift-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const giftId = card.getAttribute('data-id');
-      const gift = LUDIC_GIFTS.find(g => g.id === giftId);
-      if (gift) openGiftModal(gift);
+      if (gift) handleGiftClick(gift);
     });
   });
 }
 
-/* Modal e PIX */
+function handleGiftClick(gift) {
+  // Se o presente tiver um link de pagamento definido, redireciona em nova aba
+  if (gift.paymentLink && gift.paymentLink.trim().length > 0 && gift.paymentLink !== '#') {
+    window.open(gift.paymentLink, '_blank', 'noopener,noreferrer');
+  } else {
+    // Caso contrário, abre o modal PIX
+    openGiftModal(gift);
+  }
+}
+
+/* Modal PIX */
 function initGiftModal() {
   const modal = document.getElementById('giftModal');
   const closeBtn = document.getElementById('giftModalClose');
@@ -211,7 +321,7 @@ function initGiftModal() {
     });
   }
 
-  // Confirmação do Presente
+  // Confirmação do Presente com Recado
   if (form && modal) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -224,12 +334,12 @@ function initGiftModal() {
 
       modal.innerHTML = `
         <div class="gift-modal-card" style="text-align: center; padding: 45px 30px;">
-          <div style="font-size: 3.5rem; margin-bottom: 12px;">🥂🎲🌿</div>
+          <div style="font-size: 3.5rem; margin-bottom: 12px;">🥂🎁✨</div>
           <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.9rem; margin-bottom: 12px;">
-            Muito Obrigado, ${guestName}!
+            Muito Obrigado, ${escapeHtml(guestName)}!
           </h3>
           <p style="color: var(--color-text-muted); font-size: 1.05rem; margin-bottom: 24px; line-height: 1.6;">
-            Seu presente e seu carinho deixaram a noiva pronta pro WOD e o noivo com bônus de iniciativa! Mal podemos esperar para comemorar com você no dia 28 de Novembro na Chácara Monte Rey!
+            Seu presente e seu carinho significam muito para nós! Mal podemos esperar para comemorar com você no dia 28 de Novembro na Chácara Monte Rey!
           </p>
           <button class="btn btn-primary" onclick="document.getElementById('giftModal').classList.remove('active'); location.reload();">
             Voltar ao Site
@@ -245,13 +355,20 @@ function openGiftModal(gift) {
   const modal = document.getElementById('giftModal');
   const titleEl = document.getElementById('modalGiftTitle');
   const priceEl = document.getElementById('modalGiftPrice');
-  const imgEl = document.getElementById('modalGiftImg');
   const pixInput = document.getElementById('pixKeyDisplay');
 
   if (titleEl) titleEl.innerText = `${gift.icon} ${gift.title}`;
   if (priceEl) priceEl.innerText = `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
-  if (imgEl) imgEl.src = gift.image;
   if (pixInput) pixInput.value = CASAL_PIX_KEY;
 
   if (modal) modal.classList.add('active');
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
