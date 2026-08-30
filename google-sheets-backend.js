@@ -50,14 +50,15 @@ function doPost(e) {
       var sheetVan = ss.getSheetByName("Van_Seguranca");
       if (!sheetVan) {
         sheetVan = ss.insertSheet("Van_Seguranca");
-        sheetVan.appendRow(["Data/Hora", "Nome do Convidado", "Bairro / Endereço em Manaus"]);
-        sheetVan.getRange("A1:C1").setFontWeight("bold").setBackground("#B85D3B").setFontColor("#ffffff");
+        sheetVan.appendRow(["Data/Hora", "Nome do Convidado", "Precisa de Van?", "Bairro / Endereço em Manaus"]);
+        sheetVan.getRange("A1:D1").setFontWeight("bold").setBackground("#B85D3B").setFontColor("#ffffff");
         sheetVan.setFrozenRows(1);
       }
       sheetVan.appendRow([
         payload.date || new Date().toLocaleString("pt-BR"),
         payload.name || "Convidado",
-        payload.address || ""
+        payload.status || (payload.address ? "Sim (Vaga solicitada)" : "Não (Dispensou)"),
+        payload.address || "Não informado / Transporte próprio"
       ]);
       return ContentService.createTextOutput(JSON.stringify({ success: true, type: "van" }))
         .setMimeType(ContentService.MimeType.JSON);

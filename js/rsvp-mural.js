@@ -312,6 +312,15 @@ function initVanModal() {
 
   if (dismissBtn) {
     dismissBtn.addEventListener('click', () => {
+      // Registrar na planilha que o convidado dispensou a van
+      postToGoogleSheets({
+        action: 'van_request',
+        name: lastConfirmedGuestName,
+        status: 'Não (Transporte Próprio / Uber)',
+        address: 'Dispensou a van',
+        date: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+      });
+
       modal.classList.remove('active');
       showSuccessToast(`Presença confirmada, ${lastConfirmedGuestName}! Seu recado está salvo. 🎉`);
     });
@@ -326,12 +335,15 @@ function initVanModal() {
         return;
       }
 
+      const formattedNow = new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
       // Salvar solicitação da van localmente
       const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_VAN) || '[]');
       existing.push({
         name: lastConfirmedGuestName,
+        status: 'Sim (Vaga Solicitada)',
         address: address,
-        date: new Date().toISOString()
+        date: formattedNow
       });
       localStorage.setItem(STORAGE_KEY_VAN, JSON.stringify(existing));
 
@@ -339,8 +351,9 @@ function initVanModal() {
       postToGoogleSheets({
         action: 'van_request',
         name: lastConfirmedGuestName,
+        status: 'Sim (Vaga Solicitada)',
         address: address,
-        date: new Date().toLocaleString('pt-BR')
+        date: formattedNow
       });
 
       modal.classList.remove('active');
