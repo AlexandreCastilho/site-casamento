@@ -1,11 +1,13 @@
 /**
  * CASAMENTO ALEXANDRE & LARISSA - GIFTS.JS
- * Lista Oficial dos 30 Presentes + Cota Livre com QR Code Oficial PIX
+ * Lista Oficial dos 30 Presentes Organizada por Valores e Pares Temáticos
+ * Com Ordenação Dinâmica (Menor/Maior, Maior/Menor, A-Z) e QR Code Oficial PIX
  */
 
 const OFFICIAL_PIX_CODE = '00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0';
 
-const LUDIC_GIFTS = [
+// Lista Organizada: Menor para maior valor, mantendo juntos os pares temáticos
+const SUGGESTED_GIFTS_ORDER = [
   {
     id: 'presente-pix-personalizado',
     title: 'Cota Livre: Presenteie com Qualquer Valor via PIX',
@@ -16,51 +18,11 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
-    id: 'presente-1',
-    title: 'Tênis para a Larissa caminhar em Roma',
-    price: 487.90,
-    icon: '👟',
-    image: 'assets/gifts/gift-1.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-2',
-    title: 'Dinheiro pro Alex levar a Larissa para Roma',
-    price: 2850.00,
-    icon: '✈️',
-    image: 'assets/gifts/gift-2.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-3',
-    title: 'Fotógrafo para o Alex descansar na lua de mel',
-    price: 1240.50,
-    icon: '📸',
-    image: 'assets/gifts/gift-3.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-4',
-    title: 'Looks novos para a lua de mel',
-    price: 890.00,
-    icon: '👗',
-    image: 'assets/gifts/gift-4.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-5',
-    title: 'Misto quente para levar na lancheira e comer no aeroporto',
-    price: 115.40,
-    icon: '🥪',
-    image: 'assets/gifts/gift-5.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-6',
-    title: 'Cueca sexy para o Alexandre',
-    price: 139.90,
-    icon: '🩲',
-    image: 'assets/gifts/gift-6.jpg',
+    id: 'presente-30',
+    title: 'Só pra não dizer que não dei nada',
+    price: 102.50,
+    icon: '🪙',
+    image: 'assets/gifts/gift-30.jpg',
     paymentLink: ''
   },
   {
@@ -72,83 +34,11 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
-    id: 'presente-8',
-    title: 'Kit calmante para noiva',
-    price: 245.00,
-    icon: '🍵',
-    image: 'assets/gifts/gift-8.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-9',
-    title: 'Sofá confortável para o noivo caso o kit calmante não funcione',
-    price: 1890.00,
-    icon: '🛋️',
-    image: 'assets/gifts/gift-9.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-10',
-    title: 'Prioridade na fila do buffet',
-    price: 360.00,
-    icon: '🍽️',
-    image: 'assets/gifts/gift-10.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-11',
-    title: 'EU NÃO VOU EMBORA: Vaquinha para a hora extra da festa',
-    price: 2450.00,
-    icon: '🎉',
-    image: 'assets/gifts/gift-11.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-12',
-    title: 'Obrigar o noivo a tirar foto',
-    price: 175.00,
-    icon: '🤳',
-    image: 'assets/gifts/gift-12.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-13',
-    title: 'Jogar o buquê na sua direção',
-    price: 520.00,
-    icon: '💐',
-    image: 'assets/gifts/gift-13.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-14',
-    title: 'Cota Parintins 2027 para os noivos',
-    price: 2970.00,
-    icon: '🐂',
-    image: 'assets/gifts/gift-14.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-15',
-    title: '1º mês da escola do Xandy Junior',
-    price: 1150.00,
-    icon: '👶',
-    image: 'assets/gifts/gift-15.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-16',
-    title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
-    price: 780.00,
-    icon: '🐶',
-    image: 'assets/gifts/gift-16.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-17',
-    title: 'Kit ração pro cachorro que o Alex vai dar para a Larissa',
-    price: 295.90,
-    icon: '🦴',
-    image: 'assets/gifts/gift-17.jpg',
+    id: 'presente-5',
+    title: 'Misto quente para levar na lancheira e comer no aeroporto',
+    price: 115.40,
+    icon: '🥪',
+    image: 'assets/gifts/gift-5.jpg',
     paymentLink: ''
   },
   {
@@ -168,19 +58,11 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
-    id: 'presente-20',
-    title: '1º mês de chocolate para o casal',
-    price: 185.50,
-    icon: '🍫',
-    image: 'assets/gifts/gift-20.jpg',
-    paymentLink: ''
-  },
-  {
-    id: 'presente-21',
-    title: 'Um trocadinho para liberar o noivo pro RPG no fim de semana',
-    price: 150.00,
-    icon: '🎲',
-    image: 'assets/gifts/gift-21.jpg',
+    id: 'presente-6',
+    title: 'Cueca sexy para o Alexandre',
+    price: 139.90,
+    icon: '🩲',
+    image: 'assets/gifts/gift-6.jpg',
     paymentLink: ''
   },
   {
@@ -192,6 +74,14 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
+    id: 'presente-21',
+    title: 'Um trocadinho para liberar o noivo pro RPG no fim de semana',
+    price: 150.00,
+    icon: '🎲',
+    image: 'assets/gifts/gift-21.jpg',
+    paymentLink: ''
+  },
+  {
     id: 'presente-23',
     title: 'Livro de jardinagem para a noiva não matar mais plantas',
     price: 164.90,
@@ -200,35 +90,51 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
-    id: 'presente-24',
-    title: 'Buquê de flores mensal',
-    price: 640.00,
-    icon: '🌸',
-    image: 'assets/gifts/gift-24.jpg',
+    id: 'presente-12',
+    title: 'Obrigar o noivo a tirar foto',
+    price: 175.00,
+    icon: '🤳',
+    image: 'assets/gifts/gift-12.jpg',
     paymentLink: ''
   },
   {
-    id: 'presente-25',
-    title: 'Implante capilar para o noivo',
-    price: 2990.00,
-    icon: '💇‍♂️',
-    image: 'assets/gifts/gift-25.jpg',
+    id: 'presente-20',
+    title: '1º mês de chocolate para o casal',
+    price: 185.50,
+    icon: '🍫',
+    image: 'assets/gifts/gift-20.jpg',
     paymentLink: ''
   },
   {
-    id: 'presente-26',
-    title: 'Monjauro para os noivos meterem o shape',
-    price: 1680.00,
-    icon: '💉',
-    image: 'assets/gifts/gift-26.jpg',
+    id: 'presente-8',
+    title: 'Kit calmante para noiva',
+    price: 245.00,
+    icon: '🍵',
+    image: 'assets/gifts/gift-8.jpg',
     paymentLink: ''
   },
   {
-    id: 'presente-27',
-    title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
-    price: 430.00,
-    icon: '💪',
-    image: 'assets/gifts/gift-27.jpg',
+    id: 'presente-9',
+    title: 'Sofá confortável para o noivo caso o kit calmante não funcione',
+    price: 1890.00,
+    icon: '🛋️',
+    image: 'assets/gifts/gift-9.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-17',
+    title: 'Kit ração pro cachorro que o Alex vai dar para a Larissa',
+    price: 295.90,
+    icon: '🦴',
+    image: 'assets/gifts/gift-17.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-16',
+    title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
+    price: 780.00,
+    icon: '🐶',
+    image: 'assets/gifts/gift-16.jpg',
     paymentLink: ''
   },
   {
@@ -240,6 +146,86 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
+    id: 'presente-10',
+    title: 'Prioridade na fila do buffet',
+    price: 360.00,
+    icon: '🍽️',
+    image: 'assets/gifts/gift-10.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-27',
+    title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
+    price: 430.00,
+    icon: '💪',
+    image: 'assets/gifts/gift-27.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-26',
+    title: 'Monjauro para os noivos meterem o shape',
+    price: 1680.00,
+    icon: '💉',
+    image: 'assets/gifts/gift-26.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-1',
+    title: 'Tênis para a Larissa caminhar em Roma',
+    price: 487.90,
+    icon: '👟',
+    image: 'assets/gifts/gift-1.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-2',
+    title: 'Dinheiro pro Alex levar a Larissa para Roma',
+    price: 2850.00,
+    icon: '✈️',
+    image: 'assets/gifts/gift-2.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-13',
+    title: 'Jogar o buquê na sua direção',
+    price: 520.00,
+    icon: '💐',
+    image: 'assets/gifts/gift-13.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-24',
+    title: 'Buquê de flores mensal',
+    price: 640.00,
+    icon: '🌸',
+    image: 'assets/gifts/gift-24.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-4',
+    title: 'Looks novos para a lua de mel',
+    price: 890.00,
+    icon: '👗',
+    image: 'assets/gifts/gift-4.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-3',
+    title: 'Fotógrafo para o Alex descansar na lua de mel',
+    price: 1240.50,
+    icon: '📸',
+    image: 'assets/gifts/gift-3.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-15',
+    title: '1º mês da escola do Xandy Junior',
+    price: 1150.00,
+    icon: '👶',
+    image: 'assets/gifts/gift-15.jpg',
+    paymentLink: ''
+  },
+  {
     id: 'presente-29',
     title: 'Patrocínio para tirar nosso nome do SERASA',
     price: 1490.00,
@@ -248,15 +234,32 @@ const LUDIC_GIFTS = [
     paymentLink: ''
   },
   {
-    id: 'presente-30',
-    title: 'Só pra não dizer que não dei nada',
-    price: 102.50,
-    icon: '🪙',
-    image: 'assets/gifts/gift-30.jpg',
+    id: 'presente-11',
+    title: 'EU NÃO VOU EMBORA: Vaquinha para a hora extra da festa',
+    price: 2450.00,
+    icon: '🎉',
+    image: 'assets/gifts/gift-11.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-14',
+    title: 'Cota Parintins 2027 para os noivos',
+    price: 2970.00,
+    icon: '🐂',
+    image: 'assets/gifts/gift-14.jpg',
+    paymentLink: ''
+  },
+  {
+    id: 'presente-25',
+    title: 'Implante capilar para o noivo',
+    price: 2990.00,
+    icon: '💇‍♂️',
+    image: 'assets/gifts/gift-25.jpg',
     paymentLink: ''
   }
 ];
 
+let currentGiftSort = 'suggested';
 let currentSelectedGift = null;
 
 // Executar no carregamento da página
@@ -267,19 +270,67 @@ if (document.readyState === 'loading') {
 }
 
 function initGiftsSection() {
+  initGiftSorting();
   renderGiftsGrid();
   initGiftModal();
 }
 
-/* Renderizar Grid de Presentes com Imagem Curada, Preço e Botão de Pagamento */
+/* Inicializar Controles de Ordenação */
+function initGiftSorting() {
+  const sortSelect = document.getElementById('giftSortSelect');
+  if (!sortSelect) return;
+
+  sortSelect.addEventListener('change', (e) => {
+    currentGiftSort = e.target.value;
+    renderGiftsGrid();
+  });
+}
+
+/* Retornar lista de presentes ordenada de acordo com a seleção do usuário */
+function getSortedGifts() {
+  // O item de PIX livre fica sempre fixado em primeiro lugar
+  const pixItem = SUGGESTED_GIFTS_ORDER.find(g => g.isCustomPix);
+  const itemsWithoutPix = SUGGESTED_GIFTS_ORDER.filter(g => !g.isCustomPix);
+
+  let sorted = [];
+
+  switch (currentGiftSort) {
+    case 'price-asc':
+      // Menor para maior valor absoluto
+      sorted = [...itemsWithoutPix].sort((a, b) => a.price - b.price);
+      break;
+
+    case 'price-desc':
+      // Maior para menor valor absoluto
+      sorted = [...itemsWithoutPix].sort((a, b) => b.price - a.price);
+      break;
+
+    case 'name-asc':
+      // Ordem alfabética (A - Z)
+      sorted = [...itemsWithoutPix].sort((a, b) => a.title.localeCompare(b.title, 'pt-BR'));
+      break;
+
+    case 'suggested':
+    default:
+      // Ordem sugerida padrão (crescente com pares temáticos agrupados)
+      sorted = [...itemsWithoutPix];
+      break;
+  }
+
+  return pixItem ? [pixItem, ...sorted] : sorted;
+}
+
+/* Renderizar Grid de Presentes */
 function renderGiftsGrid() {
   const container = document.getElementById('giftsGridContainer');
   if (!container) return;
 
-  container.innerHTML = LUDIC_GIFTS.map(gift => {
+  const giftList = getSortedGifts();
+
+  container.innerHTML = giftList.map(gift => {
     const isCustom = !!gift.isCustomPix;
     const priceDisplay = isCustom 
-      ? '<span style="font-size: 1.05rem; font-weight: 700; color: var(--color-green-primary);">Valor Livre via PIX</span>' 
+      ? '<span style="font-size: 1.02rem; font-weight: 700; color: var(--color-green-primary);">Valor Livre via PIX</span>' 
       : `<span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}`;
 
     return `
@@ -307,7 +358,7 @@ function renderGiftsGrid() {
   container.querySelectorAll('.gift-card').forEach(card => {
     card.addEventListener('click', () => {
       const giftId = card.getAttribute('data-id');
-      const gift = LUDIC_GIFTS.find(g => g.id === giftId);
+      const gift = SUGGESTED_GIFTS_ORDER.find(g => g.id === giftId);
       if (gift) handleGiftClick(gift);
     });
   });
@@ -316,7 +367,7 @@ function renderGiftsGrid() {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const giftId = btn.getAttribute('data-id');
-      const gift = LUDIC_GIFTS.find(g => g.id === giftId);
+      const gift = SUGGESTED_GIFTS_ORDER.find(g => g.id === giftId);
       if (gift) handleGiftClick(gift);
     });
   });

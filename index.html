@@ -692,7 +692,26 @@
         </div>
       </div>
 
-      <!-- Grid de Presentes Dinâmico (Sem Categorias) -->
+      <!-- Barra de Controle e Ordenação dos Presentes -->
+      <div class="gifts-toolbar">
+        <div class="gifts-toolbar-info">
+          <span class="gifts-count-tag">✨ 30 Opções de Presentes + Cota Livre</span>
+        </div>
+        <div class="gifts-sort-wrapper">
+          <label for="giftSortSelect" class="gifts-sort-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12m-9 6h6"/></svg>
+            Ordenar por:
+          </label>
+          <select id="giftSortSelect" class="gifts-sort-select">
+            <option value="suggested">✨ Ordem Sugerida (Pares &amp; Menor Preço)</option>
+            <option value="price-asc">💵 Menor para Maior Valor</option>
+            <option value="price-desc">💎 Maior para Menor Valor</option>
+            <option value="name-asc">🔤 Ordem Alfabética (A - Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid de Presentes Dinâmico -->
       <div class="gifts-grid" id="giftsGridContainer">
         <!-- Renderizado dinamicamente via gifts.js -->
       </div>
@@ -798,8 +817,8 @@
   </footer>
 
   <!-- Scripts JS com Versionamento para Limpeza Imediata de Cache -->
-  <script src="js/app.js?v=2.5"></script>
-  <script src="js/gifts.js?v=2.5"></script>
-  <script src="js/rsvp-mural.js?v=2.5"></script>
+  <script src="js/app.js?v=2.6"></script>
+  <script src="js/gifts.js?v=2.6"></script>
+  <script src="js/rsvp-mural.js?v=2.6"></script>
 </body>
 </html>

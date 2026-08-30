@@ -1489,6 +1489,82 @@ h1, h2, h3, h4 {
   position: relative;
 }
 
+/* Barra de Ordenação e Controle dos Presentes */
+.gifts-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.gifts-count-tag {
+  font-family: var(--font-sans-accent);
+  font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+  font-weight: 600;
+  color: var(--color-green-dark);
+  letter-spacing: 0.5px;
+}
+
+.gifts-sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gifts-sort-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.gifts-sort-select {
+  background: var(--color-bg-sand);
+  color: var(--color-green-dark);
+  border: 1.5px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-family: var(--font-sans-accent);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.gifts-sort-select:hover,
+.gifts-sort-select:focus {
+  border-color: var(--color-terracotta-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(184, 93, 59, 0.12);
+}
+
+@media (max-width: 600px) {
+  .gifts-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+  }
+  .gifts-sort-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .gifts-sort-select {
+    width: 100%;
+  }
+}
+
 .gifts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
