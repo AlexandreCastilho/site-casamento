@@ -3,6 +3,13 @@
  * Confirmação de Presença com Lista Oficial de Convidados, Modal da Van de Segurança e Mural de Recados
  */
 
+// ==========================================================================
+// CONFIGURAÇÃO DA PLANILHA GOOGLE (GOOGLE APPS SCRIPT WEB APP)
+// ==========================================================================
+// Cole aqui a URL do seu App da Web do Google Apps Script (gerada em Menos de 2 min)
+// Exemplo: 'https://script.google.com/macros/s/AKfycb.../exec'
+const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbx0407WmbxsZZ5jGSg3ECMaH9xIzVz2eqPm0ctG-6yEFKS0HiG8KC_1RJ7iIbGwba6y/exec';
+
 const STORAGE_KEY_MESSAGES = 'casamento_recados_alexandre_larissa';
 const STORAGE_KEY_LIKES = 'casamento_recados_likes';
 const STORAGE_KEY_VAN = 'casamento_van_requests';
@@ -106,41 +113,8 @@ const OFFICIAL_GUESTS = [
 // Remover duplicatas e ordenar alfabeticamente
 const UNIQUE_GUESTS = Array.from(new Set(OFFICIAL_GUESTS)).sort((a, b) => a.localeCompare(b, 'pt-BR'));
 
-// Mensagens iniciais carinhosas
-const INITIAL_MESSAGES = [
-  {
-    id: 'msg-1',
-    author: 'Mariana & Thiago Litaiff',
-    date: '12 de Agosto, 2026',
-    text: 'Amigos queridos! Que honra e felicidade imensa testemunhar esse amor tão puro. Já estamos contando os dias para esse 28 de novembro na Chácara Monte Rey! Alexandre com bônus de carisma e Larissa bailando toada!',
-    status: 'confirmed',
-    likes: 18
-  },
-  {
-    id: 'msg-2',
-    author: 'Patrice Castilho',
-    date: '10 de Agosto, 2026',
-    text: 'Ver vocês dois juntos é uma inspiração. Que Deus continue abençoando cada passo dessa família linda que se forma. Estaremos lá firmes e fortes para comemorar!',
-    status: 'confirmed',
-    likes: 14
-  },
-  {
-    id: 'msg-3',
-    author: 'Marcus Vinicius Menezes',
-    date: '08 de Agosto, 2026',
-    text: 'Irmão Alexandre! Parece que foi ontem que você calculava viga no papel e falava da Larissa com brilho nos olhos. O casamento vai ser épico! Já separei a beca esporte fino!',
-    status: 'confirmed',
-    likes: 21
-  },
-  {
-    id: 'msg-4',
-    author: 'Letycia Brasil',
-    date: '05 de Agosto, 2026',
-    text: 'Larissa, você vai ser a noiva mais deslumbrante desse Amazonas! Estou tão emocionada por vocês dois. Viva Alexandre e Larissa!',
-    status: 'confirmed',
-    likes: 16
-  }
-];
+// Sem recados iniciais fictícios (pronto para lançamento)
+const INITIAL_MESSAGES = [];
 
 let lastConfirmedGuestName = '';
 
@@ -280,6 +254,9 @@ function initRsvpForm() {
       messages.unshift(newMessage);
       localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(messages));
       renderMuralMessages();
+
+      // Envio para o Google Sheets com text/plain (CORS safelisted)
+      postToGoogleSheets(newMessage);
     }
 
     // Resetar formulário
@@ -327,7 +304,7 @@ function initVanModal() {
         return;
       }
 
-      // Salvar solicitação da van
+      // Salvar solicitação da van localmente
       const existing = JSON.parse(localStorage.getItem(STORAGE_KEY_VAN) || '[]');
       existing.push({
         name: lastConfirmedGuestName,
@@ -335,6 +312,14 @@ function initVanModal() {
         date: new Date().toISOString()
       });
       localStorage.setItem(STORAGE_KEY_VAN, JSON.stringify(existing));
+
+      // Sincronizar pedido da van na aba 'Van_Seguranca' do Google Sheets
+      postToGoogleSheets({
+        action: 'van_request',
+        name: lastConfirmedGuestName,
+        address: address,
+        date: new Date().toLocaleString('pt-BR')
+      });
 
       modal.classList.remove('active');
       addressInput.value = '';
@@ -367,14 +352,17 @@ function showSuccessToast(message) {
    ========================================================================== */
 function getStoredMessages() {
   const saved = localStorage.getItem(STORAGE_KEY_MESSAGES);
-  if (!saved) {
-    localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(INITIAL_MESSAGES));
-    return INITIAL_MESSAGES;
-  }
+  if (!saved) return [];
   try {
-    return JSON.parse(saved);
+    const parsed = JSON.parse(saved);
+    // Limpeza automática de mensagens de exemplo mock antigas
+    const filtered = parsed.filter(m => !['msg-1', 'msg-2', 'msg-3', 'msg-4'].includes(m.id));
+    if (filtered.length !== parsed.length) {
+      localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(filtered));
+    }
+    return filtered;
   } catch (e) {
-    return INITIAL_MESSAGES;
+    return [];
   }
 }
 
@@ -397,7 +385,23 @@ function renderMuralMessages() {
   const userLikes = getStoredLikes();
 
   if (countBadge) {
-    countBadge.innerText = `${messages.length} recados`;
+    countBadge.innerText = `${messages.length} ${messages.length === 1 ? 'recado' : 'recados'}`;
+  }
+
+  // Estado vazio quando ainda não houver recados
+  if (messages.length === 0) {
+    feed.innerHTML = `
+      <div style="text-align: center; padding: 45px 20px; background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px dashed var(--color-border-light);">
+        <div style="font-size: 2.6rem; margin-bottom: 12px;">💌🌿</div>
+        <h4 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.3rem; margin-bottom: 6px;">
+          Nenhum recado publicado ainda
+        </h4>
+        <p style="color: var(--color-text-muted); font-size: 0.92rem; line-height: 1.5; max-width: 320px; margin: 0 auto;">
+          Seja o primeiro a confirmar sua presença e deixar uma mensagem de carinho para Alexandre &amp; Larissa!
+        </p>
+      </div>
+    `;
+    return;
   }
 
   feed.innerHTML = messages.map(msg => {
@@ -436,7 +440,9 @@ function toggleLikeMessage(msgId) {
   const msg = messages.find(m => m.id === msgId);
   if (!msg) return;
 
-  if (userLikes[msgId]) {
+  const isLiked = !!userLikes[msgId];
+
+  if (isLiked) {
     msg.likes = Math.max(0, (msg.likes || 1) - 1);
     delete userLikes[msgId];
   } else {
@@ -447,10 +453,51 @@ function toggleLikeMessage(msgId) {
   localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(messages));
   localStorage.setItem(STORAGE_KEY_LIKES, JSON.stringify(userLikes));
   renderMuralMessages();
+
+  // Sincronizar like no Google Sheets
+  postToGoogleSheets({
+    action: 'like',
+    id: msgId,
+    delta: isLiked ? -1 : 1
+  });
+}
+
+// Enviar dados para a Planilha Google
+function postToGoogleSheets(payload) {
+  if (!GOOGLE_SHEETS_WEBAPP_URL) return;
+  try {
+    fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.log('Sheets Sync:', err));
+  } catch (e) {
+    console.log('Post error:', e);
+  }
+}
+
+// Buscar dados mais recentes da Planilha Google
+function syncFromGoogleSheets() {
+  if (!GOOGLE_SHEETS_WEBAPP_URL) return;
+  fetch(GOOGLE_SHEETS_WEBAPP_URL)
+    .then(res => res.json())
+    .then(cloudMessages => {
+      if (Array.isArray(cloudMessages)) {
+        localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
+        renderMuralMessages();
+      }
+    })
+    .catch(err => console.log('Modo local / offline:', err));
 }
 
 function initMural() {
   renderMuralMessages();
+  syncFromGoogleSheets();
+
+  // Sincronizar ao voltar para a aba e a cada 20 segundos
+  window.addEventListener('focus', syncFromGoogleSheets);
+  setInterval(syncFromGoogleSheets, 20000);
 }
 
 // Presentes
@@ -473,6 +520,8 @@ window.addRecadoFromGift = function(authorName, textContent, giftTitle) {
   messages.unshift(newMessage);
   localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(messages));
   renderMuralMessages();
+
+  postToGoogleSheets(newMessage);
 };
 
 function escapeHtml(str) {
@@ -483,3 +532,4 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
