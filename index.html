@@ -587,13 +587,18 @@
 
             <!-- Recado para os noivos -->
             <div class="form-group">
-              <label class="form-label" for="rsvpMessage">Deixe um Recado para os Noivos (Ficará público no mural) *</label>
-              <textarea id="rsvpMessage" class="form-control" rows="3" placeholder="Escreva uma mensagem especial para Alexandre e Larissa..." required></textarea>
+              <label class="form-label" for="rsvpMessage">Deixe um Recado para os Noivos (Ficará público no mural):</label>
+              <textarea id="rsvpMessage" class="form-control" rows="3" placeholder="Escreva uma mensagem especial para Alexandre e Larissa..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
-              Confirmar Minha Presença ✨
-            </button>
+            <div class="rsvp-actions-group" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <button type="submit" id="rsvpConfirmBtn" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.02rem;">
+                Confirmar Minha Presença ✨
+              </button>
+              <button type="button" id="rsvpDeclineBtn" class="btn btn-secondary" style="width: 100%; padding: 12px; font-size: 0.92rem; background: transparent; border-color: var(--color-border-light); color: var(--color-text-muted);">
+                Não Poderei Comparecer 💌
+              </button>
+            </div>
           </form>
         </div>
 
@@ -655,6 +660,22 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal de Carinho para quem Não Pode Comparecer -->
+  <div class="gift-modal" id="declineModal" role="dialog" aria-modal="true">
+    <div class="van-modal-card" style="text-align: center; max-width: 480px;">
+      <div style="font-size: 3.2rem; margin-bottom: 12px;">💌🌿💖</div>
+      <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.75rem; margin-bottom: 12px;">
+        Sentiremos sua falta, <span id="declineGuestNameDisplay">Amigo</span>!
+      </h3>
+      <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+        Agradecemos muito por nos avisar! Seu carinho foi guardado com todo amor em nosso mural. Mesmo de longe, sua energia e seus votos estarão conosco no nosso grande dia!
+      </p>
+      <button type="button" class="btn btn-primary" id="declineModalCloseBtn" style="min-width: 160px;">
+        Entendido ✓
+      </button>
     </div>
   </div>
 

@@ -216,10 +216,12 @@ function initRsvpForm() {
   const selectedHidden = document.getElementById('selectedGuestName');
   const errorMsg = document.getElementById('guestSearchError');
   const messageInput = document.getElementById('rsvpMessage');
-  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+  const confirmBtn = document.getElementById('rsvpConfirmBtn') || (form ? form.querySelector('button[type="submit"]') : null);
+  const declineBtn = document.getElementById('rsvpDeclineBtn');
 
   if (!form) return;
 
+  // 1. Fluxo de Confirmação de Presença
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -245,40 +247,38 @@ function initRsvpForm() {
     lastConfirmedGuestName = validGuest;
 
     // Feedback no botão de envio
-    const origBtnText = submitBtn ? submitBtn.innerHTML : '';
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Enviando para a lista... ⏳';
+    const origBtnText = confirmBtn ? confirmBtn.innerHTML : '';
+    if (confirmBtn) {
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = 'Confirmando presença... ⏳';
     }
 
-    if (messageText) {
-      const now = new Date();
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      const formattedDate = now.toLocaleDateString('pt-BR', options);
+    const now = new Date();
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = now.toLocaleDateString('pt-BR', options);
 
-      const newMessage = {
-        id: 'msg-' + Date.now(),
-        author: validGuest,
-        date: formattedDate,
-        text: messageText,
-        status: 'confirmed',
-        likes: 1
-      };
+    const newMessage = {
+      id: 'msg-' + Date.now(),
+      author: validGuest,
+      date: formattedDate,
+      text: messageText || 'Presença confirmada com muita alegria! Mal posso esperar pelo grande dia! 🥂✨',
+      status: 'confirmed',
+      likes: 1
+    };
 
-      // Adiciona na visualização local imediatamente
-      currentMuralData.unshift(newMessage);
-      renderMuralMessages(currentMuralData);
+    // Adiciona na visualização local imediatamente
+    currentMuralData.unshift(newMessage);
+    renderMuralMessages(currentMuralData);
 
-      // Envia diretamente para a Planilha Google
-      await postToGoogleSheets(newMessage);
+    // Envia diretamente para a Planilha Google
+    await postToGoogleSheets(newMessage);
 
-      // Atualiza após 800ms diretamente da planilha
-      setTimeout(syncFromGoogleSheets, 800);
-    }
+    // Atualiza após 800ms diretamente da planilha
+    setTimeout(syncFromGoogleSheets, 800);
 
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = origBtnText;
+    if (confirmBtn) {
+      confirmBtn.disabled = false;
+      confirmBtn.innerHTML = origBtnText;
     }
 
     // Resetar formulário
@@ -290,16 +290,97 @@ function initRsvpForm() {
     // Abrir o Modal da Van de Segurança
     openVanModal(validGuest);
   });
+
+  // 2. Fluxo para Convidados que Não Poderão Comparecer
+  if (declineBtn) {
+    declineBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const selectedName = selectedHidden.value.trim();
+      const typedName = input.value.trim();
+
+      const validGuest = UNIQUE_GUESTS.find(g => 
+        g.toLowerCase() === (selectedName || typedName).toLowerCase()
+      );
+
+      if (!validGuest) {
+        if (errorMsg) {
+          errorMsg.innerText = '⚠️ Por favor, selecione seu nome na lista oficial de convidados antes de registrar sua resposta.';
+          errorMsg.style.display = 'block';
+        }
+        input.classList.add('is-invalid');
+        input.focus();
+        return;
+      }
+
+      const messageText = messageInput.value.trim();
+      const origBtnText = declineBtn.innerHTML;
+      declineBtn.disabled = true;
+      declineBtn.innerHTML = 'Enviando resposta... ⏳';
+
+      const now = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const formattedDate = now.toLocaleDateString('pt-BR', options);
+
+      const declineMessage = {
+        id: 'msg-' + Date.now(),
+        author: validGuest,
+        date: formattedDate,
+        text: messageText || 'Não poderei comparecer, mas envio meus melhores votos e muito amor ao casal!',
+        status: 'declined',
+        likes: 1
+      };
+
+      // Exibe no mural com a tag de carinho
+      currentMuralData.unshift(declineMessage);
+      renderMuralMessages(currentMuralData);
+
+      // Envia para a Planilha Google com status 'declined'
+      await postToGoogleSheets({
+        ...declineMessage,
+        action: 'rsvp_declined'
+      });
+
+      setTimeout(syncFromGoogleSheets, 800);
+
+      declineBtn.disabled = false;
+      declineBtn.innerHTML = origBtnText;
+
+      form.reset();
+      selectedHidden.value = '';
+      input.classList.remove('is-valid');
+      if (errorMsg) errorMsg.style.display = 'none';
+
+      openDeclineModal(validGuest);
+    });
+  }
 }
 
 /* ==========================================================================
-   3. MODAL DA VAN DE SEGURANÇA PÓS-CONFIRMAÇÃO
+   3. MODAIS: VAN DE SEGURANÇA E AGRADECIMENTO DE AUSÊNCIA
    ========================================================================== */
 function openVanModal(guestName) {
   const modal = document.getElementById('vanModal');
   const nameDisplay = document.getElementById('vanGuestNameDisplay');
   if (nameDisplay) nameDisplay.innerText = guestName;
   if (modal) modal.classList.add('active');
+}
+
+function openDeclineModal(guestName) {
+  const modal = document.getElementById('declineModal');
+  const nameDisplay = document.getElementById('declineGuestNameDisplay');
+  const closeBtn = document.getElementById('declineModalCloseBtn');
+
+  if (nameDisplay) nameDisplay.innerText = guestName;
+  if (modal) {
+    modal.classList.add('active');
+    if (closeBtn) {
+      closeBtn.onclick = () => modal.classList.remove('active');
+    }
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    };
+  }
 }
 
 function initVanModal() {
@@ -415,6 +496,7 @@ function renderMuralMessages(messages) {
 
   feed.innerHTML = list.map(msg => {
     const isLiked = !!userLikes[msg.id];
+    const isDeclined = msg.status === 'declined';
     return `
       <div class="message-card" id="${msg.id}">
         <div class="message-card-header">
@@ -423,7 +505,9 @@ function renderMuralMessages(messages) {
         </div>
         <p class="message-text">"${escapeHtml(msg.text)}"</p>
         <div class="message-card-footer">
-          <span class="presence-status-pill status-confirmed">✓ Presença Confirmada</span>
+          <span class="presence-status-pill ${isDeclined ? 'status-declined' : 'status-confirmed'}">
+            ${isDeclined ? '💌 Enviou Carinho' : '✓ Presença Confirmada'}
+          </span>
           <button class="like-btn ${isLiked ? 'liked' : ''}" data-id="${msg.id}" aria-label="Curtir recado">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
