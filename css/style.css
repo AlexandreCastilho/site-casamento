@@ -1099,13 +1099,25 @@ h1, h2, h3, h4 {
   transition: transform 0.6s ease;
 }
 
-.story-card-photo:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-elevated);
-}
-
 .story-card-photo:hover img {
   transform: scale(1.03);
+}
+
+.story-card-photo.story-card-photo-contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 8px;
+}
+
+.story-card-photo.story-card-photo-contain img,
+.story-card-photo img.story-img-full {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: calc(var(--radius-lg) - 6px);
 }
 
 .story-text {
