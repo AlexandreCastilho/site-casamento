@@ -666,31 +666,31 @@ h1, h2, h3, h4 {
   position: fixed;
   top: 10vh;
   bottom: 10vh;
-  width: 140px;
+  width: 130px;
   pointer-events: none;
   z-index: 40;
   opacity: 0;
-  transition: opacity 0.4s ease-out;
+  transition: opacity 0.35s ease-out;
 }
 
 .rail-left {
-  left: max(16px, calc((100vw - 1240px) / 2 - 155px));
+  left: max(10px, calc((100vw - 1200px) / 2 - 145px));
 }
 
 .rail-right {
-  right: max(16px, calc((100vw - 1240px) / 2 - 155px));
+  right: max(10px, calc((100vw - 1200px) / 2 - 145px));
 }
 
 .rail-track {
   display: flex;
   flex-direction: column;
-  gap: 130px;
+  gap: 120px;
   will-change: transform;
 }
 
 .floating-photo-card {
-  width: 130px;
-  height: 180px;
+  width: 120px;
+  height: 165px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: #ffffff;
@@ -720,8 +720,8 @@ h1, h2, h3, h4 {
   border-radius: calc(var(--radius-md) - 4px);
 }
 
-/* Ocultar trilhos em telas < 1480px para garantir 100% que NUNCA sobreponham o conteúdo principal */
-@media (max-width: 1480px) {
+/* Ocultar trilhos apenas em telas pequenas / mobile onde não há espaço lateral */
+@media (max-width: 1100px) {
   .floating-photo-rail {
     display: none !important;
   }

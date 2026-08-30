@@ -177,8 +177,8 @@ function initParallelPhotoParallax() {
   let ticking = false;
 
   function updateParallax() {
-    // Em telas menores, esmaecer suavemente
-    if (window.innerWidth < 1440) {
+    // Em telas menores que 1100px (tablets e celulares), esmaecer
+    if (window.innerWidth < 1100) {
       railLeft.style.opacity = '0';
       railRight.style.opacity = '0';
       return;
@@ -189,15 +189,15 @@ function initParallelPhotoParallax() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const totalDocHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-        // Cálculo contínuo de fade-in e fade-out (sem cortes secos)
-        const fadeIn = Math.min(1, Math.max(0, (scrollY - 160) / 320));
-        const fadeOut = Math.min(1, Math.max(0, (totalDocHeight - scrollY) / 360));
-        const currentOpacity = Math.max(0, Math.min(0.92, fadeIn * fadeOut * 0.92));
+        // Cálculo contínuo de fade-in e fade-out
+        const fadeIn = Math.min(1, Math.max(0, (scrollY - 80) / 220));
+        const fadeOut = Math.min(1, Math.max(0, (totalDocHeight - scrollY) / 300));
+        const currentOpacity = Math.max(0, Math.min(0.95, fadeIn * fadeOut * 0.95));
 
         railLeft.style.opacity = currentOpacity.toFixed(3);
         railRight.style.opacity = currentOpacity.toFixed(3);
 
-        // Movimento proporcional contínuo ao longo de todo o scroll da página (sem reset modular %)
+        // Movimento proporcional contínuo ao longo de todo o scroll da página
         const progress = totalDocHeight > 0 ? (scrollY / totalDocHeight) : 0;
         const maxOffsetLeft = 320;
         const maxOffsetRight = 440;
