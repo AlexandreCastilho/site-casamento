@@ -31,13 +31,6 @@ const SUGGESTED_GIFTS_ORDER = [
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-4MK9NUYO82-108,50'
   },
   {
-    id: 'presente-5',
-    title: 'Misto quente para levar na lancheira e comer no aeroporto',
-    price: 120.46,
-    image: 'assets/gifts/gift-5.jpg',
-    paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ynldsrV4nA-115,40'
-  },
-  {
     id: 'presente-18',
     title: 'Rolo de macarrão caso o Alex faça raiva para a Larissa',
     price: 134.66,
