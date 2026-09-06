@@ -1861,14 +1861,37 @@ h1, h2, h3, h4 {
 .gift-modal-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  max-width: 520px;
+  max-width: 420px;
   width: 100%;
-  padding: clamp(24px, 4vw, 36px);
+  padding: clamp(26px, 5vw, 34px) clamp(20px, 4vw, 28px);
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(197, 160, 89, 0.4);
+  border: 1px solid rgba(197, 160, 89, 0.35);
   max-height: 90vh;
   overflow-y: auto;
+  text-align: center;
+}
+
+.gift-modal-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.gift-modal-title {
+  font-family: var(--font-serif-display);
+  color: var(--color-green-dark);
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+  margin-top: 8px;
+  line-height: 1.35;
+}
+
+.gift-modal-price {
+  font-family: var(--font-serif-display);
+  font-size: 1.55rem;
+  color: var(--color-terracotta-primary);
+  font-weight: 700;
+  margin-top: 4px;
 }
 
 .modal-close-btn {
@@ -1886,6 +1909,8 @@ h1, h2, h3, h4 {
   cursor: pointer;
   color: var(--color-text-muted);
   transition: var(--transition-fast);
+  z-index: 2;
+  font-size: 0.9rem;
 }
 
 .modal-close-btn:hover {
@@ -1893,43 +1918,104 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
-/* PIX Box */
+/* PIX Box Clean */
 .pix-box {
   background: var(--color-bg-sand);
   border-radius: var(--radius-md);
-  padding: clamp(14px, 3vw, 20px);
+  padding: 22px 18px;
   text-align: center;
-  margin: 18px 0;
-  border: 1px dashed rgba(184, 93, 59, 0.4);
+  margin: 0 0 14px 0;
+  border: 1px solid var(--color-border-light);
 }
 
 .pix-qr-code {
-  width: clamp(130px, 25vw, 160px);
-  height: clamp(130px, 25vw, 160px);
-  margin: 0 auto 12px auto;
-  background: #fff;
-  padding: 10px;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 16px auto;
+  background: #ffffff;
+  padding: 8px;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-subtle);
+  box-shadow: 0 4px 16px rgba(14, 30, 22, 0.06);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pix-qr-code img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .pix-key-wrapper {
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .pix-key-input {
-  flex-grow: 1;
-  min-width: 180px;
-  padding: 10px 14px;
+  width: 100%;
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-light);
   font-family: monospace;
-  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  font-size: 0.76rem;
   background: #ffffff;
+  color: var(--color-text-muted);
+  text-align: center;
+  text-overflow: ellipsis;
+  outline: none;
+  transition: var(--transition-fast);
+  user-select: all;
+}
+
+.pix-key-input:focus {
+  border-color: var(--color-green-primary);
   color: var(--color-text-main);
+}
+
+.btn-copy-pix {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  font-size: 0.92rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-glow-terracotta);
+  transition: var(--transition-fast);
+}
+
+.btn-copy-pix.copied {
+  background-color: var(--color-green-primary) !important;
+  border-color: var(--color-green-primary) !important;
+  box-shadow: 0 8px 24px rgba(31, 63, 48, 0.3) !important;
+}
+
+.gift-modal-dismiss-btn {
+  width: 100%;
+  background: var(--color-bg-sand);
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  padding: 9px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-weight: 500;
+}
+
+.gift-modal-dismiss-btn:hover {
+  background: rgba(44, 83, 65, 0.08);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-medium);
 }
 
 /* ==========================================================================
@@ -2589,10 +2675,14 @@ textarea.form-control {
     font-size: 16px; /* Evita zoom automático no iOS Safari */
   }
 
-  .gift-modal-card,
   .van-modal-card {
     max-width: min(94vw, 480px);
     padding: clamp(20px, 5vw, 30px);
+  }
+
+  .gift-modal-card {
+    max-width: min(92vw, 400px);
+    padding: clamp(20px, 5vw, 26px);
   }
 }
 

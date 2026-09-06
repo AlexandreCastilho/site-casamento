@@ -348,61 +348,65 @@ function handleGiftClick(gift) {
 function initGiftModal() {
   const modal = document.getElementById('giftModal');
   const closeBtn = document.getElementById('giftModalClose');
+  const dismissBtn = document.getElementById('giftModalDismissBtn');
   const copyBtn = document.getElementById('copyPixBtn');
   const pixInput = document.getElementById('pixKeyDisplay');
-  const form = document.getElementById('giftConfirmForm');
 
-  if (closeBtn && modal) {
-    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+  const closeModal = () => {
+    if (modal) modal.classList.remove('active');
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (dismissBtn) dismissBtn.addEventListener('click', closeModal);
+
+  if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('active');
+      if (e.target === modal) closeModal();
     });
   }
+
+  // Fechar com a tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
 
   // Copiar código PIX oficial (Copia e Cola)
   if (copyBtn && pixInput) {
     copyBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      navigator.clipboard.writeText(OFFICIAL_PIX_CODE).then(() => {
-        const orig = copyBtn.innerText;
-        copyBtn.innerText = 'Código PIX Copiado! ✓';
-        copyBtn.style.backgroundColor = 'var(--color-green-primary)';
+      const textSpan = document.getElementById('copyPixBtnText');
+      const originalText = textSpan ? textSpan.innerText : copyBtn.innerText;
+
+      const setCopied = () => {
+        if (textSpan) {
+          textSpan.innerText = 'Código PIX Copiado! ✓';
+        } else {
+          copyBtn.innerText = 'Código PIX Copiado! ✓';
+        }
+        copyBtn.classList.add('copied');
         setTimeout(() => {
-          copyBtn.innerText = orig;
-          copyBtn.style.backgroundColor = '';
+          if (textSpan) {
+            textSpan.innerText = originalText;
+          } else {
+            copyBtn.innerText = originalText;
+          }
+          copyBtn.classList.remove('copied');
         }, 2500);
-      }).catch(() => {
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(OFFICIAL_PIX_CODE).then(setCopied).catch(() => {
+          pixInput.select();
+          document.execCommand('copy');
+          setCopied();
+        });
+      } else {
         pixInput.select();
         document.execCommand('copy');
-        copyBtn.innerText = 'Código PIX Copiado! ✓';
-      });
-    });
-  }
-
-  // Confirmação do Presente com Recado
-  if (form && modal) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const guestName = document.getElementById('giftGuestName').value.trim() || 'Amigo Querido';
-      const guestMsg = document.getElementById('giftGuestMessage').value.trim();
-
-      if (guestMsg && window.addRecadoFromGift) {
-        window.addRecadoFromGift(guestName, guestMsg, currentSelectedGift ? currentSelectedGift.title : 'Presente via PIX');
+        setCopied();
       }
-
-      modal.innerHTML = `
-        <div class="gift-modal-card" style="text-align: center; padding: 45px 30px;">
-          <h3 style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.9rem; margin-bottom: 12px;">
-            Muito Obrigado, ${escapeHtml(guestName)}!
-          </h3>
-          <p style="color: var(--color-text-muted); font-size: 1.05rem; margin-bottom: 24px; line-height: 1.6;">
-            Seu presente e seu carinho significam o mundo para nós! Mal podemos esperar para comemorar com você no dia 28 de Novembro na Chácara Monte Rey!
-          </p>
-          <button class="btn btn-primary" onclick="document.getElementById('giftModal').classList.remove('active'); location.reload();">
-            Voltar ao Site
-          </button>
-        </div>
-      `;
     });
   }
 }
@@ -416,9 +420,13 @@ function openGiftModal(gift) {
 
   if (titleEl) titleEl.innerText = gift.title;
   if (priceEl) {
-    priceEl.innerText = gift.isCustomPix 
-      ? 'Valor Livre (Defina no App do seu Banco)' 
-      : `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
+    if (gift.isCustomPix || !gift.price || gift.price <= 0) {
+      priceEl.innerText = '';
+      priceEl.style.display = 'none';
+    } else {
+      priceEl.innerText = `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
+      priceEl.style.display = 'block';
+    }
   }
   if (pixInput) pixInput.value = OFFICIAL_PIX_CODE;
 

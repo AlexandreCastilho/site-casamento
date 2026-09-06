@@ -733,61 +733,39 @@
   </section>
 
   <!-- Modal Interativo de Presente / PIX -->
-  <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true">
+  <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="modalGiftTitle">
     <div class="gift-modal-card">
       <button class="modal-close-btn" id="giftModalClose" aria-label="Fechar modal">✕</button>
       
-      <div style="text-align: center; margin-bottom: 20px;">
+      <div class="gift-modal-header">
         <span class="section-tag">Presentear os Noivos</span>
-        <h3 id="modalGiftTitle" style="font-family: var(--font-serif-display); color: var(--color-green-dark); font-size: 1.5rem; margin-top: 6px;">
-          Presente Selecionado
+        <h3 id="modalGiftTitle" class="gift-modal-title">
+          Cota Livre via PIX
         </h3>
-        <div id="modalGiftPrice" style="font-family: var(--font-serif-display); font-size: 1.8rem; color: var(--color-terracotta-primary); font-weight: 700; margin-top: 4px;">
-          R$ 0,00
-        </div>
+        <div id="modalGiftPrice" class="gift-modal-price" style="display: none;"></div>
       </div>
 
-      <!-- Box PIX com QR Code Real -->
+      <!-- Box PIX com QR Code -->
       <div class="pix-box">
-        <div style="font-size: 0.82rem; font-weight: 600; color: var(--color-green-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">
-          Pagamento Instantâneo via PIX
+        <div class="pix-qr-code">
+          <img id="pixQrCodeImg" src="assets/gifts/pix-qrcode.png" alt="QR Code PIX" />
         </div>
-        
-        <!-- QR Code Oficial Real -->
-        <div class="pix-qr-code" style="margin-bottom: 12px;">
-          <img id="pixQrCodeImg" src="assets/gifts/pix-qrcode.png" alt="QR Code PIX Larissa Leite Colares" style="width: 170px; height: 170px; margin: 0 auto; display: block; border-radius: var(--radius-sm); border: 2px solid var(--color-border-light); background: #ffffff; padding: 6px;" />
-        </div>
-
-        <div style="font-size: 0.88rem; color: var(--color-green-dark); font-weight: 600; margin-bottom: 6px;">
-          Favorecida: <strong>Larissa Leite Colares</strong>
-        </div>
-
-        <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 10px;">
-          Aponte a câmera do app do seu banco ou copie o código abaixo:
-        </p>
 
         <div class="pix-key-wrapper">
-          <input type="text" class="pix-key-input" id="pixKeyDisplay" value="00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0" readonly />
-          <button type="button" class="btn btn-primary btn-sm" id="copyPixBtn">Copiar Código PIX</button>
+          <input type="text" class="pix-key-input" id="pixKeyDisplay" value="00020126360014BR.GOV.BCB.PIX0114+55929824155315204000053039865802BR5921Larissa Leite Colares6009SAO PAULO6214051041Y5k2W4pd6304FCB0" readonly aria-label="Código PIX Copia e Cola" />
+          <button type="button" class="btn btn-primary btn-copy-pix" id="copyPixBtn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; flex-shrink: 0;">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copyPixBtnText">Copiar Código PIX</span>
+          </button>
         </div>
       </div>
 
-      <!-- Formulário com Recado e Nome do Convidado -->
-      <form id="giftConfirmForm">
-        <div class="form-group">
-          <label class="form-label" for="giftGuestName">Seu Nome:</label>
-          <input type="text" id="giftGuestName" class="form-control" placeholder="Seu nome" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="giftGuestMessage">Deixe uma Mensagem com o Presente (opcional):</label>
-          <textarea id="giftGuestMessage" class="form-control" rows="2" placeholder="Escreva uma dedicatória divertida para Alexandre &amp; Larissa..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
-          Confirmar Envio do Presente
-        </button>
-      </form>
+      <button type="button" class="btn gift-modal-dismiss-btn" id="giftModalDismissBtn">
+        Fechar
+      </button>
     </div>
   </div>
 
