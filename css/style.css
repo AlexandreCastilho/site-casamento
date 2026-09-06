@@ -841,32 +841,46 @@ h1, h2, h3, h4 {
   height: 100%;
 }
 
-/* Moldura Polaroid Autêntica */
+/* Slot do trilho polaroid (posicionamento absoluto vertical controlado via translate3d no JS) */
 .floating-photo-card {
   position: absolute;
   top: 0;
   left: 0;
   width: 96px;
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 40;
+}
+
+.floating-photo-card:hover {
+  z-index: 99 !important;
+  opacity: 1 !important;
+}
+
+/* Moldura Polaroid Autêntica (rotação e escala isoladas de posicionamento vertical para evitar conflitos) */
+.floating-photo-frame {
+  width: 100%;
   background: #ffffff;
   padding: 5px 5px 18px 5px; /* Borda inferior mais larga típica de foto Polaroid */
   border-radius: 2px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.35s ease, opacity 0.2s ease-out;
-  pointer-events: auto;
-  cursor: pointer;
-  will-change: transform, opacity;
-  opacity: 0;
+  transform: rotate(var(--card-rot, 0deg)) scale(1);
+  transform-origin: center center;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  will-change: transform;
 }
 
-.floating-photo-card:hover {
-  transform: scale(1.18) rotate(0deg) !important;
-  z-index: 99 !important;
-  opacity: 1 !important;
+.floating-photo-card:hover .floating-photo-frame {
+  transform: rotate(0deg) scale(1.18);
   box-shadow: 0 18px 40px rgba(184, 93, 59, 0.35);
 }
 
-.floating-photo-card img {
+.floating-photo-card img,
+.floating-photo-frame img {
   width: 100%;
   aspect-ratio: 1 / 1; /* Foto quadrada polaroid */
   object-fit: cover;

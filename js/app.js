@@ -209,6 +209,29 @@ function initParallelPhotoParallax() {
   const rotationsLeft = [-3.5, 4, -2.5, 3, -4, 2.5, -3, 3.5];
   const rotationsRight = [4, -3.5, 3, -4, 2.5, -3, 3.5, -2.5];
 
+  // Configurar moldura interna (fallback) e definir rotação individual como variável CSS
+  leftCards.forEach((card, i) => {
+    if (!card.querySelector('.floating-photo-frame')) {
+      const frame = document.createElement('div');
+      frame.className = 'floating-photo-frame';
+      while (card.firstChild) frame.appendChild(card.firstChild);
+      card.appendChild(frame);
+    }
+    const rot = rotationsLeft[i % rotationsLeft.length];
+    card.style.setProperty('--card-rot', `${rot}deg`);
+  });
+
+  rightCards.forEach((card, i) => {
+    if (!card.querySelector('.floating-photo-frame')) {
+      const frame = document.createElement('div');
+      frame.className = 'floating-photo-frame';
+      while (card.firstChild) frame.appendChild(card.firstChild);
+      card.appendChild(frame);
+    }
+    const rot = rotationsRight[i % rotationsRight.length];
+    card.style.setProperty('--card-rot', `${rot}deg`);
+  });
+
   const mensagemSection = document.getElementById('mensagem');
   const historiaSection = document.getElementById('historia');
 
@@ -281,14 +304,11 @@ function initParallelPhotoParallax() {
 
         // Atualizar trilho esquerdo (loop contínuo e suave)
         leftCards.forEach((card, i) => {
-          const rot = rotationsLeft[i % rotationsLeft.length];
           const basePos = i * cardSpacing;
           const rawPos = (basePos - (relativeScroll * speedLeft)) % totalHeightLeft;
           const currentY = ((rawPos % totalHeightLeft) + totalHeightLeft) % totalHeightLeft - 180;
 
-          if (!card.matches(':hover')) {
-            card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0) rotate(${rot}deg)`;
-          }
+          card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0)`;
 
           // Calcular opacidade baseada na posição vertical da tela e multiplicador da seção
           const cardCenter = currentY + 60;
@@ -307,14 +327,11 @@ function initParallelPhotoParallax() {
 
         // Atualizar trilho direito (loop contínuo e suave)
         rightCards.forEach((card, i) => {
-          const rot = rotationsRight[i % rotationsRight.length];
           const basePos = i * cardSpacing + (cardSpacing * 0.5); // Deslocamento para alternar com a esquerda
           const rawPos = (basePos - (relativeScroll * speedRight)) % totalHeightRight;
           const currentY = ((rawPos % totalHeightRight) + totalHeightRight) % totalHeightRight - 180;
 
-          if (!card.matches(':hover')) {
-            card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0) rotate(${rot}deg)`;
-          }
+          card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0)`;
 
           const cardCenter = currentY + 60;
           let opacity = 0;
