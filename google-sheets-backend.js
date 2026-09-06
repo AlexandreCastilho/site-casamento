@@ -273,24 +273,65 @@ function doGet(e) {
   var sheetConvidados = getOrCreateConvidadosSheet(ss);
   var guests = getGuestsList(sheetConvidados);
   
-  // 2. Obter mensagens da aba "Recados"
+  // 2. Mapear recados existentes na aba "Convidados" (Coluna F)
+  var convidadosData = sheetConvidados.getDataRange().getValues();
+  var convidadosRecadosMap = {}; // cleanAuthor -> { recado, date, status, name }
+  for (var c = 1; c < convidadosData.length; c++) {
+    var cName = String(convidadosData[c][0] || "").trim();
+    var cStatus = String(convidadosData[c][1] || "").trim();
+    var cDate = String(convidadosData[c][4] || "").trim();
+    var cRecado = String(convidadosData[c][5] || "").trim();
+    if (cName && cRecado) {
+      convidadosRecadosMap[cleanGuestName(cName)] = {
+        name: cName,
+        recado: cRecado,
+        status: cStatus === "Não comparecerá" ? "declined" : "confirmed",
+        date: cDate || new Date().toLocaleDateString("pt-BR")
+      };
+    }
+  }
+  
+  // 3. Obter mensagens da aba "Recados" (com suporte a edições em tempo real)
   var sheetRecados = getOrCreateRecadosSheet(ss);
   var data = sheetRecados.getDataRange().getValues();
   var messages = [];
+  var authorsInRecados = {};
   
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
     if (row && row[2]) {
+      var author = String(row[2]);
+      var text = String(row[3] || "");
+      var cleanAuthor = cleanGuestName(author);
+      authorsInRecados[cleanAuthor] = true;
+      
       messages.push({
         id: String(row[0] || ("msg-" + i)),
         date: String(row[1] || ""),
-        author: String(row[2]),
-        text: String(row[3] || ""),
+        author: author,
+        text: text,
         likes: Number(row[4]) || 0,
         status: String(row[5] || "confirmed")
       });
     }
   }
+  
+  // 4. Se o usuário escreveu um recado na aba "Convidados" (Coluna F) de alguém que ainda não estava em Recados,
+  // inclui automaticamente no mural para que apareça no site!
+  for (var cleanKey in convidadosRecadosMap) {
+    if (!authorsInRecados[cleanKey]) {
+      var directItem = convidadosRecadosMap[cleanKey];
+      messages.push({
+        id: "msg-convidado-" + cleanKey,
+        date: directItem.date,
+        author: directItem.name,
+        text: directItem.recado,
+        likes: 1,
+        status: directItem.status
+      });
+    }
+  }
+  
   messages.reverse();
   
   // Suporte a filtro opcional por parâmetro
@@ -461,5 +502,73 @@ function doPost(e) {
   } catch (err) {
     return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// TRIGGER AUTOMÁTICO ONEDIT: Sincroniza edições manuais entre as abas Convidados e Recados
+// -----------------------------------------------------------------------------
+function onEdit(e) {
+  try {
+    if (!e || !e.range) return;
+    var range = e.range;
+    var sheet = range.getSheet();
+    var sheetName = sheet.getName();
+    var row = range.getRow();
+    var col = range.getColumn();
+    
+    // Ignora alterações na linha de cabeçalho (linha 1)
+    if (row < 2) return;
+    
+    var ss = e.source || SpreadsheetApp.getActiveSpreadsheet();
+    
+    // CASO 1: Usuário alterou o recado na aba "Convidados" (Coluna F)
+    if (sheetName === "Convidados" && col === 6) {
+      var guestName = String(sheet.getRange(row, 1).getValue() || "").trim();
+      var newText = String(range.getValue() || "").trim();
+      if (!guestName) return;
+      
+      var sheetRecados = ss.getSheetByName("Recados");
+      if (!sheetRecados) return;
+      var data = sheetRecados.getDataRange().getValues();
+      var cleanTarget = cleanGuestName(guestName);
+      var found = false;
+      
+      for (var i = 1; i < data.length; i++) {
+        if (cleanGuestName(data[i][2]) === cleanTarget) {
+          sheetRecados.getRange(i + 1, 4).setValue(newText);
+          found = true;
+          break;
+        }
+      }
+      
+      if (!found && newText) {
+        var newId = "msg-" + new Date().getTime();
+        sheetRecados.appendRow([
+          newId,
+          new Date().toLocaleString("pt-BR"),
+          guestName,
+          newText,
+          1,
+          "confirmed"
+        ]);
+      }
+    }
+    
+    // CASO 2: Usuário alterou o recado na aba "Recados" (Coluna D)
+    if (sheetName === "Recados" && col === 4) {
+      var authorName = String(sheet.getRange(row, 3).getValue() || "").trim();
+      var editedText = String(range.getValue() || "").trim();
+      if (!authorName) return;
+      
+      var sheetConvidados = ss.getSheetByName("Convidados");
+      if (!sheetConvidados) return;
+      var cRow = findGuestRow(sheetConvidados, authorName);
+      if (cRow !== -1) {
+        sheetConvidados.getRange(cRow, 6).setValue(editedText);
+      }
+    }
+  } catch (err) {
+    // Falha silenciosa para não interromper a interface da planilha
   }
 }
