@@ -761,6 +761,22 @@
       <div class="gifts-grid" id="giftsGridContainer">
         <!-- Renderizado dinamicamente via gifts.js -->
       </div>
+
+      <!-- Controles de Exibição dos Presentes (Mostrar mais / Mostrar menos) -->
+      <div class="gifts-actions-wrapper" id="giftsActionsWrapper">
+        <button type="button" class="btn btn-gifts-toggle" id="giftsShowMoreBtn">
+          <span>Mostrar mais presentes</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="btn btn-gifts-toggle btn-gifts-toggle-less" id="giftsShowLessBtn" style="display: none;">
+          <span>Mostrar menos</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
 

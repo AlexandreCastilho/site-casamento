@@ -1859,6 +1859,75 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
+/* Estado recolhido de cards de presentes */
+.gift-card.gift-card-hidden {
+  display: none !important;
+}
+
+/* Animação suave ao revelar mais presentes */
+@keyframes giftCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gift-card.gift-card-revealed {
+  animation: giftCardFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Container e Botão de Expansão / Recolhimento */
+.gifts-actions-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+  width: 100%;
+}
+
+.btn-gifts-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 32px;
+  background-color: #ffffff;
+  color: var(--color-terracotta-primary);
+  border: 1.5px solid var(--color-terracotta-primary);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 14px rgba(184, 93, 59, 0.12);
+}
+
+.btn-gifts-toggle:hover {
+  background-color: var(--color-terracotta-primary);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-glow-terracotta);
+  transform: translateY(-2px);
+}
+
+.btn-gifts-toggle svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-gifts-toggle:hover svg {
+  transform: translateY(2px);
+}
+
+.btn-gifts-toggle.btn-gifts-toggle-less:hover svg {
+  transform: translateY(-2px);
+}
+
 /* Modal de Presente / PIX */
 .gift-modal {
   position: fixed;
@@ -2742,6 +2811,16 @@ textarea.form-control {
   .gifts-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .gifts-actions-wrapper {
+    margin-top: 24px;
+  }
+
+  .btn-gifts-toggle {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 0.8rem;
   }
 
   .gift-img-frame {

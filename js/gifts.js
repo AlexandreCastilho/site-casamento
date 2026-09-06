@@ -130,14 +130,14 @@ const SUGGESTED_GIFTS_ORDER = [
   },
   {
     id: 'presente-27',
-    title: 'Esteroides pesados pro noivo ficar trincado pra lua de mel',
+    title: 'Esteroides pesados para os noivos meterem o shape',
     price: 448.86,
     image: 'assets/gifts/gift-27.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ULfG7qxDm6-430,00'
   },
   {
     id: 'presente-26',
-    title: 'Monjauro para os noivos meterem o shape',
+    title: 'Mounjaro do Paraguai pra noiva secar até o casamento',
     price: 1753.66,
     image: 'assets/gifts/gift-26.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-OKNyKxU5Ml-1680,00'
@@ -216,6 +216,8 @@ const SUGGESTED_GIFTS_ORDER = [
 
 let currentGiftSort = 'suggested';
 let currentSelectedGift = null;
+let isGiftsExpanded = false;
+const INITIAL_GIFTS_COUNT = 6;
 
 // Executar no carregamento da página
 if (document.readyState === 'loading') {
@@ -226,6 +228,7 @@ if (document.readyState === 'loading') {
 
 function initGiftsSection() {
   initGiftSorting();
+  initGiftsToggle();
   renderGiftsGrid();
   initGiftModal();
 }
@@ -282,14 +285,15 @@ function renderGiftsGrid() {
 
   const giftList = getSortedGifts();
 
-  container.innerHTML = giftList.map(gift => {
+  container.innerHTML = giftList.map((gift, index) => {
     const isCustom = !!gift.isCustomPix;
     const priceDisplay = isCustom 
       ? '' 
       : `<span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}`;
+    const isHidden = !isGiftsExpanded && index >= INITIAL_GIFTS_COUNT;
 
     return `
-      <div class="gift-card ${isCustom ? 'gift-card-custom' : ''}" data-id="${gift.id}">
+      <div class="gift-card ${isCustom ? 'gift-card-custom' : ''} ${isHidden ? 'gift-card-hidden' : ''}" data-id="${gift.id}">
         <div class="gift-img-frame">
           <img src="${gift.image}" alt="${escapeHtml(gift.title)}" loading="lazy" />
         </div>
@@ -323,6 +327,86 @@ function renderGiftsGrid() {
       if (gift) handleGiftClick(gift);
     });
   });
+
+  updateToggleButtonsState();
+}
+
+/* Inicializar Controles de Mostrar Mais / Mostrar Menos */
+function initGiftsToggle() {
+  const showMoreBtn = document.getElementById('giftsShowMoreBtn');
+  const showLessBtn = document.getElementById('giftsShowLessBtn');
+
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      expandGifts();
+    });
+  }
+
+  if (showLessBtn) {
+    showLessBtn.addEventListener('click', () => {
+      collapseGifts();
+    });
+  }
+}
+
+function expandGifts() {
+  isGiftsExpanded = true;
+  const container = document.getElementById('giftsGridContainer');
+  if (container) {
+    const hiddenCards = container.querySelectorAll('.gift-card.gift-card-hidden');
+    hiddenCards.forEach(card => {
+      card.classList.remove('gift-card-hidden');
+      card.classList.add('gift-card-revealed');
+    });
+  }
+  updateToggleButtonsState();
+}
+
+function collapseGifts() {
+  isGiftsExpanded = false;
+  const container = document.getElementById('giftsGridContainer');
+  if (container) {
+    const cards = container.querySelectorAll('.gift-card');
+    cards.forEach((card, index) => {
+      if (index >= INITIAL_GIFTS_COUNT) {
+        card.classList.add('gift-card-hidden');
+        card.classList.remove('gift-card-revealed');
+      }
+    });
+  }
+  updateToggleButtonsState();
+
+  // Rolagem suave de volta ao topo da lista de presentes
+  const section = document.getElementById('giftsGridContainer') || document.getElementById('presentes');
+  if (section) {
+    const yOffset = -90; // espaço para o cabeçalho fixo
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+function updateToggleButtonsState() {
+  const showMoreBtn = document.getElementById('giftsShowMoreBtn');
+  const showLessBtn = document.getElementById('giftsShowLessBtn');
+  const actionsWrapper = document.getElementById('giftsActionsWrapper');
+  const giftList = getSortedGifts();
+
+  if (!actionsWrapper) return;
+
+  if (giftList.length <= INITIAL_GIFTS_COUNT) {
+    actionsWrapper.style.display = 'none';
+    return;
+  }
+
+  actionsWrapper.style.display = 'flex';
+
+  if (isGiftsExpanded) {
+    if (showMoreBtn) showMoreBtn.style.display = 'none';
+    if (showLessBtn) showLessBtn.style.display = 'inline-flex';
+  } else {
+    if (showMoreBtn) showMoreBtn.style.display = 'inline-flex';
+    if (showLessBtn) showLessBtn.style.display = 'none';
+  }
 }
 
 function handleGiftClick(gift) {
