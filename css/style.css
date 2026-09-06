@@ -828,51 +828,41 @@ h1, h2, h3, h4 {
 }
 
 .rail-left {
-  left: max(10px, calc((100vw - 1200px) / 2 - 125px));
+  left: max(8px, calc((100vw - 1220px) / 2 - 110px));
 }
 
 .rail-right {
-  right: max(10px, calc((100vw - 1200px) / 2 - 125px));
+  right: max(8px, calc((100vw - 1220px) / 2 - 110px));
 }
 
 .rail-track {
-  display: flex;
-  flex-direction: column;
-  gap: 380px; /* Grande espaçamento para passar apenas 1 ou 2 por vez na tela */
-  will-change: transform;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* Moldura Polaroid Autêntica */
 .floating-photo-card {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 96px;
   background: #ffffff;
   padding: 5px 5px 18px 5px; /* Borda inferior mais larga típica de foto Polaroid */
   border-radius: 2px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  transform: rotate(-4deg);
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, opacity 0.15s ease-out;
+  transition: box-shadow 0.35s ease, opacity 0.2s ease-out;
   pointer-events: auto;
   cursor: pointer;
   will-change: transform, opacity;
   opacity: 0;
 }
 
-.rail-track .floating-photo-card:nth-child(even) {
-  transform: rotate(3.5deg);
-}
-
-.rail-right .floating-photo-card {
-  transform: rotate(4deg);
-}
-
-.rail-right .rail-track .floating-photo-card:nth-child(even) {
-  transform: rotate(-3.5deg);
-}
-
 .floating-photo-card:hover {
   transform: scale(1.18) rotate(0deg) !important;
-  z-index: 50;
+  z-index: 99 !important;
+  opacity: 1 !important;
   box-shadow: 0 18px 40px rgba(184, 93, 59, 0.35);
 }
 
@@ -884,8 +874,8 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Ocultar trilhos de polaroids em telas <= 1440px para garantir total legibilidade e evitar sobreposição */
-@media (max-width: 1440px) {
+/* Ocultar trilhos de polaroids apenas em telas menores/tablets <= 1024px */
+@media (max-width: 1024px) {
   .floating-photo-rail {
     display: none !important;
   }
@@ -2444,13 +2434,7 @@ textarea.form-control {
    BREAKPOINTS RESPONSIVOS E FLUIDEZ EM QUALQUER RESOLUÇÃO
    ========================================================================== */
 
-/* Telas Grandes e Laptops (1024px a 1440px) */
-@media (max-width: 1440px) {
-  .floating-photo-rail {
-    display: none !important;
-  }
-}
-
+/* Telas Grandes e Laptops */
 @media (max-width: 1200px) {
   .container {
     padding: 0 clamp(18px, 3vw, 24px);

@@ -200,17 +200,20 @@ function initScrollAnimations() {
 function initParallelPhotoParallax() {
   const railLeft = document.getElementById('railLeft');
   const railRight = document.getElementById('railRight');
-  const leftTrack = document.getElementById('leftRailTrack');
-  const rightTrack = document.getElementById('rightRailTrack');
-  const allCards = document.querySelectorAll('.floating-photo-card');
+  const leftCards = Array.from(document.querySelectorAll('#leftRailTrack .floating-photo-card'));
+  const rightCards = Array.from(document.querySelectorAll('#rightRailTrack .floating-photo-card'));
 
-  if (!railLeft || !railRight || !leftTrack || !rightTrack) return;
+  if (!railLeft || !railRight || !leftCards.length || !rightCards.length) return;
+
+  // Rotações sutis alternadas para aspecto artesanal polaroid
+  const rotationsLeft = [-3.5, 4, -2.5, 3, -4, 2.5, -3, 3.5];
+  const rotationsRight = [4, -3.5, 3, -4, 2.5, -3, 3.5, -2.5];
 
   let ticking = false;
 
   function updateParallax() {
-    // Em telas menores que 1100px (tablets e celulares), ocultar
-    if (window.innerWidth < 1100) {
+    // Em telas menores ou iguais a 1024px (tablets e celulares), ocultar
+    if (window.innerWidth <= 1024) {
       railLeft.style.opacity = '0';
       railRight.style.opacity = '0';
       return;
@@ -222,13 +225,14 @@ function initParallelPhotoParallax() {
         const vh = window.innerHeight;
         const heroSection = document.getElementById('hero');
         const heroHeight = heroSection ? heroSection.offsetHeight : vh;
-        const heroThreshold = heroHeight * 0.70;
+        const heroThreshold = heroHeight * 0.65;
 
         // 1. REGRA: Nenhuma foto polaroid aparece na primeira seção (Hero)
         if (scrollY < heroThreshold) {
           railLeft.style.opacity = '0';
           railRight.style.opacity = '0';
-          allCards.forEach(c => c.style.opacity = '0');
+          leftCards.forEach(c => c.style.opacity = '0');
+          rightCards.forEach(c => c.style.opacity = '0');
           ticking = false;
           return;
         }
@@ -236,42 +240,69 @@ function initParallelPhotoParallax() {
         railLeft.style.opacity = '1';
         railRight.style.opacity = '1';
 
-        // 2. VELOCIDADE RÁPIDA: As polaroides sobem mais rápido do que a rolagem das seções
         const relativeScroll = scrollY - heroThreshold;
-        const speedMultiplierLeft = 1.35;
-        const speedMultiplierRight = 1.55;
 
-        // Posição inicial no fundo da tela subindo velozmente
-        const startY = vh * 0.75;
-        const offsetLeft = startY - (relativeScroll * speedMultiplierLeft);
-        const offsetRight = startY - (relativeScroll * speedMultiplierRight);
+        // Configuração do loop infinito com espaçamento equilibrado (1 ou 2 fotos por vez na tela)
+        const cardSpacing = 420; // Distância vertical entre fotos
+        const totalHeightLeft = leftCards.length * cardSpacing;
+        const totalHeightRight = rightCards.length * cardSpacing;
 
-        leftTrack.style.transform = `translate3d(0, ${offsetLeft.toFixed(1)}px, 0)`;
-        rightTrack.style.transform = `translate3d(0, ${offsetRight.toFixed(1)}px, 0)`;
+        const speedLeft = 1.25;
+        const speedRight = 1.45;
 
-        // 3. FADE IN & FADE OUT INDIVIDUAL (1 a 2 fotos por vez na tela)
-        const topFadeEnd = vh * 0.08;
-        const topFadeStart = vh * 0.28;
-        const bottomFadeStart = vh * 0.70;
-        const bottomFadeEnd = vh * 0.90;
+        const topFadeEnd = vh * 0.05;
+        const topFadeStart = vh * 0.25;
+        const bottomFadeStart = vh * 0.72;
+        const bottomFadeEnd = vh * 0.92;
 
-        allCards.forEach(card => {
-          const rect = card.getBoundingClientRect();
-          const cardCenter = rect.top + rect.height / 2;
+        // Atualizar trilho esquerdo (loop contínuo e suave)
+        leftCards.forEach((card, i) => {
+          const rot = rotationsLeft[i % rotationsLeft.length];
+          const basePos = i * cardSpacing;
+          const rawPos = (basePos - (relativeScroll * speedLeft)) % totalHeightLeft;
+          const currentY = ((rawPos % totalHeightLeft) + totalHeightLeft) % totalHeightLeft - 180;
 
-          let opacity = 1;
-          if (cardCenter < topFadeEnd) {
-            opacity = 0;
-          } else if (cardCenter < topFadeStart) {
-            opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
-          } else if (cardCenter > bottomFadeEnd) {
-            opacity = 0;
-          } else if (cardCenter > bottomFadeStart) {
-            opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
-          } else {
-            opacity = 1;
+          if (!card.matches(':hover')) {
+            card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0) rotate(${rot}deg)`;
           }
 
+          // Calcular opacidade baseada na posição vertical da tela
+          const cardCenter = currentY + 60;
+          let opacity = 0;
+          if (cardCenter > topFadeEnd && cardCenter < bottomFadeEnd) {
+            if (cardCenter < topFadeStart) {
+              opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
+            } else if (cardCenter > bottomFadeStart) {
+              opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
+            } else {
+              opacity = 1;
+            }
+          }
+          card.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(2);
+        });
+
+        // Atualizar trilho direito (loop contínuo e suave)
+        rightCards.forEach((card, i) => {
+          const rot = rotationsRight[i % rotationsRight.length];
+          const basePos = i * cardSpacing + (cardSpacing * 0.5); // Deslocamento para alternar com a esquerda
+          const rawPos = (basePos - (relativeScroll * speedRight)) % totalHeightRight;
+          const currentY = ((rawPos % totalHeightRight) + totalHeightRight) % totalHeightRight - 180;
+
+          if (!card.matches(':hover')) {
+            card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0) rotate(${rot}deg)`;
+          }
+
+          const cardCenter = currentY + 60;
+          let opacity = 0;
+          if (cardCenter > topFadeEnd && cardCenter < bottomFadeEnd) {
+            if (cardCenter < topFadeStart) {
+              opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
+            } else if (cardCenter > bottomFadeStart) {
+              opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
+            } else {
+              opacity = 1;
+            }
+          }
           card.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(2);
         });
 
