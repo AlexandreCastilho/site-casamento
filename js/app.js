@@ -238,113 +238,161 @@ function initParallelPhotoParallax() {
   let ticking = false;
 
   function updateParallax() {
-    // Em telas menores ou iguais a 1024px (tablets e celulares), ocultar
-    if (window.innerWidth <= 1024) {
+    // Em telas menores que 1200px (tablets e celulares), desativar e ocultar completamente
+    if (window.innerWidth < 1200) {
       railLeft.style.opacity = '0';
       railRight.style.opacity = '0';
+      railLeft.style.visibility = 'hidden';
+      railRight.style.visibility = 'hidden';
       return;
     }
 
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        const vh = window.innerHeight;
-
-        // REGRA: As fotos polaroid só devem aparecer exclusivamente nas seções "mensagem" e "nossa história"
         if (!mensagemSection || !historiaSection) {
           ticking = false;
           return;
         }
 
+        const vh = window.innerHeight;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Limites físicos exatos das seções no viewport
         const msgRect = mensagemSection.getBoundingClientRect();
         const histRect = historiaSection.getBoundingClientRect();
 
-        let railOpacity = 1;
+        const sectionTop = msgRect.top;       // Posição no viewport do topo de "Mensagem"
+        const sectionBottom = histRect.bottom; // Posição no viewport da base de "Nossa história"
 
-        if (msgRect.top > vh * 0.4) {
-          // Na Hero section ou se aproximando da seção Mensagem
-          railOpacity = (vh * 0.7 - msgRect.top) / (vh * 0.3);
-        } else if (histRect.bottom < vh * 0.6) {
-          // Saindo de Nossa História em direção à seção Local ou posteriores
-          railOpacity = (histRect.bottom - vh * 0.1) / (vh * 0.5);
-        }
-
-        railOpacity = Math.max(0, Math.min(1, railOpacity));
-
-        // Se fora do intervalo das seções Mensagem e Nossa História, ocultar 100%
-        if (railOpacity <= 0.01) {
+        // REGRA ABSOLUTA: Se a área conjunta de "Mensagem" e "Nossa história" não estiver no viewport,
+        // oculta imediatamente os trilhos (ex: quando na Hero section ou em seções posteriores como Local)
+        if (sectionTop >= vh || sectionBottom <= 0) {
           railLeft.style.opacity = '0';
           railRight.style.opacity = '0';
-          leftCards.forEach(c => c.style.opacity = '0');
-          rightCards.forEach(c => c.style.opacity = '0');
+          railLeft.style.visibility = 'hidden';
+          railRight.style.visibility = 'hidden';
+          leftCards.forEach(c => { c.style.opacity = '0'; c.style.pointerEvents = 'none'; });
+          rightCards.forEach(c => { c.style.opacity = '0'; c.style.pointerEvents = 'none'; });
           ticking = false;
           return;
         }
 
-        railLeft.style.opacity = railOpacity.toFixed(2);
-        railRight.style.opacity = railOpacity.toFixed(2);
+        // Tornar trilhos visíveis dentro da zona permitida
+        railLeft.style.visibility = 'visible';
+        railRight.style.visibility = 'visible';
+        railLeft.style.opacity = '1';
+        railRight.style.opacity = '1';
 
-        const heroSection = document.getElementById('hero');
-        const heroHeight = heroSection ? heroSection.offsetHeight : vh;
-        const heroThreshold = heroHeight * 0.65;
-        const relativeScroll = Math.max(0, scrollY - heroThreshold);
+        // BLINDAGEM DE HARDWARE (CLIP-PATH): Corta milimetricamente qualquer pixel fora de Mensagem / Nossa História
+        const clipTop = Math.max(0, Math.ceil(sectionTop));
+        const clipBottom = Math.max(0, Math.ceil(vh - sectionBottom));
+        const clipStyle = `inset(${clipTop}px 0px ${clipBottom}px 0px)`;
+        railLeft.style.clipPath = clipStyle;
+        railRight.style.clipPath = clipStyle;
+        railLeft.style.webkitClipPath = clipStyle;
+        railRight.style.webkitClipPath = clipStyle;
 
-        // Configuração do loop infinito com espaçamento equilibrado (1 ou 2 fotos por vez na tela)
-        const cardSpacing = 420; // Distância vertical entre fotos
+        // Scroll relativo ancorado ao início da seção Mensagem
+        const mensagemTopDoc = mensagemSection.offsetTop;
+        const relativeScroll = Math.max(0, scrollY - (mensagemTopDoc - vh));
+
+        // Dimensões responsivas dos cards e do espaçamento
+        const isCompact = window.innerWidth < 1400;
+        const cardSpacing = isCompact ? 360 : 400;
+        const cardHeight = isCompact ? 105 : 125;
         const totalHeightLeft = leftCards.length * cardSpacing;
         const totalHeightRight = rightCards.length * cardSpacing;
 
         const speedLeft = 1.25;
         const speedRight = 1.45;
+        const fadeZone = 90; // Pixels para transição suave de opacidade antes dos limites
 
-        const topFadeEnd = vh * 0.05;
-        const topFadeStart = vh * 0.25;
-        const bottomFadeStart = vh * 0.72;
-        const bottomFadeEnd = vh * 0.92;
-
-        // Atualizar trilho esquerdo (loop contínuo e suave)
+        // Atualizar trilho esquerdo
         leftCards.forEach((card, i) => {
           const basePos = i * cardSpacing;
           const rawPos = (basePos - (relativeScroll * speedLeft)) % totalHeightLeft;
-          const currentY = ((rawPos % totalHeightLeft) + totalHeightLeft) % totalHeightLeft - 180;
+          const currentY = ((rawPos % totalHeightLeft) + totalHeightLeft) % totalHeightLeft - 150;
 
           card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0)`;
 
-          // Calcular opacidade baseada na posição vertical da tela e multiplicador da seção
-          const cardCenter = currentY + 60;
-          let opacity = 0;
-          if (cardCenter > topFadeEnd && cardCenter < bottomFadeEnd) {
-            if (cardCenter < topFadeStart) {
-              opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
-            } else if (cardCenter > bottomFadeStart) {
-              opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
-            } else {
-              opacity = 1;
-            }
+          const cardTop = currentY;
+          const cardBottom = currentY + cardHeight;
+
+          // 1. Fade contra invasão do topo (Hero section)
+          const distFromHero = cardTop - sectionTop;
+          let factorTop = 1;
+          if (distFromHero <= 0) {
+            factorTop = 0;
+          } else if (distFromHero < fadeZone) {
+            factorTop = distFromHero / fadeZone;
           }
-          card.style.opacity = (Math.max(0, Math.min(1, opacity)) * railOpacity).toFixed(2);
+
+          // 2. Fade contra invasão da base (Local section)
+          const distFromLocal = sectionBottom - cardBottom;
+          let factorBottom = 1;
+          if (distFromLocal <= 0) {
+            factorBottom = 0;
+          } else if (distFromLocal < fadeZone) {
+            factorBottom = distFromLocal / fadeZone;
+          }
+
+          // 3. Fade suave nas bordas do viewport
+          let factorVpTop = 1;
+          if (cardTop < 50) {
+            factorVpTop = Math.max(0, cardTop / 50);
+          }
+          let factorVpBottom = 1;
+          if (cardBottom > vh - 50) {
+            factorVpBottom = Math.max(0, (vh - cardBottom) / 50);
+          }
+
+          const finalOpacity = Math.max(0, Math.min(1, Math.min(factorTop, factorBottom, factorVpTop, factorVpBottom)));
+          card.style.opacity = finalOpacity.toFixed(2);
+          card.style.pointerEvents = finalOpacity > 0.1 ? 'auto' : 'none';
         });
 
-        // Atualizar trilho direito (loop contínuo e suave)
+        // Atualizar trilho direito
         rightCards.forEach((card, i) => {
           const basePos = i * cardSpacing + (cardSpacing * 0.5); // Deslocamento para alternar com a esquerda
           const rawPos = (basePos - (relativeScroll * speedRight)) % totalHeightRight;
-          const currentY = ((rawPos % totalHeightRight) + totalHeightRight) % totalHeightRight - 180;
+          const currentY = ((rawPos % totalHeightRight) + totalHeightRight) % totalHeightRight - 150;
 
           card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0)`;
 
-          const cardCenter = currentY + 60;
-          let opacity = 0;
-          if (cardCenter > topFadeEnd && cardCenter < bottomFadeEnd) {
-            if (cardCenter < topFadeStart) {
-              opacity = (cardCenter - topFadeEnd) / (topFadeStart - topFadeEnd);
-            } else if (cardCenter > bottomFadeStart) {
-              opacity = (bottomFadeEnd - cardCenter) / (bottomFadeEnd - bottomFadeStart);
-            } else {
-              opacity = 1;
-            }
+          const cardTop = currentY;
+          const cardBottom = currentY + cardHeight;
+
+          // 1. Fade contra invasão do topo (Hero section)
+          const distFromHero = cardTop - sectionTop;
+          let factorTop = 1;
+          if (distFromHero <= 0) {
+            factorTop = 0;
+          } else if (distFromHero < fadeZone) {
+            factorTop = distFromHero / fadeZone;
           }
-          card.style.opacity = (Math.max(0, Math.min(1, opacity)) * railOpacity).toFixed(2);
+
+          // 2. Fade contra invasão da base (Local section)
+          const distFromLocal = sectionBottom - cardBottom;
+          let factorBottom = 1;
+          if (distFromLocal <= 0) {
+            factorBottom = 0;
+          } else if (distFromLocal < fadeZone) {
+            factorBottom = distFromLocal / fadeZone;
+          }
+
+          // 3. Fade suave nas bordas do viewport
+          let factorVpTop = 1;
+          if (cardTop < 50) {
+            factorVpTop = Math.max(0, cardTop / 50);
+          }
+          let factorVpBottom = 1;
+          if (cardBottom > vh - 50) {
+            factorVpBottom = Math.max(0, (vh - cardBottom) / 50);
+          }
+
+          const finalOpacity = Math.max(0, Math.min(1, Math.min(factorTop, factorBottom, factorVpTop, factorVpBottom)));
+          card.style.opacity = finalOpacity.toFixed(2);
+          card.style.pointerEvents = finalOpacity > 0.1 ? 'auto' : 'none';
         });
 
         ticking = false;
@@ -355,6 +403,7 @@ function initParallelPhotoParallax() {
 
   window.addEventListener('scroll', updateParallax, { passive: true });
   window.addEventListener('resize', updateParallax, { passive: true });
+  window.addEventListener('load', updateParallax, { passive: true });
   updateParallax();
 }
 
@@ -423,6 +472,32 @@ function initLightbox() {
     updateLightboxContent();
   }
 
+  // Suporte a gestos touch (swipe lateral) para celulares e tablets
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+    // Se o movimento horizontal for predominante e maior que 40px
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        nextPhoto();
+      } else {
+        prevPhoto();
+      }
+    }
+  }, { passive: true });
+
   if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
   if (nextBtn) nextBtn.addEventListener('click', nextPhoto);
   if (prevBtn) prevBtn.addEventListener('click', prevPhoto);
@@ -447,8 +522,8 @@ function initResizeHandler() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      // Se redimensionar para Desktop (>= 768px), fechar menu mobile e restaurar scroll
-      if (window.innerWidth >= 768) {
+      // Se redimensionar para Desktop (> 1024px), fechar menu mobile e restaurar scroll
+      if (window.innerWidth > 1024) {
         const navMenu = document.getElementById('navMenu');
         const backdrop = document.getElementById('navBackdrop');
         if (navMenu) navMenu.classList.remove('open');
