@@ -109,7 +109,7 @@ const SUGGESTED_GIFTS_ORDER = [
   },
   {
     id: 'presente-16',
-    title: 'Dinheiro para a Larissa convencer o Alex para termos um cachorro',
+    title: 'Verba para convencer o Alex a adotar um cachorro',
     price: 814.20,
     image: 'assets/gifts/gift-16.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-smyFL9RpCH-780,00'
