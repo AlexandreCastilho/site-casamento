@@ -1837,6 +1837,14 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 
+.gift-card-footer-custom {
+  justify-content: center;
+}
+
+.gift-card-footer-custom .presentear-btn {
+  width: 100%;
+}
+
 /* Modal de Presente / PIX */
 .gift-modal {
   position: fixed;

@@ -292,7 +292,7 @@ function renderGiftsGrid() {
   container.innerHTML = giftList.map(gift => {
     const isCustom = !!gift.isCustomPix;
     const priceDisplay = isCustom 
-      ? '<span style="font-size: 1.02rem; font-weight: 700; color: var(--color-green-primary);">Valor Livre via PIX</span>' 
+      ? '' 
       : `<span class="gift-currency">R$</span>${gift.price.toFixed(2).replace('.', ',')}`;
 
     return `
@@ -302,12 +302,10 @@ function renderGiftsGrid() {
         </div>
         <div class="gift-card-body">
           <h4 class="gift-title">${escapeHtml(gift.title)}</h4>
-          <div class="gift-card-footer">
-            <div class="gift-price">
-              ${priceDisplay}
-            </div>
-            <button type="button" class="btn ${isCustom ? 'btn-secondary' : 'btn-primary'} btn-sm presentear-btn" data-id="${gift.id}">
-              ${isCustom ? 'Contribuir via PIX' : 'Presentear'}
+          <div class="gift-card-footer ${isCustom ? 'gift-card-footer-custom' : ''}">
+            ${!isCustom ? `<div class="gift-price">${priceDisplay}</div>` : ''}
+            <button type="button" class="btn btn-primary btn-sm presentear-btn" data-id="${gift.id}">
+              Presentear
             </button>
           </div>
         </div>
