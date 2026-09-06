@@ -179,7 +179,7 @@ const SUGGESTED_GIFTS_ORDER = [
   },
   {
     id: 'presente-3',
-    title: 'Fotógrafo para o Alex descansar na lua de mel',
+    title: 'Fotógrafo para tirar fotos da Larissa na Lua de Mel e deixar o Alex descansar',
     price: 1294.89,
     image: 'assets/gifts/gift-3.jpg',
     paymentLink: 'https://link.infinitepay.io/alexandre-castilho-2j8/VC1D-ixxjW59FtY-1240,50'
