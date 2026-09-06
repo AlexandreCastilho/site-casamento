@@ -9,115 +9,157 @@ const STORAGE_KEY_MESSAGES = 'casamento_recados_alexandre_larissa';
 const STORAGE_KEY_LIKES = 'casamento_recados_likes';
 const STORAGE_KEY_VAN = 'casamento_van_requests';
 
-// Lista Oficial de Convidados (Convidados.txt)
+// Lista Oficial de Convidados (Base inicial de contingência caso a planilha esteja indisponível)
 const OFFICIAL_GUESTS = [
-  "Patrice Castilho",
-  "Mariana Castilho",
-  "Márcio Oliveira",
-  "Emanuel Oliveira",
-  "Carol Santos",
-  "Lana Colares",
-  "Reginaldo Colares",
-  "Rodrigo Colares",
-  "Rafael Colares",
-  "Luana Amazonas",
-  "Ruben Colares",
-  "Gabriel Colares",
-  "Rafaelly Colares",
-  "Harvey Colares",
-  "Luna Colares",
-  "Liz Colares",
-  "Frank Leite",
-  "Rita Silva",
-  "Edna Colares",
-  "Kleber Colares",
-  "Guiomar Colares",
-  "Henrique Colares",
-  "Felipe Colares",
-  "Leodete Pantoja",
-  "Laura Pantoja",
-  "Kelly Linhares",
-  "Joice Caster",
-  "Cris",
-  "Milie",
-  "José Amilton Colares",
-  "Maria Colares",
-  "Jasmim Oliveira",
-  "Israel Alves",
-  "Laura Dias De Lima Souto",
-  "Izidorio França",
-  "Isabele França",
-  "Alvaro Nascimento",
-  "Ayesa Nascimento",
-  "Olívia Moss",
-  "Ewerton Moss",
-  "Moisés Moss",
-  "Camilly Moss",
-  "Marcus Vinicius Menezes",
-  "Vitória Rassy",
-  "Leonardo Castilho",
-  "Geovanna Pinheiro",
-  "Lucivaldo Castilho",
-  "Ana Lúcia Castilho",
-  "Jocely Castilho",
-  "Sirlene Castilho",
-  "Letycia Brasil",
-  "Renan Albuquerque",
-  "Luciana Castilho",
-  "Lucas Castilho",
-  "Larissa Lima",
-  "Afonso",
-  "Rafaela",
-  "Tânia",
-  "Daniel",
-  "Jeferson",
-  "Karina",
-  "Leda",
-  "Manoel",
-  "Luan",
-  "Ruan",
-  "Vera",
-  "Vânia",
-  "Heliomar",
-  "Humberto",
-  "Fabio",
-  "Fabiola",
   "Adriana",
-  "Lourdes",
+  "Afonso",
+  "Alvaro Nascimento",
+  "Ana Claudia Romero",
+  "Ana Lúcia Castilho",
+  "Andreza Libório",
+  "Andrezza Uchôa",
+  "Anne Camila",
+  "Arthur Yves",
+  "Avó da Larissa",
+  "Ayesa Nascimento",
+  "Ayla Couto",
+  "Beatriz Dantas",
+  "Brenda Gomes",
+  "Caio Alves",
+  "Camilly Moss",
+  "Carol Santos",
+  "Cris",
+  "Daniel",
+  "Daniel Magalhães",
   "Danielle",
   "Danilo",
   "Davi",
-  "Julio",
-  "Hanna",
-  "Heitor",
-  "Ayla Couto",
-  "Isabella Litaiff",
-  "Thiago Litaiff",
-  "Jessica Hellen Lima",
-  "Luana Beatriz",
+  "Edna Colares",
   "Eduardo Dias",
+  "Eloise Silva",
+  "Emanuel Oliveira",
+  "Emily Brito",
   "Evelyn Campos",
-  "Robeilton Gomes",
-  "Maria Paula",
-  "Samir Figueiredo",
-  "Matheus Velho",
-  "Luana Botinelly",
-  "Gleuza Botinelly",
-  "Luiz Botinelly",
-  "Arthur Yves",
-  "Letícia Nascimento",
-  "Phillip da Letícia",
-  "Helder Cruz",
-  "Joyce Paixão",
+  "Ewerton Moss",
+  "Fabio",
   "Fábio Tomaselli",
+  "Fabiola",
+  "Felipe Colares",
+  "Frank Leite",
+  "Gabriel Colares",
+  "Gabriela Saline",
+  "Geovanna Pinheiro",
+  "Gleuza Botinelly",
+  "Guiomar Colares",
+  "Hanna",
+  "Harvey Colares",
+  "Heitor",
+  "Helder Cruz",
+  "Heliomar",
+  "Henrique Colares",
+  "Hermes Pontes Lima Jr",
+  "Humberto",
+  "Ioha",
+  "Isabele França",
+  "Isabella Litaiff",
+  "Israel Alves",
+  "Izidorio França",
+  "Jasmim Oliveira",
+  "Jeferson",
   "Jefferson Paixão",
-  "Anne Camila",
-  "Caio Alves",
-  "Avó da Larissa"
+  "Jessica Hellen Lima",
+  "Jocely Castilho",
+  "Joice Caster",
+  "José Amilton Colares",
+  "Joyce Montefusco",
+  "Joyce Paixão",
+  "Julio",
+  "Karina",
+  "Kelly Linhares",
+  "Kleber Colares",
+  "Lana Colares",
+  "Larissa Freire",
+  "Larissa Lima",
+  "Laura Dias De Lima Souto",
+  "Laura Pantoja",
+  "Leda",
+  "Leodete Pantoja",
+  "Leonardo Castilho",
+  "Letícia Figueiredo",
+  "Letícia Nascimento",
+  "Letycia Brasil",
+  "Liz Colares",
+  "Lourdes",
+  "Luan",
+  "Luana Amazonas",
+  "Luana Beatriz",
+  "Luana Botinelly",
+  "Luana Vicente",
+  "Lucas Castilho",
+  "Luciana Castilho",
+  "Lucivaldo Castilho",
+  "Luiz Botinelly",
+  "Luna Colares",
+  "Madchen Marques",
+  "Magnum Pereira",
+  "Maitê Filó",
+  "Manoel",
+  "Marcelo Hermido",
+  "Márcio Oliveira",
+  "Marcus Vinicius Menezes",
+  "Maria Colares",
+  "Maria Paula",
+  "Mariana Castilho",
+  "Matheus Queiroz",
+  "Matheus Velho",
+  "Max Oliveira",
+  "Milie",
+  "Moisés Moss",
+  "Naide Albuquerque",
+  "Olívia Moss",
+  "Patrice Castilho",
+  "Paulo Victor Calderaro",
+  "Phillip da Letícia",
+  "Rafael Colares",
+  "Rafaela",
+  "Rafaelly Colares",
+  "Reginaldo Colares",
+  "Renan Albuquerque",
+  "Rita Silva",
+  "Robeilton Gomes",
+  "Rodrigo Colares",
+  "Ruan",
+  "Ruben Colares",
+  "Samir Figueiredo",
+  "Samuel Jansley",
+  "Sirlene Castilho",
+  "Tânia",
+  "Thalita Soares",
+  "Thiago Litaiff",
+  "Vânia",
+  "Vera",
+  "Victor Chaves",
+  "Vitória Rassy",
+  "Yuji Yano"
 ];
 
-// Remover duplicatas e ordenar alfabeticamente
-const UNIQUE_GUESTS = Array.from(new Set(OFFICIAL_GUESTS)).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+const STORAGE_KEY_GUESTS = 'casamento_convidados_lista_v2';
+
+// Lista ativa de convidados carregada do cache local ou lista padrão
+let activeGuestsList = (() => {
+  try {
+    const cached = localStorage.getItem(STORAGE_KEY_GUESTS);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn('Erro ao carregar cache de convidados:', e);
+  }
+  return Array.from(new Set(OFFICIAL_GUESTS)).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+})();
 
 let lastConfirmedGuestName = '';
 let currentMuralData = [];
@@ -147,7 +189,7 @@ function initGuestSearchAutocomplete() {
     }
 
     const cleanQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const matches = UNIQUE_GUESTS.filter(guest => {
+    const matches = activeGuestsList.filter(guest => {
       const cleanGuest = guest.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       return cleanGuest.includes(cleanQuery);
     });
@@ -172,6 +214,9 @@ function initGuestSearchAutocomplete() {
 
     dropdown.classList.add('show');
   }
+
+  // Expõe gatilho para re-filtrar quando a planilha atualizar a lista em segundo plano
+  window.triggerGuestFilter = filterGuests;
 
   input.addEventListener('input', (e) => {
     const val = e.target.value.trim();
@@ -228,9 +273,10 @@ function initRsvpForm() {
     const selectedName = selectedHidden.value.trim();
     const typedName = input.value.trim();
 
-    // Validar se o nome está na lista oficial de convidados
-    const validGuest = UNIQUE_GUESTS.find(g => 
-      g.toLowerCase() === (selectedName || typedName).toLowerCase()
+    // Validar se o nome está na lista oficial de convidados (ativa e sincronizada)
+    const targetClean = (selectedName || typedName).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const validGuest = activeGuestsList.find(g => 
+      g.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === targetClean
     );
 
     if (!validGuest) {
@@ -258,6 +304,7 @@ function initRsvpForm() {
     const formattedDate = now.toLocaleDateString('pt-BR', options);
 
     const newMessage = {
+      action: 'rsvp_confirm',
       id: 'msg-' + Date.now(),
       author: validGuest,
       date: formattedDate,
@@ -299,8 +346,9 @@ function initRsvpForm() {
       const selectedName = selectedHidden.value.trim();
       const typedName = input.value.trim();
 
-      const validGuest = UNIQUE_GUESTS.find(g => 
-        g.toLowerCase() === (selectedName || typedName).toLowerCase()
+      const targetClean = (selectedName || typedName).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const validGuest = activeGuestsList.find(g => 
+        g.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === targetClean
       );
 
       if (!validGuest) {
@@ -568,7 +616,7 @@ async function postToGoogleSheets(payload) {
   }
 }
 
-// Buscar dados mais recentes da Planilha Google (com cache-buster e diff inteligente)
+// Buscar dados mais recentes da Planilha Google (com cache-buster e sincronização de convidados e recados)
 async function syncFromGoogleSheets() {
   if (!GOOGLE_SHEETS_WEBAPP_URL) return;
   try {
@@ -579,19 +627,57 @@ async function syncFromGoogleSheets() {
     });
 
     if (res.ok) {
-      const cloudMessages = await res.json();
-      if (Array.isArray(cloudMessages)) {
-        // Apenas re-renderiza o DOM se houver alteração real nos dados
-        const isDifferent = JSON.stringify(cloudMessages) !== JSON.stringify(currentMuralData);
-        if (isDifferent) {
-          currentMuralData = cloudMessages;
-          localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
-          renderMuralMessages(currentMuralData);
+      const cloudData = await res.json();
+      
+      // 1. Resposta unificada { guests: [...], messages: [...] }
+      if (cloudData && typeof cloudData === 'object' && !Array.isArray(cloudData)) {
+        if (Array.isArray(cloudData.guests) && cloudData.guests.length > 0) {
+          updateGuestsList(cloudData.guests);
         }
+        if (Array.isArray(cloudData.messages)) {
+          updateMuralMessages(cloudData.messages);
+        }
+      } else if (Array.isArray(cloudData)) {
+        // 2. Resposta de versão legada (apenas array de mensagens)
+        updateMuralMessages(cloudData);
       }
     }
   } catch (err) {
     console.warn('Google Sheets offline/local fallback:', err);
+  }
+}
+
+// Atualiza dinamicamente a lista de convidados a partir da planilha
+function updateGuestsList(newGuests) {
+  const cleaned = Array.from(
+    new Set(newGuests.map(g => String(g || '').trim()).filter(Boolean))
+  ).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+  if (cleaned.length > 0 && JSON.stringify(cleaned) !== JSON.stringify(activeGuestsList)) {
+    activeGuestsList = cleaned;
+    try {
+      localStorage.setItem(STORAGE_KEY_GUESTS, JSON.stringify(cleaned));
+    } catch (e) {
+      console.warn('Erro ao salvar convidados no cache local:', e);
+    }
+
+    // Se o usuário estiver interagindo com o campo de busca, re-filtra dinamicamente
+    const input = document.getElementById('guestSearchInput');
+    if (input && document.activeElement === input && input.value.trim().length > 0) {
+      if (typeof window.triggerGuestFilter === 'function') {
+        window.triggerGuestFilter(input.value.trim());
+      }
+    }
+  }
+}
+
+// Atualiza os recados do mural mantendo renderização reativa limpa
+function updateMuralMessages(cloudMessages) {
+  const isDifferent = JSON.stringify(cloudMessages) !== JSON.stringify(currentMuralData);
+  if (isDifferent) {
+    currentMuralData = cloudMessages;
+    localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
+    renderMuralMessages(currentMuralData);
   }
 }
 
