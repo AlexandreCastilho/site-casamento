@@ -209,6 +209,9 @@ function initParallelPhotoParallax() {
   const rotationsLeft = [-3.5, 4, -2.5, 3, -4, 2.5, -3, 3.5];
   const rotationsRight = [4, -3.5, 3, -4, 2.5, -3, 3.5, -2.5];
 
+  const mensagemSection = document.getElementById('mensagem');
+  const historiaSection = document.getElementById('historia');
+
   let ticking = false;
 
   function updateParallax() {
@@ -223,12 +226,30 @@ function initParallelPhotoParallax() {
       window.requestAnimationFrame(() => {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const vh = window.innerHeight;
-        const heroSection = document.getElementById('hero');
-        const heroHeight = heroSection ? heroSection.offsetHeight : vh;
-        const heroThreshold = heroHeight * 0.65;
 
-        // 1. REGRA: Nenhuma foto polaroid aparece na primeira seção (Hero)
-        if (scrollY < heroThreshold) {
+        // REGRA: As fotos polaroid só devem aparecer exclusivamente nas seções "mensagem" e "nossa história"
+        if (!mensagemSection || !historiaSection) {
+          ticking = false;
+          return;
+        }
+
+        const msgRect = mensagemSection.getBoundingClientRect();
+        const histRect = historiaSection.getBoundingClientRect();
+
+        let railOpacity = 1;
+
+        if (msgRect.top > vh * 0.4) {
+          // Na Hero section ou se aproximando da seção Mensagem
+          railOpacity = (vh * 0.7 - msgRect.top) / (vh * 0.3);
+        } else if (histRect.bottom < vh * 0.6) {
+          // Saindo de Nossa História em direção à seção Local ou posteriores
+          railOpacity = (histRect.bottom - vh * 0.1) / (vh * 0.5);
+        }
+
+        railOpacity = Math.max(0, Math.min(1, railOpacity));
+
+        // Se fora do intervalo das seções Mensagem e Nossa História, ocultar 100%
+        if (railOpacity <= 0.01) {
           railLeft.style.opacity = '0';
           railRight.style.opacity = '0';
           leftCards.forEach(c => c.style.opacity = '0');
@@ -237,10 +258,13 @@ function initParallelPhotoParallax() {
           return;
         }
 
-        railLeft.style.opacity = '1';
-        railRight.style.opacity = '1';
+        railLeft.style.opacity = railOpacity.toFixed(2);
+        railRight.style.opacity = railOpacity.toFixed(2);
 
-        const relativeScroll = scrollY - heroThreshold;
+        const heroSection = document.getElementById('hero');
+        const heroHeight = heroSection ? heroSection.offsetHeight : vh;
+        const heroThreshold = heroHeight * 0.65;
+        const relativeScroll = Math.max(0, scrollY - heroThreshold);
 
         // Configuração do loop infinito com espaçamento equilibrado (1 ou 2 fotos por vez na tela)
         const cardSpacing = 420; // Distância vertical entre fotos
@@ -266,7 +290,7 @@ function initParallelPhotoParallax() {
             card.style.transform = `translate3d(0, ${currentY.toFixed(1)}px, 0) rotate(${rot}deg)`;
           }
 
-          // Calcular opacidade baseada na posição vertical da tela
+          // Calcular opacidade baseada na posição vertical da tela e multiplicador da seção
           const cardCenter = currentY + 60;
           let opacity = 0;
           if (cardCenter > topFadeEnd && cardCenter < bottomFadeEnd) {
@@ -278,7 +302,7 @@ function initParallelPhotoParallax() {
               opacity = 1;
             }
           }
-          card.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(2);
+          card.style.opacity = (Math.max(0, Math.min(1, opacity)) * railOpacity).toFixed(2);
         });
 
         // Atualizar trilho direito (loop contínuo e suave)
@@ -303,7 +327,7 @@ function initParallelPhotoParallax() {
               opacity = 1;
             }
           }
-          card.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(2);
+          card.style.opacity = (Math.max(0, Math.min(1, opacity)) * railOpacity).toFixed(2);
         });
 
         ticking = false;
