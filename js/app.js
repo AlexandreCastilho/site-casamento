@@ -424,9 +424,11 @@ function initLightbox() {
   const photoList = [];
 
   galleryItems.forEach((img, index) => {
+    const isPolaroid = Boolean(img.closest('.floating-photo-card'));
     photoList.push({
       src: img.getAttribute('src') || img.src,
-      alt: img.getAttribute('alt') || 'Alexandre & Larissa'
+      alt: isPolaroid ? '' : (img.getAttribute('alt') || ''),
+      isPolaroid: isPolaroid
     });
 
     const parent = img.closest('.gallery-item, .floating-photo-card, .welcome-photo-frame, .story-card-photo');
@@ -456,9 +458,15 @@ function initLightbox() {
     const item = photoList[currentIndex];
     if (!item) return;
     lightboxImg.src = item.src;
-    lightboxImg.alt = item.alt;
+    lightboxImg.alt = item.isPolaroid ? 'Alexandre & Larissa' : (item.alt || 'Alexandre & Larissa');
     if (lightboxCaption) {
-      lightboxCaption.innerText = item.alt;
+      if (item.isPolaroid || !item.alt) {
+        lightboxCaption.innerText = '';
+        lightboxCaption.style.display = 'none';
+      } else {
+        lightboxCaption.innerText = item.alt;
+        lightboxCaption.style.display = 'block';
+      }
     }
   }
 
