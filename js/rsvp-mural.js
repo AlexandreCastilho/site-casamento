@@ -161,7 +161,19 @@ let activeGuestsList = (() => {
   return Array.from(new Set(OFFICIAL_GUESTS)).sort((a, b) => a.localeCompare(b, 'pt-BR'));
 })();
 
+const LEGACY_DEFAULT_MESSAGES = [
+  "Presença confirmada com muita alegria! Mal posso esperar pelo grande dia! 🥂✨",
+  "Não poderei comparecer, mas envio meus melhores votos e muito amor ao casal!"
+];
+
+function isRealMessage(text) {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) return false;
+  return !LEGACY_DEFAULT_MESSAGES.includes(trimmed);
+}
+
 let lastConfirmedGuestName = '';
+let lastConfirmedGuestHadMessage = false;
 let currentMuralData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -291,6 +303,7 @@ function initRsvpForm() {
 
     const messageText = messageInput.value.trim();
     lastConfirmedGuestName = validGuest;
+    lastConfirmedGuestHadMessage = !!messageText;
 
     // Feedback no botão de envio
     const origBtnText = confirmBtn ? confirmBtn.innerHTML : '';
@@ -308,14 +321,16 @@ function initRsvpForm() {
       id: 'msg-' + Date.now(),
       author: validGuest,
       date: formattedDate,
-      text: messageText || 'Presença confirmada com muita alegria! Mal posso esperar pelo grande dia! 🥂✨',
+      text: messageText,
       status: 'confirmed',
       likes: 1
     };
 
-    // Adiciona na visualização local imediatamente
-    currentMuralData.unshift(newMessage);
-    renderMuralMessages(currentMuralData);
+    // Adiciona na visualização local apenas se o convidado tiver escrito uma mensagem
+    if (messageText) {
+      currentMuralData.unshift(newMessage);
+      renderMuralMessages(currentMuralData);
+    }
 
     // Envia diretamente para a Planilha Google
     await postToGoogleSheets(newMessage);
@@ -371,23 +386,23 @@ function initRsvpForm() {
       const formattedDate = now.toLocaleDateString('pt-BR', options);
 
       const declineMessage = {
+        action: 'rsvp_declined',
         id: 'msg-' + Date.now(),
         author: validGuest,
         date: formattedDate,
-        text: messageText || 'Não poderei comparecer, mas envio meus melhores votos e muito amor ao casal!',
+        text: messageText,
         status: 'declined',
         likes: 1
       };
 
-      // Exibe no mural com a tag de carinho
-      currentMuralData.unshift(declineMessage);
-      renderMuralMessages(currentMuralData);
+      // Exibe no mural com a tag de carinho apenas se tiver digitado uma mensagem
+      if (messageText) {
+        currentMuralData.unshift(declineMessage);
+        renderMuralMessages(currentMuralData);
+      }
 
       // Envia para a Planilha Google com status 'declined'
-      await postToGoogleSheets({
-        ...declineMessage,
-        action: 'rsvp_declined'
-      });
+      await postToGoogleSheets(declineMessage);
 
       setTimeout(syncFromGoogleSheets, 800);
 
@@ -399,7 +414,7 @@ function initRsvpForm() {
       input.classList.remove('is-valid');
       if (errorMsg) errorMsg.style.display = 'none';
 
-      openDeclineModal(validGuest);
+      openDeclineModal(validGuest, !!messageText);
     });
   }
 }
@@ -414,12 +429,20 @@ function openVanModal(guestName) {
   if (modal) modal.classList.add('active');
 }
 
-function openDeclineModal(guestName) {
+function openDeclineModal(guestName, hasMessage) {
   const modal = document.getElementById('declineModal');
   const nameDisplay = document.getElementById('declineGuestNameDisplay');
+  const descDisplay = document.getElementById('declineModalDesc');
   const closeBtn = document.getElementById('declineModalCloseBtn');
 
   if (nameDisplay) nameDisplay.innerText = guestName;
+  if (descDisplay) {
+    if (hasMessage) {
+      descDisplay.innerText = 'Agradecemos muito por nos avisar! Seu carinho foi guardado com todo amor em nosso mural. Mesmo de longe, sua energia e seus votos estarão conosco no nosso grande dia!';
+    } else {
+      descDisplay.innerText = 'Agradecemos muito por nos avisar! Mesmo de longe, sua energia e seus votos estarão conosco no nosso grande dia!';
+    }
+  }
   if (modal) {
     modal.classList.add('active');
     if (closeBtn) {
@@ -451,7 +474,10 @@ function initVanModal() {
       });
 
       modal.classList.remove('active');
-      showSuccessToast(`Presença confirmada, ${lastConfirmedGuestName}! Seu recado está salvo. 🎉`);
+      const toastMsg = lastConfirmedGuestHadMessage
+        ? `Presença confirmada e recado salvo, ${lastConfirmedGuestName}! 🎉`
+        : `Presença confirmada com sucesso, ${lastConfirmedGuestName}! 🎉`;
+      showSuccessToast(toastMsg);
     });
   }
 
@@ -673,10 +699,11 @@ function updateGuestsList(newGuests) {
 
 // Atualiza os recados do mural mantendo renderização reativa limpa
 function updateMuralMessages(cloudMessages) {
-  const isDifferent = JSON.stringify(cloudMessages) !== JSON.stringify(currentMuralData);
+  const filtered = (Array.isArray(cloudMessages) ? cloudMessages : []).filter(m => isRealMessage(m.text));
+  const isDifferent = JSON.stringify(filtered) !== JSON.stringify(currentMuralData);
   if (isDifferent) {
-    currentMuralData = cloudMessages;
-    localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(cloudMessages));
+    currentMuralData = filtered;
+    localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(filtered));
     renderMuralMessages(currentMuralData);
   }
 }
@@ -686,7 +713,8 @@ function initMural() {
   const saved = localStorage.getItem(STORAGE_KEY_MESSAGES);
   if (saved) {
     try {
-      currentMuralData = JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      currentMuralData = (Array.isArray(parsed) ? parsed : []).filter(m => isRealMessage(m.text));
       renderMuralMessages(currentMuralData);
     } catch (e) {
       renderMuralMessages([]);

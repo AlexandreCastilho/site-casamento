@@ -164,6 +164,21 @@ function cleanGuestName(str) {
     .trim();
 }
 
+// Mensagens padrão antigas que devem ser ignoradas caso existam na planilha
+var LEGACY_DEFAULT_MESSAGES = [
+  "Presença confirmada com muita alegria! Mal posso esperar pelo grande dia! 🥂✨",
+  "Não poderei comparecer, mas envio meus melhores votos e muito amor ao casal!"
+];
+
+function isRealMessage(text) {
+  var trimmed = String(text || "").trim();
+  if (!trimmed) return false;
+  for (var i = 0; i < LEGACY_DEFAULT_MESSAGES.length; i++) {
+    if (trimmed === LEGACY_DEFAULT_MESSAGES[i]) return false;
+  }
+  return true;
+}
+
 // Obtém ou cria a aba "Convidados" com formatação completa
 function getOrCreateConvidadosSheet(ss) {
   var sheet = ss.getSheetByName("Convidados");
@@ -281,7 +296,7 @@ function doGet(e) {
     var cStatus = String(convidadosData[c][1] || "").trim();
     var cDate = String(convidadosData[c][4] || "").trim();
     var cRecado = String(convidadosData[c][5] || "").trim();
-    if (cName && cRecado) {
+    if (cName && isRealMessage(cRecado)) {
       convidadosRecadosMap[cleanGuestName(cName)] = {
         name: cName,
         recado: cRecado,
@@ -301,18 +316,21 @@ function doGet(e) {
     var row = data[i];
     if (row && row[2]) {
       var author = String(row[2]);
-      var text = String(row[3] || "");
+      var text = String(row[3] || "").trim();
       var cleanAuthor = cleanGuestName(author);
       authorsInRecados[cleanAuthor] = true;
       
-      messages.push({
-        id: String(row[0] || ("msg-" + i)),
-        date: String(row[1] || ""),
-        author: author,
-        text: text,
-        likes: Number(row[4]) || 0,
-        status: String(row[5] || "confirmed")
-      });
+      // APENAS adiciona no mural se for um recado real não vazio e não placeholder
+      if (isRealMessage(text)) {
+        messages.push({
+          id: String(row[0] || ("msg-" + i)),
+          date: String(row[1] || ""),
+          author: author,
+          text: text,
+          likes: Number(row[4]) || 0,
+          status: String(row[5] || "confirmed")
+        });
+      }
     }
   }
   
@@ -321,14 +339,16 @@ function doGet(e) {
   for (var cleanKey in convidadosRecadosMap) {
     if (!authorsInRecados[cleanKey]) {
       var directItem = convidadosRecadosMap[cleanKey];
-      messages.push({
-        id: "msg-convidado-" + cleanKey,
-        date: directItem.date,
-        author: directItem.name,
-        text: directItem.recado,
-        likes: 1,
-        status: directItem.status
-      });
+      if (isRealMessage(directItem.recado)) {
+        messages.push({
+          id: "msg-convidado-" + cleanKey,
+          date: directItem.date,
+          author: directItem.name,
+          text: directItem.recado,
+          likes: 1,
+          status: directItem.status
+        });
+      }
     }
   }
   
@@ -424,15 +444,14 @@ function doPost(e) {
     if (payload.action === "rsvp_declined") {
       var guestNameDecline = payload.author || payload.name || "Convidado";
       var rowDecline = findGuestRow(sheetConvidados, guestNameDecline);
-      var msgTextDecline = payload.text || "";
+      var msgTextDecline = String(payload.text || "").trim();
+      if (!isRealMessage(msgTextDecline)) msgTextDecline = "";
       
       if (rowDecline !== -1) {
         sheetConvidados.getRange(rowDecline, 2).setValue("Não comparecerá"); // Coluna B: Presença
         sheetConvidados.getRange(rowDecline, 3).setValue("Não");             // Coluna C: Van
         sheetConvidados.getRange(rowDecline, 5).setValue(nowStr);            // Coluna E: Data
-        if (msgTextDecline) {
-          sheetConvidados.getRange(rowDecline, 6).setValue(msgTextDecline);  // Coluna F: Recado
-        }
+        sheetConvidados.getRange(rowDecline, 6).setValue(msgTextDecline);    // Coluna F: Recado
       } else {
         sheetConvidados.appendRow([
           guestNameDecline,
@@ -444,17 +463,19 @@ function doPost(e) {
         ]);
       }
       
-      // Registra também na aba de Recados
-      var sheetRecadosDecline = getOrCreateRecadosSheet(ss);
-      var msgIdDecline = payload.id || ("msg-" + new Date().getTime());
-      sheetRecadosDecline.appendRow([
-        msgIdDecline,
-        nowStr,
-        guestNameDecline,
-        msgTextDecline || "Não poderei comparecer, mas envio meus melhores votos e muito amor ao casal!",
-        1,
-        "declined"
-      ]);
+      // Registra na aba de Recados APENAS se o convidado tiver escrito um recado real
+      if (msgTextDecline) {
+        var sheetRecadosDecline = getOrCreateRecadosSheet(ss);
+        var msgIdDecline = payload.id || ("msg-" + new Date().getTime());
+        sheetRecadosDecline.appendRow([
+          msgIdDecline,
+          nowStr,
+          guestNameDecline,
+          msgTextDecline,
+          1,
+          "declined"
+        ]);
+      }
       
       return ContentService.createTextOutput(JSON.stringify({ success: true, type: "rsvp_declined" }))
         .setMimeType(ContentService.MimeType.JSON);
@@ -465,14 +486,13 @@ function doPost(e) {
     // ---------------------------------------------------------
     var guestNameConfirm = payload.author || payload.name || "Convidado";
     var rowConfirm = findGuestRow(sheetConvidados, guestNameConfirm);
-    var msgTextConfirm = payload.text || "";
+    var msgTextConfirm = String(payload.text || "").trim();
+    if (!isRealMessage(msgTextConfirm)) msgTextConfirm = "";
     
     if (rowConfirm !== -1) {
       sheetConvidados.getRange(rowConfirm, 2).setValue("Confirmado"); // Coluna B: Presença
       sheetConvidados.getRange(rowConfirm, 5).setValue(nowStr);       // Coluna E: Data
-      if (msgTextConfirm) {
-        sheetConvidados.getRange(rowConfirm, 6).setValue(msgTextConfirm); // Coluna F: Recado
-      }
+      sheetConvidados.getRange(rowConfirm, 6).setValue(msgTextConfirm); // Coluna F: Recado
     } else {
       sheetConvidados.appendRow([
         guestNameConfirm,
@@ -484,17 +504,19 @@ function doPost(e) {
       ]);
     }
     
-    // Registra na aba Recados para alimentar o mural público
-    var sheetRecadosGeral = getOrCreateRecadosSheet(ss);
-    var msgId = payload.id || ("msg-" + new Date().getTime());
-    sheetRecadosGeral.appendRow([
-      msgId,
-      nowStr,
-      guestNameConfirm,
-      msgTextConfirm || "Presença confirmada com muita alegria! Mal posso esperar pelo grande dia! 🥂✨",
-      Number(payload.likes) || 1,
-      payload.status || "confirmed"
-    ]);
+    // Registra na aba Recados APENAS se o convidado tiver escrito um recado real
+    if (msgTextConfirm) {
+      var sheetRecadosGeral = getOrCreateRecadosSheet(ss);
+      var msgId = payload.id || ("msg-" + new Date().getTime());
+      sheetRecadosGeral.appendRow([
+        msgId,
+        nowStr,
+        guestNameConfirm,
+        msgTextConfirm,
+        Number(payload.likes) || 1,
+        payload.status || "confirmed"
+      ]);
+    }
     
     return ContentService.createTextOutput(JSON.stringify({ success: true, id: msgId, type: "rsvp_confirm" }))
       .setMimeType(ContentService.MimeType.JSON);
