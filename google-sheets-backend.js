@@ -282,6 +282,11 @@ function getOrCreateRecadosSheet(ss) {
 // GET: Retorna os dados em tempo real para o site
 // -----------------------------------------------------------------------------
 function doGet(e) {
+  // Álbum dos Convidados (ver google-apps-script-fotos.js)
+  if (e && e.parameter && e.parameter.only === "photos") {
+    return getPhotosResponse();
+  }
+
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   
   // 1. Obter lista de convidados da aba "Convidados"
@@ -384,6 +389,11 @@ function doPost(e) {
       payload = JSON.parse(e.postData.contents);
     } else if (e && e.parameter) {
       payload = e.parameter;
+    }
+
+    // Álbum dos Convidados: envio, curtida e comentário de fotos
+    if (String(payload.action || "").indexOf("photo_") === 0) {
+      return handlePhotoAction(payload);
     }
     
     var ss = SpreadsheetApp.getActiveSpreadsheet();

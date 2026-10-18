@@ -19,6 +19,7 @@
   <!-- Estilos CSS -->
   <link rel="stylesheet" href="css/style.css?v=3.3" />
   <link rel="stylesheet" href="css/botanical.css?v=3.3" />
+  <link rel="stylesheet" href="css/fotos.css?v=1.0" />
 </head>
 <body>
 
@@ -75,6 +76,7 @@
           <li><a href="#local" class="nav-link">O Local</a></li>
           <li><a href="#traje" class="nav-link">Guia de Traje</a></li>
           <li><a href="#rsvp" class="nav-link">Mural &amp; RSVP</a></li>
+          <li class="nav-item-mobile-only"><a href="#fotos" class="nav-link">Fotos do Dia</a></li>
           <li><a href="#presentes" class="nav-link">Lista de Presentes</a></li>
           <li><a href="#rsvp" class="btn btn-primary nav-cta-btn">Confirmar Presença</a></li>
         </ul>
@@ -720,6 +722,66 @@
   </div>
 
   <!-- ========================================================================
+       SEÇÃO: FOTOS DO DIA (ÁLBUM DOS CONVIDADOS VIA QR CODE)
+       ======================================================================== -->
+  <section class="photos-day-section" id="fotos">
+    <div class="container">
+      <div style="text-align: center;">
+        <div class="section-tag">No Grande Dia</div>
+        <h2 class="section-title">Fotos dos Convidados</h2>
+        <p class="section-subtitle">
+          Cada celular é uma câmera da nossa festa! Escaneie o QR Code nas mesas e mande suas fotos e vídeos direto para o nosso álbum.
+        </p>
+        <div class="botanical-divider">
+          <img src="assets/svg/divider.svg" alt="Divisória" />
+        </div>
+      </div>
+
+      <div class="photos-day-layout">
+        <div class="photos-day-qr-card reveal-left">
+          <img src="assets/svg/qr-album-fotos.svg" alt="QR Code do Álbum dos Convidados" />
+          <h3>Álbum dos Convidados</h3>
+          <p>Aponte a câmera do celular para o código ou toque no botão abaixo.</p>
+          <a href="fotos.html" class="btn btn-primary">Abrir o Álbum 📸</a>
+        </div>
+
+        <div class="reveal-right">
+          <ol class="photos-day-steps">
+            <li>
+              <span class="photos-day-step-num">1</span>
+              <div><strong>Escaneie o QR Code</strong><span>Sem baixar aplicativo e sem criar conta. É só abrir e usar.</span></div>
+            </li>
+            <li>
+              <span class="photos-day-step-num">2</span>
+              <div><strong>Envie suas fotos e vídeos</strong><span>Elas entram sozinhas no álbum certo pelo horário em que foram tiradas.</span></div>
+            </li>
+            <li>
+              <span class="photos-day-step-num">3</span>
+              <div><strong>Curta e comente</strong><span>Veja as fotos de todos os convidados e deixe seu like e comentário.</span></div>
+            </li>
+          </ol>
+
+          <div class="photos-day-albums">
+            <div class="photos-day-album"><strong>Cerimônia</strong><span>15h – 18h</span></div>
+            <div class="photos-day-album"><strong>Recepção</strong><span>18h – 20h</span></div>
+            <div class="photos-day-album"><strong>Festa</strong><span>20h – 23h30</span></div>
+          </div>
+
+          <p style="font-family: var(--font-sans-accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-terracotta-primary); margin-bottom: 10px;">Desafios do dia</p>
+          <div class="photos-day-challenges">
+            <span>💋 Os noivos se beijando</span>
+            <span>🤝 Com um desconhecido</span>
+            <span>🥂 Com uma bebida</span>
+            <span>💃 Na pista de dança</span>
+            <span>🌿 Com a decoração</span>
+            <span>🍽️ Com a sua mesa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
        SEÇÃO 6: LISTA DE PRESENTES FICTÍCIOS / COTAS LÚDICAS DOS NOIVOS
        ======================================================================== -->
   <section class="gifts-section" id="presentes">
@@ -844,6 +906,7 @@
         <a href="#local">O Local</a>
         <a href="#traje">Guia de Traje</a>
         <a href="#rsvp">RSVP &amp; Mural</a>
+        <a href="#fotos">Fotos do Dia</a>
         <a href="#presentes">Presentes</a>
       </nav>
 

@@ -1,0 +1,873 @@
+/* ==========================================================================
+   ÁLBUM DOS CONVIDADOS (fotos.html) + SEÇÃO "FOTOS DO DIA" (index.html)
+   Usa os tokens de cor e tipografia definidos em style.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PÁGINA DO ÁLBUM (mobile first)
+   -------------------------------------------------------------------------- */
+.album-page {
+  background: var(--color-bg-ivory);
+  min-height: 100vh;
+  padding-bottom: calc(40px + var(--safe-bottom));
+}
+
+.album-header {
+  position: relative;
+  text-align: center;
+  color: var(--color-text-inverse);
+  background: radial-gradient(circle at 50% 0%, #2c5341 0%, var(--color-green-dark) 55%, var(--color-green-deep) 100%);
+  padding: calc(56px + var(--safe-top)) 20px 34px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.album-back {
+  position: absolute;
+  top: calc(14px + var(--safe-top));
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-sans-accent);
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 6px 8px;
+}
+
+.album-header-crest {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-serif-display);
+  font-size: 1.6rem;
+  color: var(--color-gold-light);
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  margin-bottom: 14px;
+}
+
+.album-header-crest .crest-amp {
+  font-family: var(--font-serif-romantic);
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+.album-header-title {
+  color: var(--color-text-inverse);
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  margin-bottom: 4px;
+}
+
+.album-header-sub {
+  font-family: var(--font-serif-romantic);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.album-greeting {
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.album-link-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  opacity: 0.75;
+  cursor: pointer;
+  margin-left: 6px;
+  padding: 4px;
+}
+
+.album-demo-banner {
+  max-width: 640px;
+  margin: 16px auto 0;
+  padding: 12px 16px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-terracotta-dark);
+  background: var(--color-terracotta-soft);
+  border: 1px dashed var(--color-terracotta-light);
+  border-radius: var(--radius-sm);
+  width: calc(100% - 32px);
+}
+
+.album-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.album-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-medium);
+  padding: 22px 20px;
+  margin-top: 20px;
+}
+
+.album-name-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.album-name-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 14px;
+}
+
+.album-name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* --- Envio --- */
+.album-upload {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.album-upload-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-terracotta-primary), var(--color-terracotta-dark));
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-glow-terracotta);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.album-upload-main:active {
+  transform: scale(0.98);
+}
+
+.album-upload-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.album-upload-text strong {
+  display: block;
+  font-family: var(--font-serif-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.album-upload-text small {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.album-upload-camera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-green-light);
+  color: var(--color-green-primary);
+  font-family: var(--font-sans-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: var(--color-bg-card);
+}
+
+.album-upload-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.9;
+}
+
+.album-hint-chip {
+  display: inline-block;
+  white-space: nowrap;
+  background: var(--color-green-soft);
+  color: var(--color-green-primary);
+  border-radius: var(--radius-full);
+  padding: 1px 10px;
+  margin: 0 2px;
+  font-weight: 500;
+}
+
+/* --- Cabeçalhos de bloco --- */
+.album-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.album-section-head h2 {
+  font-size: 1.45rem;
+}
+
+.album-section-sub {
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+/* --- Desafios --- */
+.album-challenges {
+  margin-top: 32px;
+}
+
+.album-challenge-progress {
+  font-family: var(--font-sans-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-terracotta-primary);
+  background: var(--color-terracotta-tint);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.album-challenge-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.album-challenge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 14px;
+  min-height: 118px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-subtle);
+  font-family: var(--font-sans-clean);
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.album-challenge:active {
+  transform: scale(0.97);
+}
+
+.album-challenge-emoji {
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.album-challenge-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.album-challenge-count {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.album-challenge.is-done {
+  background: var(--color-green-soft);
+  border-color: var(--color-green-light);
+}
+
+.album-challenge.is-done .album-challenge-count {
+  color: var(--color-green-primary);
+  font-weight: 600;
+}
+
+/* --- Abas de álbum --- */
+.album-feed-section {
+  margin-top: 32px;
+}
+
+.album-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  scrollbar-width: none;
+}
+
+.album-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.album-tab {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-card);
+  color: var(--color-text-main);
+  font-family: var(--font-sans-clean);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.album-tab-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.album-tab-label em {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  margin-left: 2px;
+}
+
+.album-tab-hint {
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+}
+
+.album-tab.is-active {
+  background: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+  color: var(--color-text-inverse);
+}
+
+.album-tab.is-active .album-tab-label em,
+.album-tab.is-active .album-tab-hint {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Grade de fotos --- */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.album-tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: none;
+  padding: 0;
+  background: var(--color-bg-sand);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.album-tile img,
+.album-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-tile-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-full);
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+}
+
+.album-tile-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.6rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.album-tile-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 18px 6px 5px;
+  font-size: 0.68rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  text-align: left;
+}
+
+.album-tile-overlay span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-tile-overlay span:last-child {
+  white-space: nowrap;
+}
+
+.album-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-family: var(--font-serif-romantic);
+  font-style: italic;
+  font-size: 1.1rem;
+  padding: 36px 0;
+}
+
+/* --- Folha de envio --- */
+.album-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(14, 30, 22, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.album-sheet-backdrop[hidden],
+.album-viewer[hidden] {
+  display: none;
+}
+
+.album-sheet {
+  width: 100%;
+  max-width: 640px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 10px 20px calc(24px + var(--safe-bottom));
+  animation: album-sheet-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes album-sheet-in {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.album-sheet-handle {
+  width: 42px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border-light);
+  margin: 0 auto 14px;
+}
+
+.album-sheet h3 {
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+}
+
+.album-sheet-previews {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.album-sheet-preview {
+  flex: 0 0 112px;
+}
+
+.album-sheet-preview img,
+.album-sheet-preview video {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.album-sheet-preview span {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.album-sheet-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-bg-sand);
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.album-sheet-progress-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-terracotta-primary), var(--color-gold));
+  transition: width 0.3s ease;
+}
+
+.album-sheet-status {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+}
+
+.album-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.album-sheet-actions .btn {
+  width: 100%;
+}
+
+.album-sheet-actions .album-link-btn {
+  color: var(--color-text-muted);
+}
+
+/* --- Visualizador --- */
+.album-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: #0b140f;
+  display: flex;
+  flex-direction: column;
+}
+
+.album-viewer-close {
+  position: absolute;
+  top: calc(12px + var(--safe-top));
+  right: 12px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.album-viewer-media {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-viewer-media img,
+.album-viewer-media video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.album-viewer-panel {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 16px 18px calc(16px + var(--safe-bottom));
+  max-height: 46vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.album-viewer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.album-viewer-meta strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-green-dark);
+}
+
+.album-viewer-meta span {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.album-like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-card);
+  color: var(--color-text-main);
+  font-family: var(--font-sans-clean);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.album-like-heart {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.album-like-btn.is-liked {
+  color: var(--color-terracotta-primary);
+  border-color: var(--color-terracotta-light);
+  background: var(--color-terracotta-soft);
+}
+
+.album-viewer-challenge {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--color-green-primary);
+  background: var(--color-green-soft);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+
+.album-comments {
+  flex: 1;
+  overflow-y: auto;
+  margin: 12px 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.album-comments p {
+  margin-bottom: 6px;
+}
+
+.album-comments strong {
+  color: var(--color-green-dark);
+  margin-right: 4px;
+}
+
+.album-comments-empty {
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+.album-comment-form {
+  display: flex;
+  gap: 8px;
+}
+
+.album-comment-form .form-control {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Aviso flutuante --- */
+.album-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + var(--safe-bottom));
+  transform: translate(-50%, 20px);
+  z-index: 1100;
+  background: var(--color-green-dark);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-elevated);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  text-align: center;
+}
+
+.album-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (min-width: 720px) {
+  .album-challenge-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .album-grid {
+    gap: 6px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SEÇÃO "FOTOS DO DIA" NO SITE PRINCIPAL
+   -------------------------------------------------------------------------- */
+.photos-day-section {
+  padding: 100px 0;
+  background: var(--color-bg-sand);
+}
+
+.photos-day-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.photos-day-qr-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  padding: 32px;
+  text-align: center;
+}
+
+.photos-day-qr-card img {
+  width: 220px;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  border-radius: var(--radius-sm);
+}
+
+.photos-day-qr-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.photos-day-qr-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.photos-day-steps {
+  list-style: none;
+  display: grid;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.photos-day-steps li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.photos-day-step-num {
+  flex: 0 0 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-green-dark);
+  color: var(--color-gold-light);
+  font-family: var(--font-serif-display);
+  font-size: 1.1rem;
+}
+
+.photos-day-steps strong {
+  display: block;
+  font-family: var(--font-serif-display);
+  color: var(--color-green-dark);
+  font-size: 1.1rem;
+}
+
+.photos-day-steps div span {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+.photos-day-albums {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.photos-day-album {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid var(--color-border-light);
+}
+
+.photos-day-album strong {
+  display: block;
+  font-family: var(--font-serif-display);
+  color: var(--color-green-dark);
+}
+
+.photos-day-album span {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.photos-day-challenges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.photos-day-challenges span {
+  font-size: 0.82rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+}
+
+@media (max-width: 900px) {
+  .photos-day-section {
+    padding: 70px 0;
+  }
+
+  .photos-day-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .photos-day-qr-card {
+    order: 2;
+  }
+}
+
+.album-viewer-media iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* O menu do desktop já está no limite de largura: o link "Fotos do Dia"
+   aparece só no menu mobile (no desktop fica no rodapé) */
+@media (min-width: 1025px) {
+  .nav-item-mobile-only {
+    display: none;
+  }
+}
