@@ -208,9 +208,10 @@ function handlePhotoAction(payload) {
 //      "https://www.googleapis.com/auth/spreadsheets",
 //      "https://www.googleapis.com/auth/drive",
 //      "https://www.googleapis.com/auth/script.external_request",
+//      "https://www.googleapis.com/auth/script.scriptapp",
 //      "https://www.googleapis.com/auth/photoslibrary.appendonly"
-// 3. Execute syncPhotosToGooglePhotos uma vez manualmente (para autorizar) e crie
-//    um acionador "Baseado no tempo" a cada 10 minutos para essa função.
+// 3. Execute ativarSincronizacaoGoogleFotos uma vez pelo editor: ela pede a
+//    autorização e liga a cópia automática a cada 10 minutos.
 // -----------------------------------------------------------------------------
 function getGooglePhotosAlbumId(albumId) {
   var props = PropertiesService.getScriptProperties();
@@ -263,4 +264,14 @@ function syncPhotosToGooglePhotos() {
 
     sheet.getRange(i + 1, COL.googlePhotos + 1).setValue("Enviada " + new Date().toLocaleString("pt-BR"));
   }
+}
+
+// Execute esta função UMA vez pelo editor (botão "Executar") para autorizar o
+// Google Fotos e ligar a cópia automática a cada 10 minutos.
+function ativarSincronizacaoGoogleFotos() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === "syncPhotosToGooglePhotos") ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger("syncPhotosToGooglePhotos").timeBased().everyMinutes(10).create();
+  syncPhotosToGooglePhotos();
 }
