@@ -6,7 +6,7 @@
 // URL do Web App do Google Apps Script (o mesmo do RSVP/Mural).
 // Enquanto estiver vazia, a página roda em MODO PRÉVIA: usa fotos de exemplo
 // e guarda os envios apenas na memória do aparelho.
-const PHOTOS_WEBAPP_URL = '';
+const PHOTOS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbx0407WmbxsZZ5jGSg3ECMaH9xIzVz2eqPm0ctG-6yEFKS0HiG8KC_1RJ7iIbGwba6y/exec';
 
 const STORAGE_KEY_NAME = 'casamento_album_nome';
 const STORAGE_KEY_LIKED = 'casamento_album_curtidas';
