@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Álbum dos Convidados | Alexandre &amp; Larissa</title>
+  <meta name="description" content="Envie as fotos e vídeos que você tirar no casamento de Alexandre &amp; Larissa, cumpra os desafios e curta as fotos dos outros convidados." />
+  <meta name="theme-color" content="#152b20" />
+
+  <meta property="og:title" content="Álbum dos Convidados • Alexandre &amp; Larissa" />
+  <meta property="og:description" content="Mande suas fotos e vídeos do casamento direto para o nosso álbum!" />
+  <meta property="og:image" content="assets/photos/IMG_6870.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/svg/wreath.svg" />
+  <link rel="stylesheet" href="css/style.css?v=3.3" />
+  <link rel="stylesheet" href="css/fotos.css?v=1.0" />
+</head>
+<body class="album-page">
+
+  <!-- ========================================================================
+       CABEÇALHO DO ÁLBUM
+       ======================================================================== -->
+  <header class="album-header">
+    <a href="index.html" class="album-back" aria-label="Voltar para o site">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Site
+    </a>
+    <div class="album-header-crest">
+      <span>A</span><span class="crest-amp">&amp;</span><span>L</span>
+    </div>
+    <h1 class="album-header-title">Álbum dos Convidados</h1>
+    <p class="album-header-sub">28 de Novembro de 2026 • Chácara Monte Rey</p>
+
+    <div class="album-greeting" id="albumGreeting" hidden>
+      Olá, <strong id="albumGuestName">convidado</strong>!
+      <button type="button" class="album-link-btn" id="changeNameBtn">Não é você?</button>
+    </div>
+  </header>
+
+  <div class="album-demo-banner" id="demoBanner" hidden>
+    <strong>Versão de prévia.</strong> As fotos de exemplo e as que você enviar aqui ficam só neste aparelho e ainda não vão para o Google.
+  </div>
+
+  <main class="album-main">
+
+    <!-- Identificação rápida do convidado (fica salva no aparelho) -->
+    <section class="album-card album-name-card" id="nameCard" hidden>
+      <h2>Como podemos te chamar?</h2>
+      <p>Seu nome aparece junto das fotos que você enviar. Só perguntamos uma vez.</p>
+      <form id="nameForm" class="album-name-form">
+        <input type="text" id="nameInput" class="form-control" placeholder="Seu nome" autocomplete="name" maxlength="40" required />
+        <button type="submit" class="btn btn-primary">Entrar no álbum</button>
+      </form>
+    </section>
+
+    <!-- Envio de fotos e vídeos -->
+    <section class="album-upload" id="uploadSection">
+      <label class="album-upload-main" for="fileInputGallery">
+        <span class="album-upload-icon">📸</span>
+        <span class="album-upload-text">
+          <strong>Enviar fotos e vídeos</strong>
+          <small>Escolha da galeria do celular</small>
+        </span>
+      </label>
+      <label class="album-upload-camera" for="fileInputCamera">
+        <span>📷</span> Tirar foto agora
+      </label>
+      <input type="file" id="fileInputGallery" accept="image/*,video/*" multiple hidden />
+      <input type="file" id="fileInputCamera" accept="image/*" capture="environment" hidden />
+      <p class="album-upload-hint">
+        As fotos entram sozinhas no álbum certo pelo horário em que foram tiradas:
+        <span class="album-hint-chip">Cerimônia 15h–18h</span>
+        <span class="album-hint-chip">Recepção 18h–20h</span>
+        <span class="album-hint-chip">Festa 20h–23h30</span>
+      </p>
+    </section>
+
+    <!-- Desafios -->
+    <section class="album-challenges">
+      <div class="album-section-head">
+        <h2>Desafios do Dia</h2>
+        <span class="album-challenge-progress" id="challengeProgress">0 de 6</span>
+      </div>
+      <p class="album-section-sub">Toque num desafio para enviar a foto que cumpre ele.</p>
+      <div class="album-challenge-list" id="challengeList">
+        <!-- Renderizado via js/fotos.js -->
+      </div>
+    </section>
+
+    <!-- Álbuns e feed -->
+    <section class="album-feed-section">
+      <div class="album-tabs" id="albumTabs" role="tablist">
+        <!-- Renderizado via js/fotos.js -->
+      </div>
+      <div class="album-grid" id="albumGrid">
+        <!-- Renderizado via js/fotos.js -->
+      </div>
+      <p class="album-empty" id="albumEmpty" hidden>Nenhuma foto aqui ainda. Que tal ser o primeiro?</p>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOLHA DE ENVIO (pré-visualização + desafio)
+       ======================================================================== -->
+  <div class="album-sheet-backdrop" id="uploadSheet" hidden>
+    <div class="album-sheet" role="dialog" aria-modal="true" aria-labelledby="uploadSheetTitle">
+      <div class="album-sheet-handle"></div>
+      <h3 id="uploadSheetTitle">Enviar para o álbum</h3>
+      <div class="album-sheet-previews" id="uploadPreviews"></div>
+
+      <label class="form-label" for="uploadChallengeSelect">Essa foto cumpre algum desafio?</label>
+      <select id="uploadChallengeSelect" class="form-control">
+        <option value="">Nenhum desafio</option>
+      </select>
+
+      <div class="album-sheet-progress" id="uploadProgress" hidden>
+        <div class="album-sheet-progress-bar" id="uploadProgressBar"></div>
+      </div>
+      <p class="album-sheet-status" id="uploadStatus"></p>
+
+      <div class="album-sheet-actions">
+        <button type="button" class="btn btn-primary" id="uploadConfirmBtn">Enviar</button>
+        <button type="button" class="album-link-btn" id="uploadCancelBtn">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VISUALIZADOR (curtidas + comentários)
+       ======================================================================== -->
+  <div class="album-viewer" id="photoViewer" hidden role="dialog" aria-modal="true">
+    <button type="button" class="album-viewer-close" id="viewerCloseBtn" aria-label="Fechar">✕</button>
+    <div class="album-viewer-media" id="viewerMedia"></div>
+    <div class="album-viewer-panel">
+      <div class="album-viewer-meta">
+        <div>
+          <strong id="viewerAuthor"></strong>
+          <span id="viewerInfo"></span>
+        </div>
+        <button type="button" class="album-like-btn" id="viewerLikeBtn" aria-pressed="false">
+          <span class="album-like-heart">♡</span>
+          <span id="viewerLikeCount">0</span>
+        </button>
+      </div>
+      <div class="album-viewer-challenge" id="viewerChallenge" hidden></div>
+      <div class="album-comments" id="viewerComments"></div>
+      <form class="album-comment-form" id="commentForm">
+        <input type="text" id="commentInput" class="form-control" placeholder="Escreva um comentário..." maxlength="200" autocomplete="off" />
+        <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="album-toast" id="albumToast" role="status" aria-live="polite"></div>
+
+  <script src="js/fotos.js?v=1.0"></script>
+</body>
+</html>
